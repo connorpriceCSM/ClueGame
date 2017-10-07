@@ -51,25 +51,25 @@ public class IntBoard {
 	{
 		visited =  new HashSet<BoardCell>();
 		visited.add(startCell);
+		targets = new HashSet<BoardCell>();
 		findAllTargets(startCell, steps);
 		
 	}
 	public void findAllTargets(BoardCell startCell, int steps)
 	{
-		targets = new HashSet<BoardCell>();
 		Set<BoardCell> adjCells = getAdjList(startCell);
-		HashSet<BoardCell> tempVisit = new HashSet<BoardCell>();
+		//HashSet<BoardCell> tempVisit = new HashSet<BoardCell>();
 		for (BoardCell adjCell: adjCells) {
-			if (tempVisit.contains(adjCell)) {
+			if (visited.contains(adjCell)) {
 				
 			} else {
-				tempVisit.add(adjCell);
+				visited.add(adjCell);
 				if (steps ==1) {
 					targets.add(adjCell);
 				} else {
 					findAllTargets(adjCell, steps-1);
 				}
-				tempVisit.remove(adjCell);
+				visited.remove(adjCell);
 			}
 
 		}
