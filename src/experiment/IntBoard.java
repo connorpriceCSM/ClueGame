@@ -1,5 +1,5 @@
 package experiment;
-
+//Authors: Amelia Atiles and Connor Price
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -56,7 +56,23 @@ public class IntBoard {
 	}
 	public void findAllTargets(BoardCell startCell, int steps)
 	{
-		
+		targets = new HashSet<BoardCell>();
+		Set<BoardCell> adjCells = getAdjList(startCell);
+		HashSet<BoardCell> tempVisit = new HashSet<BoardCell>();
+		for (BoardCell adjCell: adjCells) {
+			if (tempVisit.contains(adjCell)) {
+				
+			} else {
+				tempVisit.add(adjCell);
+				if (steps ==1) {
+					targets.add(adjCell);
+				} else {
+					findAllTargets(adjCell, steps-1);
+				}
+				tempVisit.remove(adjCell);
+			}
+
+		}
 	}
 	public HashSet<BoardCell> getTargets()
 	{

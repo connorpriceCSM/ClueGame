@@ -1,5 +1,5 @@
 package experiment;
-
+//Authors: Amelia Atiles and Connor Price
 public class BoardCell {
 
 	private int row;
