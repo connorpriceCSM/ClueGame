@@ -25,7 +25,7 @@ public class IntBoard {
 		 {
 			 for(int j = 0; j < cols; j++)
 			 {
-				 grid[rows][cols] = new BoardCell(rows,cols);
+				 grid[i][j] = new BoardCell(i,j);
 			 }
 		 }
 		 adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
