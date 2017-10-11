@@ -1,0 +1,12 @@
+C, Closet, Other
+P, Pathway, Other
+L, Library, Card
+B, Bathroom, Card
+O, Observatory, Card
+F, Foyer, Card
+S, Sauna, Card
+K, Kitchen, Card
+G, Garden, Card
+D, Bedroom, Card
+E, Entertainment room, Card
+
