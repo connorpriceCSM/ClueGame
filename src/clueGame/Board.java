@@ -1,6 +1,8 @@
 package clueGame;
 
+
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 import clueGame.BoardCell;
@@ -8,6 +10,8 @@ import clueGame.BoardCell;
 import java.util.HashSet;
 import java.util.HashMap;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+
 
 
 //Authors: Amelia Atiles and Connor Price
@@ -23,20 +27,18 @@ public class Board {
 
 	private int numRows,numCols;
 	final static int MAX_BOARD_SIZE = 50;
+	public static final int NUM_ROWS = 23;
+	public static final int NUM_COLUMNS = 22;
+
 
 	private String boardConfigFile;
 	private String roomConfigFile;
 
 
 	// constructor is private to ensure only one can be created
-	// board is initialized to 
 	private Board() 
 	{
-		visited = new  HashSet<BoardCell>();
-		targets=  new HashSet<BoardCell>();
-		legend = new HashMap<Character,String>();
-		grid = new BoardCell[numRows][numCols];
-		adjMtx = new HashMap<BoardCell,Set<BoardCell>>();
+		
 
 	}
 
@@ -54,36 +56,109 @@ public class Board {
 
 	public int getNumRows() {
 		// TODO Auto-generated method stub
-		return 0;
+		return numRows;
 	}
 
 	public int getNumColumns() {
 		// TODO Auto-generated method stub
-		return 0;
+		return numCols;
 	}
 
 
+	//Set the config files correctly.
 	public void setConfigFiles(String boardConfig, String roomConfig) {
+		boardConfigFile = boardConfig;
+		roomConfigFile = roomConfig;
 
 	}
+	// Get
 	public BoardCell getCellAt(int row, int col)
 	{
-		BoardCell cell =  new BoardCell(row,col);
+		BoardCell cell =  grid[row][col];
 		return cell;
 
 	}
-	// Not needed  thus far
+	// create lists to keep track of targets, rooms, etc
+	// load the rooms and boards. Give it a max size of 50 as reccomended.
 	public void initialize() {
+		
+		legend = new HashMap<Character,String>();
+		grid  = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+		
+		try
+		{
+			loadRoomConfig();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
+		try
+		{
+			loadBoardConfig();
+		}
+		catch(Exception e)
+		{
+			System.out.println(e.getMessage());
+		}
 
 
 	}
-	public void loadRoomConfig()
+	// Method to read and load rooms!!
+	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
 	{
-
+      FileReader fileReader = new FileReader(roomConfigFile);
+      // very important to use space for useDelimiter
+      Scanner legendReader =  new Scanner(fileReader).useDelimiter(", ");
+      while(legendReader.hasNext())
+      {
+    	  //reads the character first
+    	  char character = legendReader.next().charAt(0);
+    	  //Reads the room name
+    	  String roomName = legendReader.next();
+    	  //Puts the combination into the map and moves on to the next line
+    	  legend.put(character, roomName);
+    	  legendReader.nextLine();
+    	 
+      }
+      legendReader.close();
 	}
-	public void loadBoardConfig()
+	// This is a tricky one...
+	// In short, we're using double while loops to read the rows and columns.
+	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException
 	{
-
+		FileReader fileReader = new FileReader(boardConfigFile);
+		Scanner rowReader = new Scanner(fileReader);
+		Scanner colReader;
+		int currentRow = 0;
+		// hasNextLine is an important method here because we're reading form a set square grid
+		while(rowReader.hasNextLine())
+		{
+			int currentColumn = 0;
+			colReader = new Scanner(rowReader.nextLine()).useDelimiter(",");
+			while(colReader.hasNext())
+			{
+				//AGAIN VERY IMPORTANT TO USE A STRING HERE
+				String entry = colReader.next();
+				// create cell and enter it in our grid. We have solid values now.
+				BoardCell cell =  new BoardCell(currentRow,currentColumn,entry);
+				grid[currentRow][currentColumn] = cell;
+				currentColumn++;
+			}
+			if(numCols < currentColumn)
+			{
+				numCols = currentColumn;
+			}
+			// once the columns are out, increment the row.
+			currentRow++;
+		}
+		numRows = currentRow;
+		// cant close colReader because of the declaration...whoops
+		rowReader.close();
+		
+		
+		
+     
 	}
 	public void calcAdjacencies()
 	{
