@@ -38,7 +38,7 @@ public class Board {
 	// constructor is private to ensure only one can be created
 	private Board() 
 	{
-		
+
 
 	}
 
@@ -71,7 +71,7 @@ public class Board {
 		roomConfigFile = roomConfig;
 
 	}
-	// Get
+	// Get the boardcell;
 	public BoardCell getCellAt(int row, int col)
 	{
 		BoardCell cell =  grid[row][col];
@@ -82,31 +82,124 @@ public class Board {
 	// load the rooms and boards. Give it a max size of 50 as reccomended.
 	public void initialize() {
 		
-		legend = new HashMap<Character,String>();
-		grid  = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
-		
+
 		try
 		{
+			
 			loadRoomConfig();
-		}
-		catch(Exception e)
-		{
-			System.out.println(e.getMessage());
-		}
-		try
-		{
 			loadBoardConfig();
 		}
-		catch(Exception e)
+		catch (Exception e)
 		{
 			System.out.println(e.getMessage());
 		}
 
 
 	}
+
+	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
+	{
+		FileReader fileReader = new FileReader(roomConfigFile);
+		Scanner legendReader = new Scanner(fileReader);
+		// NECESSARY FOR EXCEPTION TESTS BECAUSE INITIALIZE ISNT CALLED IN THEM
+		legend = new HashMap<Character,String>();
+		while(legendReader.hasNextLine())
+		{
+			String entry = legendReader.nextLine();
+			//BIG BIG THING TO SEPARATE VALUES
+			 //Does it wherever it finds a comma
+			 //Should be exactly three parts
+			 //[ character,  roomName, cardType]
+			 //Otherwise. Throw dat Error!
+			String[] parts = entry.split(",");
+			if(parts.length != 3)
+			{   
+				legendReader.close();
+				throw new BadConfigFormatException("The  general room file format is incorrect for "+ entry); 
+			}
+			//get parts[0] which is our character
+			//charAt(0) is our character
+			char character =   new Character(parts[0].charAt(0));
+			//Get parts[1] and parts[2] 
+			// Check this one to be careful.
+			// trim eliminates whitespace which is big given the layout of the legend file.
+			String roomName =   new String(parts[1].trim());
+			String cardName =  new String(parts[2].trim());
+			// Must check card name to make sure it isn't anything other than "Other" or "Card"
+			if ((!cardName.equals("Card")) && (!cardName.equals("Other")))
+			{
+				legendReader.close();
+				throw new BadConfigFormatException("The card format file is incorrect for " + entry);
+			}
+			legend.put(character, roomName);
+			
+			
+		}
+		legendReader.close();
+		
+
+
+	}
+	// Read the board layout file
+	// Put each string (character) into  it's own little board cell spot
+	//  
+	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException
+	{
+		FileReader fileReader = new FileReader(boardConfigFile);
+		Scanner boardReader = new Scanner(fileReader);
+		int currentRow = 0;
+		// NECESSARY FOR EXCEPTION TESTS BECAUSE INITIALIZE ISNT CALLED IN THEM
+		grid  = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+		while(boardReader.hasNextLine())
+		{
+			// Like loadRoomConfig, we'll divide all our entries by commas!
+			// THIS IS WHY WE USED CSV FILES, it inserts the commas automatically!
+			// With entries, we're going to read the row, then read the column across with nextLine()
+			String entries = boardReader.nextLine();
+			String[] parts = entries.split(",");
+			int currentColumn = 0;
+
+			// One time if statement to set our column length
+			//i.e 22 or 23.
+			if(currentRow == 0)
+			{
+				numCols = parts.length;
+			}
+			// Checking to make sure the grid is full and every row has the same number of columns
+			// If not, throw the error
+			if(numCols != parts.length)
+			{
+				boardReader.close();
+				throw new BadConfigFormatException("The board structure is incorrect for " + entries );
+			}
+
+			//currentColumn is our variable here
+			while(currentColumn < numCols)
+			{
+				//getting the character
+				Character roomChar = (Character)parts[currentColumn].charAt(0);
+				String room = legend.get(roomChar);
+				//Check to make sure you are getting a room that acutally exists!!
+				if(room == null)
+				{
+					boardReader.close();
+					throw new BadConfigFormatException("No room exists for " + roomChar);
+				}
+				BoardCell cell = new BoardCell(currentRow, currentColumn, parts[currentColumn]);
+				grid[currentRow][currentColumn] = cell;
+				currentColumn++;
+			}
+			currentRow++;
+		}
+		numRows = currentRow++;
+		boardReader.close();
+	}
+
+	/*
 	// Method to read and load rooms!!
 	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
 	{
+
       FileReader fileReader = new FileReader(roomConfigFile);
       // very important to use space for useDelimiter
       Scanner legendReader =  new Scanner(fileReader).useDelimiter(", ");
@@ -119,10 +212,11 @@ public class Board {
     	  //Puts the combination into the map and moves on to the next line
     	  legend.put(character, roomName);
     	  legendReader.nextLine();
-    	 
+
       }
       legendReader.close();
 	}
+	
 	// This is a tricky one...
 	// In short, we're using double while loops to read the rows and columns.
 	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException
@@ -155,11 +249,14 @@ public class Board {
 		numRows = currentRow;
 		// cant close colReader because of the declaration...whoops
 		rowReader.close();
-		
-		
-		
-     
 	}
+	*/
+	 
+
+
+
+
+
 	public void calcAdjacencies()
 	{
 

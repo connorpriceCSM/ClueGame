@@ -1,0 +1,1 @@
+Error: Bad Configuration on file: The card format file is incorrect for K, Kitchen, X

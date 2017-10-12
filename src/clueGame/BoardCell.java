@@ -20,7 +20,7 @@ public class BoardCell {
 		// BoardCell is guaranteed to have at least one character
 		initial = characters.charAt(0);
 		direction = DoorDirection.NONE;
-		// if this BoardCell 
+		// if this BoardCell has two characters, check for a door.
 		if(characters.length() == 2)
 		{
 			if(characters.charAt(1) != 'N')
