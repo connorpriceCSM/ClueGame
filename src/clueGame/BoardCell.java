@@ -8,13 +8,49 @@ public class BoardCell {
 	private char initial;
 	private char doorChar;
 	private DoorDirection direction;
-	public BoardCell(int row, int column)
+	/*
+	 * Easier to just use a string type as the 3rd parameter
+	 * because some cells will have more than one character for doors
+	 * like BU for example.
+	 */
+	public BoardCell(int row, int column, String characters)
 	{
 		this.row = row;
 		this.column = column;
-
+		// BoardCell is guaranteed to have at least one character
+		initial = characters.charAt(0);
+		direction = DoorDirection.NONE;
+		// if this BoardCell 
+		if(characters.length() == 2)
+		{
+			if(characters.charAt(1) != 'N')
+			doorChar = characters.charAt(1);
+		}
+		// method to set door 
+		setDoor();
 	}
-	// getter methods as well as booleans for
+	public BoardCell(int row, int column)
+	{
+		this.row = row;
+		
+	}
+	// setter methods
+	public void setRow(int row) {
+		this.row = row;
+	}
+	public void setColumn(int column) {
+		this.column = column;
+	}
+	public void setInitial(char initial) {
+		this.initial = initial;
+	}
+	public void setDoorChar(char doorChar) {
+		this.doorChar = doorChar;
+	}
+	public void setDirection(DoorDirection direction) {
+		this.direction = direction;
+	}
+	// getter methods as well as booleans for doorways,pathways,and rooms
 	public int getRow() 
 	{
 		return row;
@@ -23,7 +59,7 @@ public class BoardCell {
 	{
 		return column;
 	}
-	// needed to verify tests
+	
 	public char getInitial()
 	{
 		return initial;
@@ -35,21 +71,50 @@ public class BoardCell {
 	
 	public boolean isPathway()
 	{
-		
+		if(initial == 'P')
+		{
+			return true;
+		}
 		return false;
 
 	}
 	public boolean isRoom()
 	{
+		if(initial != 'P' && !isDoorway())
+		{
+			return true;
+		}
 		return false;
 
 	}
 	public boolean isDoorway()
 	{
+		if(direction != DoorDirection.NONE)
+		{
+			return true;
+		}
 		return false;
 	}
 	public void setDoor()
 	{
-		
+		switch(doorChar)
+		{
+		case 'U':
+			direction = DoorDirection.UP;
+			break;
+		case 'D':
+			direction = DoorDirection.DOWN;
+			break;
+		case 'R':
+			direction = DoorDirection.RIGHT;
+			break;
+		case 'L':
+			direction = DoorDirection.LEFT;
+			break;
+		default:
+			direction = DoorDirection.NONE;
+			break;
+				
+		}
 	}
 }

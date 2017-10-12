@@ -20,6 +20,7 @@ import clueGame.*;
 public class ClueBoardTests {
 
 	// boundaries of the grid and legend
+	// THEY DO VARY A BIT.
 	private static Board board;
 	public static final int LEGEND_SIZE = 11;
 	public static final int NUM_ROWS = 23;
@@ -54,7 +55,7 @@ public class ClueBoardTests {
 	}
 	@Test
 	public void testDoorDirections() {
-		
+
 		// Tests a selection of doors from the ClueMap, including a doubledoor.
 		BoardCell room = board.getCellAt(5, 1);
 		assertTrue(room.isDoorway());
@@ -106,7 +107,7 @@ public class ClueBoardTests {
 		assertEquals('B', board.getCellAt(7, 16).getInitial());
 		assertEquals('L', board.getCellAt(1, 8).getInitial());
 		assertEquals('K', board.getCellAt(0, 0).getInitial());
-		assertEquals('O', board.getCellAt(9, 1).getInitial());
+		assertEquals('O', board.getCellAt(8, 1).getInitial());
 		// Test a walkway
 		assertEquals('P', board.getCellAt(17, 14).getInitial());
 		// Test the closet
