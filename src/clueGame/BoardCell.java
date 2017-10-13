@@ -23,6 +23,7 @@ public class BoardCell {
 		// if this BoardCell has two characters, check for a door.
 		if(characters.length() == 2)
 		{
+			// accounting for Baldwin's room placements
 			if(characters.charAt(1) != 'N')
 			doorChar = characters.charAt(1);
 		}
