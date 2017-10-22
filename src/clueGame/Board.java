@@ -70,14 +70,7 @@ public class Board {
 		roomConfigFile = roomConfig;
 
 	}
-	// Get the boardcell;
-	public BoardCell getCellAt(int row, int col)
-	{
-		BoardCell cell =  grid[row][col];
-		return cell;
-
-	}
-
+	
 	// load the rooms and boards.
 	// both methods have to throw exceptions so try/catch blocks are used
 	public void initialize() {
@@ -270,13 +263,36 @@ public class Board {
 	}
 	 */
 
+	//PART III Skeleton methods to fail tests!
+	// Get the boardcell;
+	public BoardCell getCellAt(int row, int col)
+	{
+			BoardCell cell =  grid[row][col];
+			return cell;
 
+	}
+	public Set<BoardCell> getAdjList(int row, int col)
+	{
+		Set<BoardCell> set =  new HashSet<BoardCell>();
+		// adding 1 cell to ensure all tests fail for part III
+		set.add(new BoardCell(0,0));
+		return set;
+	}
 	public void calcAdjacencies()
 	{
 
 	}
-	public void calcTargets(BoardCell startCell, int pathLength)
+	public void calcTargets(int row, int col, int pathLength)
 	{
 
+	}
+	public void findAllTargets(int row, int col, int pathLength)
+	{
+		
+	}
+	public Set<BoardCell> getTargets()
+	{
+		Set<BoardCell> set =  new HashSet<BoardCell>();
+		return set;
 	}
 }
