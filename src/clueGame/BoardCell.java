@@ -81,7 +81,7 @@ public class BoardCell {
 	}
 	public boolean isRoom()
 	{
-		if(initial != 'P' && !isDoorway())
+		if(initial != 'P' && initial!='X' && !isDoorway())
 		{
 			return true;
 		}
