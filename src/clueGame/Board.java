@@ -264,7 +264,6 @@ public class Board {
 	}
 	 */
 
-	//PART III Skeleton methods to fail tests!
 	// Get the boardcell;
 	public BoardCell getCellAt(int row, int col)
 	{
@@ -292,6 +291,7 @@ public class Board {
 
 	}
 
+	// calc list for only one cell
 	public void calcSingleAdjacencyList(int row, int col)
 	{
 		Set<BoardCell> adjacentCells = new HashSet();
@@ -322,6 +322,8 @@ public class Board {
 
 	}
 
+	// Check a door of a cell  and make sure that you can get to a pathway from it!
+	// Add it to the adjacent list
 	public void setDoorWayList(int row, int col, DoorDirection direction, Set<BoardCell> adjacentCells)
 	{
 		if((direction == DoorDirection.DOWN) && row + 1 < numRows &&  grid[row +1][col].isPathway())
@@ -356,6 +358,7 @@ public class Board {
 		{
 			adjacentCells.add(cell);
 		}
+		//accounts for doorways
 		if(cell.isDoorway())
 		{
 			DoorDirection doorDirection = cell.getDoorDirection();
