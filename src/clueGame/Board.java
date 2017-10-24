@@ -281,7 +281,7 @@ public class Board {
 	// Method that calculates adjancies for each board cell in the game.
 	public void calcAdjacencies()
 	{
-		adjMtx = new HashMap();
+		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		for( int i =  0; i < numRows; i++ )
 		{
 			for( int j = 0; j < numCols; j++)
@@ -318,6 +318,7 @@ public class Board {
 			 * There should be four calls of checkCell here!
 			 */
 		}
+		adjMtx.put(startCell, adjacentCells);
 
 	}
 
