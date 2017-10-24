@@ -76,7 +76,7 @@ public class Board {
 	public void initialize() {
 		try
 		{
-
+			
 			loadRoomConfig();
 			loadBoardConfig();
 			calcAdjacencies();
@@ -290,7 +290,6 @@ public class Board {
 			}
 		}
 
-
 	}
 
 	public void calcSingleAdjacencyList(int row, int col)
@@ -310,13 +309,14 @@ public class Board {
 		// if the cell is a pathway, there's quite a bit to do.
 		else if(startCell.isPathway())
 		{
-			checkCell(row + 1, col, adjacentCells, startCell);
-			checkCell(row - 1, col, adjacentCells, startCell);
-			checkCell(row, col + 1, adjacentCells, startCell);
-			checkCell(row, col - 1, adjacentCells, startCell);
-			/*
-			 * There should be four calls of checkCell here!
-			 */
+			// CHECK every cell around the cell, door direction included to make sure proper doors are fit in
+			  checkCell(row - 1, col, adjacentCells, DoorDirection.DOWN);
+		      
+		      checkCell(row + 1, col, adjacentCells, DoorDirection.UP);
+		      
+		      checkCell(row, col - 1, adjacentCells, DoorDirection.RIGHT);
+		      
+		      checkCell(row, col + 1, adjacentCells, DoorDirection.LEFT);
 		}
 		adjMtx.put(startCell, adjacentCells);
 
@@ -328,22 +328,23 @@ public class Board {
 		{
 			adjacentCells.add(grid[row+1][col]);
 		}
-		// FILL OUT THE RIGHT UP AND LEFT  DOOR DIRECTIONS USING SIMILAR FORMAT ABOVE!
-		else if((direction == DoorDirection.RIGHT) && col - 1 < numRows &&  grid[row][col-1].isPathway())
-		{
-			adjacentCells.add(grid[row][col-1]);
-		}
-		else if((direction == DoorDirection.LEFT) && col + 1 < numRows &&  grid[row][col+1].isPathway())
-		{
-			adjacentCells.add(grid[row][col+1]);
-		}
-		else if((direction == DoorDirection.UP) && row - 1 < numRows &&  grid[row -1][col].isPathway())
+		else if((direction == DoorDirection.UP) && row - 1 >= 0 &&  grid[row -1][col].isPathway())
 		{
 			adjacentCells.add(grid[row-1][col]);
 		}
+		else if ((direction == DoorDirection.RIGHT) && col + 1 < numCols  &&  grid[row][col +1 ].isPathway())
+		{
+			adjacentCells.add(grid[row][col+1]);
+		}
+		else if((direction == DoorDirection.LEFT) && col - 1 >= 0  &&  grid[row][col -1 ].isPathway())
+		{
+			adjacentCells.add(grid[row][col-1]);
+		}
+		
+		
 	}
 	
-	public void checkCell(int row, int col, Set<BoardCell> adjacentCells, BoardCell startCell)
+	public void checkCell(int row, int col,  Set<BoardCell> adjacentCells, DoorDirection direction)
 	{
 		// accounts for bounds of the grid
 		if((row < 0) || (col < 0 ) || (row >= numRows) || (col >= numCols))
@@ -351,36 +352,19 @@ public class Board {
 			return;
 		}
 		BoardCell cell = grid[row][col];
-		DoorDirection dir = cell.getDoorDirection();
-		if(cell.isRoom())
+		if(cell.isPathway())
 		{
-			
+			adjacentCells.add(cell);
 		}
-		// checks
-		else if (cell.isDoorway())
+		if(cell.isDoorway())
 		{
-			if (dir == DoorDirection.DOWN && startCell.getRow() == row + 1 && startCell.getColumn() == col)
+			DoorDirection doorDirection = cell.getDoorDirection();
+			if(doorDirection == direction)
+
 			{
 				adjacentCells.add(cell);
 			}
-			else if (dir == DoorDirection.UP && startCell.getRow() == row -1 && startCell.getColumn() == col)
-			{
-				adjacentCells.add(cell);
-			}
-			else if (dir == DoorDirection.LEFT && startCell.getRow() == row && startCell.getColumn() == col - 1)
-			{
-				adjacentCells.add(cell);
-			}
-			else if (dir == DoorDirection.DOWN && startCell.getRow() == row && startCell.getColumn() == col + 1)
-			{
-				adjacentCells.add(cell);
-			}
-		}
-		adjacentCells.add(cell);
-			
-		
-		
-		
+		}		
 	}
 
 	
