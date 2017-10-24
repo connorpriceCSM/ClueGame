@@ -310,6 +310,10 @@ public class Board {
 		// if the cell is a pathway, there's quite a bit to do.
 		else if(startCell.isPathway())
 		{
+			checkCell(row + 1, col, adjacentCells, startCell);
+			checkCell(row - 1, col, adjacentCells, startCell);
+			checkCell(row, col + 1, adjacentCells, startCell);
+			checkCell(row, col - 1, adjacentCells, startCell);
 			/*
 			 * There should be four calls of checkCell here!
 			 */
@@ -324,29 +328,55 @@ public class Board {
 			adjacentCells.add(grid[row+1][col]);
 		}
 		// FILL OUT THE RIGHT UP AND LEFT  DOOR DIRECTIONS USING SIMILAR FORMAT ABOVE!
-		/*else if
+		else if((direction == DoorDirection.RIGHT) && col - 1 < numRows &&  grid[row][col-1].isPathway())
 		{
-			
+			adjacentCells.add(grid[row][col-1]);
 		}
-		else if
+		else if((direction == DoorDirection.LEFT) && col + 1 < numRows &&  grid[row][col+1].isPathway())
 		{
-		
+			adjacentCells.add(grid[row][col+1]);
 		}
-		else if
+		else if((direction == DoorDirection.UP) && row - 1 < numRows &&  grid[row -1][col].isPathway())
 		{
-		
+			adjacentCells.add(grid[row-1][col]);
 		}
-		*/
 	}
 	
-	public void checkCell(int row, int col, DoorDirection direction, Set<BoardCell> adjacentCells)
+	public void checkCell(int row, int col, Set<BoardCell> adjacentCells, BoardCell startCell)
 	{
 		// accounts for bounds of the grid
-		if((row <0) || (col < 0 ) || (row >= numRows) || (col >= numCols))
+		if((row < 0) || (col < 0 ) || (row >= numRows) || (col >= numCols))
 		{
 			return;
 		}
 		BoardCell cell = grid[row][col];
+		DoorDirection dir = cell.getDoorDirection();
+		if(cell.isRoom())
+		{
+			
+		}
+		else if (cell.isDoorway())
+		{
+			if (dir == DoorDirection.DOWN && startCell.getRow() == row + 1 && startCell.getColumn() == col)
+			{
+				adjacentCells.add(cell);
+			}
+			else if (dir == DoorDirection.UP && startCell.getRow() == row -1 && startCell.getColumn() == col)
+			{
+				adjacentCells.add(cell);
+			}
+			else if (dir == DoorDirection.LEFT && startCell.getRow() == row && startCell.getColumn() == col - 1)
+			{
+				adjacentCells.add(cell);
+			}
+			else if (dir == DoorDirection.DOWN && startCell.getRow() == row && startCell.getColumn() == col + 1)
+			{
+				adjacentCells.add(cell);
+			}
+		}
+		adjacentCells.add(cell);
+			
+		
 		/*
 		 * Make sure you check if the cell is a doorway, room, etc,
 		 * DONT FORGET DIRECTION!!
