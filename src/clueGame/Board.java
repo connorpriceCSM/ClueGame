@@ -76,7 +76,6 @@ public class Board {
 	public void initialize() {
 		try
 		{
-			
 			loadRoomConfig();
 			loadBoardConfig();
 			calcAdjacencies();
@@ -294,12 +293,12 @@ public class Board {
 	// calc list for only one cell
 	public void calcSingleAdjacencyList(int row, int col)
 	{
-		Set<BoardCell> adjacentCells = new HashSet();
+		Set<BoardCell> adjacentCells = new HashSet<BoardCell>();
 		BoardCell startCell = grid[row][col];
 		// if the cell is a room, there will be no adjacency list
 		if(startCell.isRoom())
 		{
-		
+
 		}
 		// if the cell is a doorway, we need to check the exit paths.
 		else if(startCell.isDoorway())
@@ -310,14 +309,15 @@ public class Board {
 		else if(startCell.isPathway())
 		{
 			// CHECK every cell around the cell, door direction included to make sure proper doors are fit in
-			  checkCell(row - 1, col, adjacentCells, DoorDirection.DOWN);
-		      
-		      checkCell(row + 1, col, adjacentCells, DoorDirection.UP);
-		      
-		      checkCell(row, col - 1, adjacentCells, DoorDirection.RIGHT);
-		      
-		      checkCell(row, col + 1, adjacentCells, DoorDirection.LEFT);
+			checkCell(row - 1, col, adjacentCells, DoorDirection.DOWN);
+
+			checkCell(row + 1, col, adjacentCells, DoorDirection.UP);
+
+			checkCell(row, col - 1, adjacentCells, DoorDirection.RIGHT);
+
+			checkCell(row, col + 1, adjacentCells, DoorDirection.LEFT);
 		}
+
 		adjMtx.put(startCell, adjacentCells);
 
 	}
@@ -342,10 +342,10 @@ public class Board {
 		{
 			adjacentCells.add(grid[row][col-1]);
 		}
-		
-		
+
+
 	}
-	
+
 	public void checkCell(int row, int col,  Set<BoardCell> adjacentCells, DoorDirection direction)
 	{
 		// accounts for bounds of the grid
@@ -370,13 +370,13 @@ public class Board {
 		}		
 	}
 
-	
+
 	// find all the targets for any given cell
 	public void calcTargets(int row, int col, int pathLength)
 	{
 		BoardCell startCell = grid[row][col];
-		targets =  new HashSet();
-		visited = new HashSet();
+		targets =  new HashSet<BoardCell>();
+		visited = new HashSet<BoardCell>();
 		visited.add(startCell);
 		findAllTargets(startCell,pathLength);
 

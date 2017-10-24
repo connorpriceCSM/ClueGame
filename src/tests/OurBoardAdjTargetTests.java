@@ -3,7 +3,7 @@ package tests;
 /*
  * This program tests that adjacencies and targets are calculated correctly.
 
- * Or in this case, incorrectly at the moment,
+
  * Authors:  Connor Price & Amelia Atiles
  */
 
