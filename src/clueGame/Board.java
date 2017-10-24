@@ -356,6 +356,7 @@ public class Board {
 		{
 			
 		}
+		// checks
 		else if (cell.isDoorway())
 		{
 			if (dir == DoorDirection.DOWN && startCell.getRow() == row + 1 && startCell.getColumn() == col)
@@ -378,13 +379,12 @@ public class Board {
 		adjacentCells.add(cell);
 			
 		
-		/*
-		 * Make sure you check if the cell is a doorway, room, etc,
-		 * DONT FORGET DIRECTION!!
-		 */
+		
 		
 	}
 
+	
+	// find all the targets for any given cell
 	public void calcTargets(int row, int col, int pathLength)
 	{
 		BoardCell startCell = grid[row][col];
@@ -394,6 +394,7 @@ public class Board {
 		findAllTargets(startCell,pathLength);
 
 	}
+	// method is just like intboard only isDoorway is implemented to make sure it's read
 	public void findAllTargets(BoardCell startCell, int pathLength)
 	{
 		Set<BoardCell> adjCells = adjMtx.get(startCell);

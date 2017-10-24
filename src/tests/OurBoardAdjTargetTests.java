@@ -298,10 +298,9 @@ public class OurBoardAdjTargetTests {
 		// Take one step, essentially just the adj list
 		board.calcTargets(17, 7, 1);
 		Set<BoardCell> targets= board.getTargets();
-		assertEquals(2, targets.size());
-		//NOTE you can move to the other exit door.
+		assertEquals(1, targets.size());
+		//NOTE you cant move to the other exit door.
 		assertTrue(targets.contains(board.getCellAt(16, 7)));
-		assertTrue(targets.contains(board.getCellAt(17, 6)));
 		// Take two steps out of the doorway
 		board.calcTargets(17, 7, 2);
 		targets= board.getTargets();
