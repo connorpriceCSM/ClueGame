@@ -70,7 +70,7 @@ public class Board {
 		roomConfigFile = roomConfig;
 
 	}
-	
+
 	// load the rooms and boards.
 	// both methods have to throw exceptions so try/catch blocks are used
 	public void initialize() {
@@ -79,6 +79,7 @@ public class Board {
 
 			loadRoomConfig();
 			loadBoardConfig();
+			calcAdjacencies();
 		}
 		//our FileNotFound and BadConfig Exceptions!
 		catch (Exception e)
@@ -267,32 +268,126 @@ public class Board {
 	// Get the boardcell;
 	public BoardCell getCellAt(int row, int col)
 	{
-			BoardCell cell =  grid[row][col];
-			return cell;
+		BoardCell cell =  grid[row][col];
+		return cell;
 
 	}
+	// Method to get the neighbors of any cell only after they've been calculated at initalize
 	public Set<BoardCell> getAdjList(int row, int col)
 	{
-		Set<BoardCell> set =  new HashSet<BoardCell>();
-		// adding 1 cell to ensure all tests fail for part III
-		set.add(new BoardCell(0,0));
-		return set;
+		BoardCell cell = grid[row][col];
+		return adjMtx.get(cell);
 	}
+	// Method that calculates adjancies for each board cell in the game.
 	public void calcAdjacencies()
 	{
+		adjMtx = new HashMap();
+		for( int i =  0; i < numRows; i++ )
+		{
+			for( int j = 0; j < numCols; j++)
+			{
+				calcSingleAdjacencyList(i,j);
+			}
+		}
+
 
 	}
-	public void calcTargets(int row, int col, int pathLength)
+
+	public void calcSingleAdjacencyList(int row, int col)
 	{
+		Set<BoardCell> adjacentCells = new HashSet();
+		BoardCell startCell = grid[row][col];
+		// if the cell is a room, there will be no adjacency list
+		if(startCell.isRoom())
+		{
+		
+		}
+		// if the cell is a doorway, we need to check the exit paths.
+		else if(startCell.isDoorway())
+		{
+			setDoorWayList(row, col, startCell.getDoorDirection(), adjacentCells);
+		}
+		// if the cell is a pathway, there's quite a bit to do.
+		else if(startCell.isPathway())
+		{
+			/*
+			 * There should be four calls of checkCell here!
+			 */
+		}
 
 	}
-	public void findAllTargets(int row, int col, int pathLength)
+
+	public void setDoorWayList(int row, int col, DoorDirection direction, Set<BoardCell> adjacentCells)
 	{
+		if((direction == DoorDirection.DOWN) && row + 1 < numRows &&  grid[row +1][col].isPathway())
+		{
+			adjacentCells.add(grid[row+1][col]);
+		}
+		// FILL OUT THE RIGHT UP AND LEFT  DOOR DIRECTIONS USING SIMILAR FORMAT ABOVE!
+		/*else if
+		{
+			
+		}
+		else if
+		{
+		
+		}
+		else if
+		{
+		
+		}
+		*/
+	}
+	
+	public void checkCell(int row, int col, DoorDirection direction, Set<BoardCell> adjacentCells)
+	{
+		// accounts for bounds of the grid
+		if((row <0) || (col < 0 ) || (row >= numRows) || (col >= numCols))
+		{
+			return;
+		}
+		BoardCell cell = grid[row][col];
+		/*
+		 * Make sure you check if the cell is a doorway, room, etc,
+		 * DONT FORGET DIRECTION!!
+		 */
 		
 	}
+
+	public void calcTargets(int row, int col, int pathLength)
+	{
+		BoardCell startCell = grid[row][col];
+		targets =  new HashSet();
+		visited = new HashSet();
+		visited.add(startCell);
+		findAllTargets(startCell,pathLength);
+
+	}
+	public void findAllTargets(BoardCell startCell, int pathLength)
+	{
+		Set<BoardCell> adjCells = adjMtx.get(startCell);
+		for (BoardCell adjCell: adjCells) {
+			if (visited.contains(adjCell)) {
+
+			} else {
+				visited.add(adjCell);
+				if(adjCell.isDoorway())
+				{
+					targets.add(adjCell);
+				}
+				else if (pathLength ==1) {
+					targets.add(adjCell);
+				} else {
+					findAllTargets(adjCell, pathLength-1);
+				}
+				visited.remove(adjCell);
+			}
+
+		}
+	}
+
 	public Set<BoardCell> getTargets()
 	{
-		Set<BoardCell> set =  new HashSet<BoardCell>();
-		return set;
+		return targets;
 	}
 }
