@@ -225,9 +225,9 @@ public class Board {
 		
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		
-		for( int i =  0; i < NUM_ROWS; i++ )
+		for( int i =  0; i < numRows; i++ )
 		{
-			for( int j = 0; j < NUM_COLUMNS; j++)
+			for( int j = 0; j < numCols; j++)
 			{
 				calcSingleAdjacencyList(i,j);
 			}
@@ -271,7 +271,7 @@ public class Board {
 	public void setDoorWayList(int row, int col, DoorDirection direction, Set<BoardCell> adjacentCells)
 	{
 		// Direction DOWN
-		if((direction == DoorDirection.DOWN) && row + 1 < NUM_ROWS &&  grid[row +1][col].isPathway())
+		if((direction == DoorDirection.DOWN) && row + 1 < numRows &&  grid[row +1][col].isPathway())
 		{
 			adjacentCells.add(grid[row+1][col]);
 		}
@@ -281,7 +281,7 @@ public class Board {
 			adjacentCells.add(grid[row-1][col]);
 		}
 		// Direction RIGHT
-		else if ((direction == DoorDirection.RIGHT) && col + 1 < NUM_COLUMNS  &&  grid[row][col +1 ].isPathway())
+		else if ((direction == DoorDirection.RIGHT) && col + 1 < numCols  &&  grid[row][col +1 ].isPathway())
 		{
 			adjacentCells.add(grid[row][col+1]);
 		}
@@ -301,7 +301,7 @@ public class Board {
 	{
 		// accounts for bounds of the grid
 		// There is no valid cell if any of these conditions are true
-		if((row < 0) || (col < 0 ) || (row >= NUM_ROWS) || (col >= NUM_COLUMNS))
+		if((row < 0) || (col < 0 ) || (row >= numRows || (col >= numCols)))
 		{
 			return;
 		}
@@ -367,5 +367,9 @@ public class Board {
 	public Set<BoardCell> getTargets()
 	{
 		return targets;
+	}
+	public BoardCell[][] getGrid()
+	{
+		return grid;
 	}
 }

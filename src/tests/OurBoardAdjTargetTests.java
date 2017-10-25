@@ -27,6 +27,7 @@ public class OurBoardAdjTargetTests {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueMap.csv", "ClueLegend.txt");		
 		board.initialize();
+		
 	}
 
 	// Ensure that player does not move around within room

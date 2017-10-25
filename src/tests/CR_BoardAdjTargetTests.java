@@ -26,6 +26,7 @@ public class CR_BoardAdjTargetTests {
 		// set the file names to use my config files
 		board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegend.txt");		
 		board.initialize();
+		
 	}
 
 	// Ensure that player does not move around within room
