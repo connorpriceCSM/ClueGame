@@ -18,8 +18,8 @@ public class Board {
 	// variable used for singleton pattern
 
 	private Map<BoardCell, Set<BoardCell>> adjMtx;
-	private HashSet<BoardCell> visited;
-	private HashSet<BoardCell> targets;
+	private Set<BoardCell> visited;
+	private Set<BoardCell> targets;
 	private Map<Character, String> legend;
 	private BoardCell[][] grid;
 	private static Board theInstance = new Board();
@@ -73,12 +73,14 @@ public class Board {
 
 	// load the rooms and boards.
 	// both methods have to throw exceptions so try/catch blocks are used
-	public void initialize() {
+	public void initialize() 
+	{
 		try
 		{
 			loadRoomConfig();
 			loadBoardConfig();
 			calcAdjacencies();
+			System.out.print("Files loaded.");
 		}
 		//our FileNotFound and BadConfig Exceptions!
 		catch (Exception e)
@@ -88,6 +90,7 @@ public class Board {
 
 
 	}
+	
 
 
 	// read the legend file
@@ -203,66 +206,6 @@ public class Board {
 		boardReader.close();
 	}
 
-	/*
-	 * An older method that I tried earlier w/out exception handling.
-	 * Might do more with it later
-	 * 
-	// Method to read and load rooms!!
-	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
-	{
-
-      FileReader fileReader = new FileReader(roomConfigFile);
-      // very important to use space for useDelimiter
-      Scanner legendReader =  new Scanner(fileReader).useDelimiter(", ");
-      while(legendReader.hasNext())
-      {
-    	  //reads the character first
-    	  char character = legendReader.next().charAt(0);
-    	  //Reads the room name
-    	  String roomName = legendReader.next();
-    	  //Puts the combination into the map and moves on to the next line
-    	  legend.put(character, roomName);
-    	  legendReader.nextLine();
-
-      }
-      legendReader.close();
-	}
-
-	// This is a tricky one...
-	// In short, we're using double while loops to read the rows and columns.
-	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException
-	{
-		FileReader fileReader = new FileReader(boardConfigFile);
-		Scanner rowReader = new Scanner(fileReader);
-		Scanner colReader;
-		int currentRow = 0;
-		// hasNextLine is an important method here because we're reading form a set square grid
-		while(rowReader.hasNextLine())
-		{
-			int currentColumn = 0;
-			colReader = new Scanner(rowReader.nextLine()).useDelimiter(",");
-			while(colReader.hasNext())
-			{
-				//AGAIN VERY IMPORTANT TO USE A STRING HERE
-				String entry = colReader.next();
-				// create cell and enter it in our grid. We have solid values now.
-				BoardCell cell =  new BoardCell(currentRow,currentColumn,entry);
-				grid[currentRow][currentColumn] = cell;
-				currentColumn++;
-			}
-			if(numCols < currentColumn)
-			{
-				numCols = currentColumn;
-			}
-			// once the columns are out, increment the row.
-			currentRow++;
-		}
-		numRows = currentRow;
-		// cant close colReader because of the declaration...whoops
-		rowReader.close();
-	}
-	 */
-
 	// Get the boardcell;
 	public BoardCell getCellAt(int row, int col)
 	{
@@ -279,16 +222,19 @@ public class Board {
 	// Method that calculates adjancies for each board cell in the game.
 	public void calcAdjacencies()
 	{
+		
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		for( int i =  0; i < numRows; i++ )
+		for( int i =  0; i < NUM_ROWS; i++ )
 		{
-			for( int j = 0; j < numCols; j++)
+			for( int j = 0; j < NUM_COLUMNS; j++)
 			{
 				calcSingleAdjacencyList(i,j);
 			}
 		}
 
-	}
+		System.out.println("This should be working!");	
+		}
+
 
 	// calc list for only one cell
 	public void calcSingleAdjacencyList(int row, int col)
@@ -296,12 +242,10 @@ public class Board {
 		Set<BoardCell> adjacentCells = new HashSet<BoardCell>();
 		BoardCell startCell = grid[row][col];
 		// if the cell is a room, there will be no adjacency list
-		if(startCell.isRoom())
-		{
-
-		}
+	
+		
 		// if the cell is a doorway, we need to check the exit paths.
-		else if(startCell.isDoorway())
+	     if(startCell.isDoorway())
 		{
 			setDoorWayList(row, col, startCell.getDoorDirection(), adjacentCells);
 		}
@@ -309,35 +253,38 @@ public class Board {
 		else if(startCell.isPathway())
 		{
 			// CHECK every cell around the cell, door direction included to make sure proper doors are fit in
+			checkCell(row, col - 1, adjacentCells, DoorDirection.RIGHT);
+			checkCell(row, col + 1, adjacentCells, DoorDirection.LEFT);
 			checkCell(row - 1, col, adjacentCells, DoorDirection.DOWN);
-
 			checkCell(row + 1, col, adjacentCells, DoorDirection.UP);
 
-			checkCell(row, col - 1, adjacentCells, DoorDirection.RIGHT);
-
-			checkCell(row, col + 1, adjacentCells, DoorDirection.LEFT);
+			
 		}
 
 		adjMtx.put(startCell, adjacentCells);
 
 	}
 
-	// Check a door of a cell  and make sure that you can get to a pathway from it!
+	// Check a door of a cell and make sure that there is a pathway next to it that can be reached
 	// Add it to the adjacent list
 	public void setDoorWayList(int row, int col, DoorDirection direction, Set<BoardCell> adjacentCells)
 	{
-		if((direction == DoorDirection.DOWN) && row + 1 < numRows &&  grid[row +1][col].isPathway())
+		// Direction DOWN
+		if((direction == DoorDirection.DOWN) && row + 1 < NUM_ROWS &&  grid[row +1][col].isPathway())
 		{
 			adjacentCells.add(grid[row+1][col]);
 		}
+		// Direction UP
 		else if((direction == DoorDirection.UP) && row - 1 >= 0 &&  grid[row -1][col].isPathway())
 		{
 			adjacentCells.add(grid[row-1][col]);
 		}
-		else if ((direction == DoorDirection.RIGHT) && col + 1 < numCols  &&  grid[row][col +1 ].isPathway())
+		// Direction RIGHT
+		else if ((direction == DoorDirection.RIGHT) && col + 1 < NUM_COLUMNS  &&  grid[row][col +1 ].isPathway())
 		{
 			adjacentCells.add(grid[row][col+1]);
 		}
+		// Direction LEFT
 		else if((direction == DoorDirection.LEFT) && col - 1 >= 0  &&  grid[row][col -1 ].isPathway())
 		{
 			adjacentCells.add(grid[row][col-1]);
@@ -346,14 +293,24 @@ public class Board {
 
 	}
 
+	// Check any cell at all and make sure that it's a valid pathway
+	// If the cell happens to fall on a door, make sure the door is reachable given it's door direction
+	// Ex: You can't go upwards into a doorway that's facing right, up, or left.
 	public void checkCell(int row, int col,  Set<BoardCell> adjacentCells, DoorDirection direction)
 	{
 		// accounts for bounds of the grid
-		if((row < 0) || (col < 0 ) || (row >= numRows) || (col >= numCols))
+		// There is no valid cell if any of these conditions are true
+		if((row < 0) || (col < 0 ) || (row >= NUM_ROWS) || (col >= NUM_COLUMNS))
 		{
 			return;
 		}
 		BoardCell cell = grid[row][col];
+		// If the cell is a room, do nothing, no reason to add this one.
+		if(cell.isRoom())
+		{
+			return;
+		}
+		// if the cell is a valid pathway, it's a valid target and spot to move
 		if(cell.isPathway())
 		{
 			adjacentCells.add(cell);
@@ -405,6 +362,7 @@ public class Board {
 		}
 	}
 
+	// Getter method for Targets
 	public Set<BoardCell> getTargets()
 	{
 		return targets;
