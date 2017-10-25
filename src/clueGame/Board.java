@@ -224,6 +224,7 @@ public class Board {
 	{
 		
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
+		
 		for( int i =  0; i < NUM_ROWS; i++ )
 		{
 			for( int j = 0; j < NUM_COLUMNS; j++)
