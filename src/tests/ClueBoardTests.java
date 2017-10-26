@@ -44,7 +44,7 @@ public class ClueBoardTests {
 		assertEquals("Entertainment room", legend.get('E'));
 		assertEquals("Sauna", legend.get('S'));
 		assertEquals("Bedroom", legend.get('D'));
-		assertEquals("Closet", legend.get('C'));
+		assertEquals("Closet", legend.get('X'));
 
 	}
 	@Test
@@ -109,9 +109,9 @@ public class ClueBoardTests {
 		assertEquals('K', board.getCellAt(0, 0).getInitial());
 		assertEquals('O', board.getCellAt(8, 1).getInitial());
 		// Test a walkway
-		assertEquals('P', board.getCellAt(17, 14).getInitial());
+		assertEquals('W', board.getCellAt(17, 14).getInitial());
 		// Test the closet
-		assertEquals('C', board.getCellAt(12,9).getInitial());
+		assertEquals('X', board.getCellAt(12,9).getInitial());
 	}
 
 }

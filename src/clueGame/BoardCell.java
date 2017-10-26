@@ -1,5 +1,6 @@
 package clueGame;
 
+
 //Authors: Amelia Atiles and Connor Price
 public class BoardCell {
 
@@ -8,6 +9,7 @@ public class BoardCell {
 	private char initial;
 	private char doorChar;
 	private DoorDirection direction;
+	private int index;
 	/*
 	 * Easier to just use a string type as the 3rd parameter
 	 * because some cells will have more than one character for doors
@@ -72,7 +74,7 @@ public class BoardCell {
 	
 	public boolean isPathway()
 	{
-		if(initial == 'P')
+		if(initial == Board.WALKWAY_CHAR)
 		{
 			return true;
 		}
@@ -81,7 +83,7 @@ public class BoardCell {
 	}
 	public boolean isRoom()
 	{
-		if(initial != 'P' && initial!='X' && !isDoorway())
+		if (initial != Board.WALKWAY_CHAR && initial!= Board.CLOSET_CHAR && !isDoorway())
 		{
 			return true;
 		}
@@ -118,4 +120,33 @@ public class BoardCell {
 				
 		}
 	}
+	// Hashcode for Comparing Cells
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + column;
+		result = prime * result + row;
+		return result;   
+	}
+
+
+	//Override Equals method  to compare BoardCells if need be.
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BoardCell other = (BoardCell) obj;
+		if (column != other.column)
+			return false;
+		if (row != other.row)
+			return false;
+		return true;
+	}
+
+			
 }

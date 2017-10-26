@@ -7,5 +7,5 @@ K, Kitchen, Card
 G, Garden, Card
 D, Bedroom, Card
 E, Entertainment room, Card
-C, Closet, Other
-P, Pathway, Other
+X, Closet, Other
+W, Pathway, Other

@@ -29,7 +29,6 @@ public class OurBoardAdjTargetTests {
 		board.initialize();
 		
 	}
-
 	// Ensure that player does not move around within room
 	// These cells are PURPLE on the planning spreadsheet
 	@Test
@@ -177,8 +176,8 @@ public class OurBoardAdjTargetTests {
 		assertEquals(1, testList.size());
 
 		// Test on left edge of the board,
-		testList = board.getAdjList(12, 0);
-		assertTrue(testList.contains(board.getCellAt(13, 0)));
+		testList = board.getAdjList(11, 0);
+		assertTrue(testList.contains(board.getCellAt(12, 0)));
 		assertEquals(1, testList.size());
 
 

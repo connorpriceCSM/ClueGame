@@ -17,10 +17,10 @@ import java.io.FileReader;
 public class Board {
 	// variable used for singleton pattern
 
-	private Map<BoardCell, Set<BoardCell>> adjMtx;
-	private Set<BoardCell> visited;
-	private Set<BoardCell> targets;
-	private Map<Character, String> legend;
+	private HashMap<BoardCell, Set<BoardCell>> adjMtx;
+	private HashSet<BoardCell> visited;
+	private HashSet<BoardCell> targets;
+	private HashMap<Character, String> legend;
 	private BoardCell[][] grid;
 	private static Board theInstance = new Board();
 
@@ -28,6 +28,8 @@ public class Board {
 	final static int MAX_BOARD_SIZE = 50;
 	public static final int NUM_ROWS = 23;
 	public static final int NUM_COLUMNS = 22;
+	public static final char WALKWAY_CHAR = 'W';
+	public static final char CLOSET_CHAR = 'X';
 
 
 	private String boardConfigFile;
@@ -75,6 +77,11 @@ public class Board {
 	// both methods have to throw exceptions so try/catch blocks are used
 	public void initialize() 
 	{
+		legend = new HashMap<Character, String>();
+		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
+		visited = new HashSet<BoardCell>();
+		targets = new HashSet<BoardCell>();
+
 		try
 		{
 			loadRoomConfig();
