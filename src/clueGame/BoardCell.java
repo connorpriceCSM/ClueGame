@@ -4,9 +4,9 @@ package clueGame;
 //Authors: Amelia Atiles and Connor Price
 public class BoardCell {
 
-	private int row;
-	private int column;
-	private char initial;
+	private int cellRow;
+	private int cellColumn;
+	private char cellInitial;
 	private char doorChar;
 	private DoorDirection direction;
 	private int index;
@@ -18,10 +18,10 @@ public class BoardCell {
 	//primary constructor
 	public BoardCell(int row, int column, String characters)
 	{
-		this.row = row;
-		this.column = column;
+		this.cellRow = row;
+		this.cellColumn = column;
 		// BoardCell is guaranteed to have at least one character
-		initial = characters.charAt(0);
+		cellInitial = characters.charAt(0);
 		direction = DoorDirection.NONE;
 		// if this BoardCell has two characters, check for a door.
 		if(characters.length() == 2)
@@ -36,20 +36,20 @@ public class BoardCell {
 	// secondary constructor
 	public BoardCell(int row, int column)
 	{
-		this.row = row;
+		this.cellRow = row;
 	}
 	// setter methods
 	public void setRow(int row) 
 	{
-		this.row = row;
+		this.cellRow = row;
 	}
 	public void setColumn(int column) 
 	{
-		this.column = column;
+		this.cellColumn = column;
 	}
 	public void setInitial(char initial) 
 	{
-		this.initial = initial;
+		this.cellInitial = initial;
 	}
 	public void setDoorChar(char doorChar) 
 	{
@@ -62,16 +62,16 @@ public class BoardCell {
 	// getter methods as well as booleans for doorways,pathways,and rooms
 	public int getRow() 
 	{
-		return row;
+		return cellRow;
 	}
 	public int getColumn() 
 	{
-		return column;
+		return cellColumn;
 	}
 	
 	public char getInitial()
 	{
-		return initial;
+		return cellInitial;
 	}
 	public DoorDirection getDoorDirection()
 	{
@@ -81,7 +81,7 @@ public class BoardCell {
 	//check if this cell is a pathway
 	public boolean isPathway()
 	{
-		if(initial == Board.WALKWAY_CHAR)
+		if(cellInitial == Board.WALKWAY_CHARACTER)
 		{
 			return true;
 		}
@@ -90,7 +90,7 @@ public class BoardCell {
 	//check if this cell is a room
 	public boolean isRoom()
 	{
-		if (initial != Board.WALKWAY_CHAR && initial!= Board.CLOSET_CHAR && !isDoorway())
+		if (cellInitial != Board.WALKWAY_CHARACTER && cellInitial!= Board.CLOSET_CHARACTER && !isDoorway())
 		{
 			return true;
 		}
@@ -129,17 +129,19 @@ public class BoardCell {
 	}
 	// Hashcode for Comparing Cells
 	@Override
-	public int hashCode() {
+	public int hashCode() 
+	{
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + column;
-		result = prime * result + row;
+		result = prime * result + cellColumn;
+		result = prime * result + cellRow;
 		return result;   
 	}
 
 	//Override Equals method  to compare BoardCells if need be.
 	@Override
-	public boolean equals(Object obj) {
+	public boolean equals(Object obj) 
+	{
 		if (this == obj)
 			return true;
 		if (obj == null)
@@ -147,9 +149,9 @@ public class BoardCell {
 		if (getClass() != obj.getClass())
 			return false;
 		BoardCell other = (BoardCell) obj;
-		if (column != other.column)
+		if (cellColumn != other.cellColumn)
 			return false;
-		if (row != other.row)
+		if (cellRow != other.cellRow)
 			return false;
 		return true;
 	}	
