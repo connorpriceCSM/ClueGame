@@ -137,7 +137,6 @@ public class BoardCell {
 		return result;   
 	}
 
-
 	//Override Equals method  to compare BoardCells if need be.
 	@Override
 	public boolean equals(Object obj) {
@@ -153,7 +152,5 @@ public class BoardCell {
 		if (row != other.row)
 			return false;
 		return true;
-	}
-
-			
+	}	
 }
