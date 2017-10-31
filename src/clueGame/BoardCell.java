@@ -15,6 +15,7 @@ public class BoardCell {
 	 * because some cells will have more than one character for doors
 	 * like BU for example.
 	 */
+	//primary constructor
 	public BoardCell(int row, int column, String characters)
 	{
 		this.row = row;
@@ -32,25 +33,30 @@ public class BoardCell {
 		// method to set door 
 		setDoor();
 	}
+	// secondary constructor
 	public BoardCell(int row, int column)
 	{
 		this.row = row;
-		
 	}
 	// setter methods
-	public void setRow(int row) {
+	public void setRow(int row) 
+	{
 		this.row = row;
 	}
-	public void setColumn(int column) {
+	public void setColumn(int column) 
+	{
 		this.column = column;
 	}
-	public void setInitial(char initial) {
+	public void setInitial(char initial) 
+	{
 		this.initial = initial;
 	}
-	public void setDoorChar(char doorChar) {
+	public void setDoorChar(char doorChar) 
+	{
 		this.doorChar = doorChar;
 	}
-	public void setDirection(DoorDirection direction) {
+	public void setDirection(DoorDirection direction) 
+	{
 		this.direction = direction;
 	}
 	// getter methods as well as booleans for doorways,pathways,and rooms
@@ -72,6 +78,7 @@ public class BoardCell {
 		return direction;
 	}
 	
+	//check if this cell is a pathway
 	public boolean isPathway()
 	{
 		if(initial == Board.WALKWAY_CHAR)
@@ -79,8 +86,8 @@ public class BoardCell {
 			return true;
 		}
 		return false;
-
 	}
+	//check if this cell is a room
 	public boolean isRoom()
 	{
 		if (initial != Board.WALKWAY_CHAR && initial!= Board.CLOSET_CHAR && !isDoorway())
@@ -88,8 +95,8 @@ public class BoardCell {
 			return true;
 		}
 		return false;
-
 	}
+	// check if this cell is a doorway
 	public boolean isDoorway()
 	{
 		if(direction != DoorDirection.NONE)
@@ -98,6 +105,7 @@ public class BoardCell {
 		}
 		return false;
 	}
+	// depending on the secondary character, set the door direction for this cell
 	public void setDoor()
 	{
 		switch(doorChar)
@@ -116,8 +124,7 @@ public class BoardCell {
 			break;
 		default:
 			direction = DoorDirection.NONE;
-			break;
-				
+			break;	
 		}
 	}
 	// Hashcode for Comparing Cells
