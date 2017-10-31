@@ -26,10 +26,10 @@ public class Board {
 
 	private int numRows,numCols;
 	final static int MAX_BOARD_SIZE = 50;
-	public static final int NUM_ROWS = 23;
-	public static final int NUM_COLUMNS = 22;
-	public static final char WALKWAY_CHAR = 'W';
-	public static final char CLOSET_CHAR = 'X';
+	public static final int NUMBER_OF_ROWS = 23;
+	public static final int NUMBER_OF_COLUMNS = 22;
+	public static final char WALKWAY_CHARACTER = 'W';
+	public static final char CLOSET_CHARACTER = 'X';
 
 
 	private String boardConfigFile;
@@ -50,41 +50,48 @@ public class Board {
 	}
 
 	// return the legend
-	public Map<Character, String> getLegend() {
+	public Map<Character, String> getLegend() 
+	{
 		
 		return legend;
 	}
 
     // return the number of rows of the grid
-	public int getNumRows() {
+	public int getNumRows() 
+	{
 		
 		return numRows;
 	}
 
 	// return the number of columns of the grid.
-	public int getNumColumns() {
+	public int getNumColumns() 
+	{
 		
 		return numCols;
 	}
 
 
 	//Set the config files correctly.
-	public void setConfigFiles(String boardConfig, String roomConfig) {
+	public void setConfigFiles(String boardConfig, String roomConfig)
+	{
 		boardConfigFile = boardConfig;
 		roomConfigFile = roomConfig;
-
 	}
 
-	// load the rooms and boards.
-	// both methods have to throw exceptions so try/catch blocks are used
-	public void initialize() 
+	// reinitialize our sets, map, and grid to clear it.
+	public void clearHolders()
 	{
-		// reinitialize everything to clear it.
 		legend = new HashMap<Character, String>();
 		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 		visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
 
+	}
+	// load the rooms and boards.
+	// both methods have to throw exceptions so try/catch blocks are used
+	public void initialize() 
+	{
+		clearHolders();
 		try
 		{
 			//load the board, room, and calculate all possible adjacencies.
@@ -98,12 +105,8 @@ public class Board {
 		{
 			System.out.println(e.getMessage());
 		}
-
-
 	}
-
-
-
+	
 	/* read the legend file
 	// make sure that the format (including commas and spaces)  of each entry is correct
 	// throw errors otherwise
@@ -144,22 +147,17 @@ public class Board {
 			}
 			// put the  found character and the room name in the legend.
 			legend.put(character, roomName);
-
-
 		}
 		// close the scanner
 		legendReader.close();
-
-
-
 	}
+	
 	// Read the board layout file
 	// Put each string (character) into  it's own little board cell spot
 	//  Check to make sure each spot is filled and that each character actually corresponds to a room/
 	//throw exceptions otherwise
 	public void loadBoardConfig() throws FileNotFoundException, BadConfigFormatException
 	{
-		//
 		FileReader fileReader = new FileReader(boardConfigFile);
 		Scanner boardReader = new Scanner(fileReader);
 		int currentRow = 0;
@@ -218,7 +216,7 @@ public class Board {
 		// close the scanner
 		boardReader.close();
 	}
-
+	
 	// Get the boardcell;
 	public BoardCell getCellAt(int row, int col)
 	{
@@ -253,15 +251,12 @@ public class Board {
 		System.out.println("This should be working!");	
 	}
 
-
 	// calc list for only one cell
 	public void calcSingleAdjacencyList(int row, int col)
 	{
 		Set<BoardCell> adjacentCells = new HashSet<BoardCell>();
 		BoardCell startCell = grid[row][col];
 		// if the cell is a room, there will be no adjacency list
-
-
 		// if the cell is a doorway, we need to check the exit paths.
 		if(startCell.isDoorway())
 		{
@@ -275,12 +270,8 @@ public class Board {
 			checkCell(row, col + 1, adjacentCells, DoorDirection.LEFT);
 			checkCell(row - 1, col, adjacentCells, DoorDirection.DOWN);
 			checkCell(row + 1, col, adjacentCells, DoorDirection.UP);
-
-
 		}
-
 		adjMtx.put(startCell, adjacentCells);
-
 	}
 
 	// Check a door of a cell and make sure that there is a pathway next to it that can be reached
@@ -307,8 +298,6 @@ public class Board {
 		{
 			adjacentCells.add(grid[row][col-1]);
 		}
-
-
 	}
 
 	// Check any cell at all and make sure that it's a valid pathway
@@ -354,7 +343,6 @@ public class Board {
 		visited = new HashSet<BoardCell>();
 		visited.add(startCell);
 		findAllTargets(startCell,pathLength);
-
 	}
 	// method is just like intboard only isDoorway is implemented to make sure it's read
 	public void findAllTargets(BoardCell startCell, int pathLength)
