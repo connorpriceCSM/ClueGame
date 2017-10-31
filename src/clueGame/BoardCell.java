@@ -28,7 +28,9 @@ public class BoardCell {
 		{
 			// accounting for Baldwin's room placements
 			if(characters.charAt(1) != 'N')
+			{
 			doorChar = characters.charAt(1);
+			}
 		}
 		// method to set door 
 		setDoor();
