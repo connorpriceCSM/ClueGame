@@ -38,10 +38,7 @@ public class Board {
 
 	// constructor is private to ensure only one can be created
 	private Board() 
-	{
-
-
-	}
+	{}
 
 	// this method returns the only Board
 	public static Board getInstance() 
@@ -52,21 +49,18 @@ public class Board {
 	// return the legend
 	public Map<Character, String> getLegend() 
 	{
-		
 		return legend;
 	}
 
     // return the number of rows of the grid
 	public int getNumRows() 
 	{
-		
 		return numRows;
 	}
 
 	// return the number of columns of the grid.
 	public int getNumColumns() 
 	{
-		
 		return numCols;
 	}
 
@@ -222,7 +216,6 @@ public class Board {
 	{
 		BoardCell cell =  grid[row][col];
 		return cell;
-
 	}
 	// Method to get the neighbors of any cell only after they've been calculated at initalize
 	public Set<BoardCell> getAdjList(int row, int col)
@@ -233,8 +226,6 @@ public class Board {
 	// Method that calculates adjancies for each board cell in the game.
 	public void calcAdjacencies()
 	{
-
-		
 		// set the matrix that will be filled with board cells
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 
@@ -327,7 +318,6 @@ public class Board {
 		{
 			DoorDirection doorDirection = cell.getDoorDirection();
 			if(doorDirection == direction)
-
 			{
 				adjacentCells.add(cell);
 			}
@@ -351,9 +341,7 @@ public class Board {
 		for (BoardCell adjCell: adjCells) 
 		{
 			if (visited.contains(adjCell)) 
-			{
-
-			} 
+			{} 
 			else 
 			{
 				visited.add(adjCell);
@@ -363,14 +351,15 @@ public class Board {
 				}
 				else if (pathLength ==1) 
 				{
+					
 					targets.add(adjCell);
-				} else 
+				} 
+				else 
 				{
 					findAllTargets(adjCell, pathLength-1);
 				}
 				visited.remove(adjCell);
 			}
-
 		}
 	}
 

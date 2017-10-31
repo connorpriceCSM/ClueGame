@@ -1,0 +1,205 @@
+commit 77ac3a797af087cd4e93e2d6def0702537b30591
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 30 21:40:22 2017 -0600
+
+    Whitespace removal and more if statement corrections!
+
+commit 3f04ad130ee897013a7c716a834085fd5012df5d
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 30 21:34:48 2017 -0600
+
+    Removed unnecessary methods in BoardCell.
+
+commit 1dd14964b5ca31040c1f3ec6facf062285470d65
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 30 21:22:44 2017 -0600
+
+     re adjusting if statements
+
+commit 2c016835bef388596827c9b731cf2efcf6e5aa5e
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 30 20:50:17 2017 -0600
+
+    Changed variable names.
+
+commit cab2fea77607103fb25966427f074a5686cf66c4
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 30 20:05:32 2017 -0600
+
+    Shortening methods where possible.
+
+commit 9d64b4f2fadd22d1b77844ab4f97f5d043a4ec41
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 30 19:07:27 2017 -0600
+
+    Fixing indentations and spacing between methods for Board/BoardCell.
+
+commit 04b385136ce93f1d70d1fdedfdaa0d71622dae18
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 30 18:41:39 2017 -0600
+
+    Added necessary comments on some methods.
+
+commit b7eee681295d99fbf4f0f2cb871b2cd9bbc0cd1f
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 30 18:23:18 2017 -0600
+
+    Removing unnecessary comments.
+
+commit 5986b3ca70c96bc19a5762ba0be73c12ea93aea6
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Thu Oct 26 13:35:23 2017 -0600
+
+     IT WORKS BY GOD IT WORKSgit status BALDWIN IS A GOD!
+
+commit fe3aeafca9eca5d162496c1adc88acda4877c0a9
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Tue Oct 24 19:42:22 2017 -0600
+
+    Even more attempts at fixes.
+
+commit c60ca19c5693b7dd6ae18ed38b2f0379cac501b3
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Tue Oct 24 18:38:02 2017 -0600
+
+    Stuff.
+
+commit 722ee9879db29054d23224a93eb97c2ba6cd037a
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Tue Oct 24 18:26:07 2017 -0600
+
+    Javadoc and yet more changes to fix this stupid error.
+
+commit ed29a3205e5fc8e55a8a0fd5bf4ab49f268f9957
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Tue Oct 24 00:37:46 2017 -0600
+
+    Even more changes.
+
+commit f670dfafa69ea591819bcb17bcde5fb55f077f86
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 23 23:55:58 2017 -0600
+
+    Comment changes.
+
+commit 0e6341b1931445295d8d211c31fba1eb280d0e87
+Merge: 00227da d2e0bbe
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 23 23:51:57 2017 -0600
+
+    Successful merge.
+
+commit 00227dab63e805155d94e241886bc9f67da1fd6b
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 23 23:46:34 2017 -0600
+
+    Minor changes.
+
+commit d2e0bbea3639a6c1ed0f50743cbbe64ad8c92497
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 23 23:37:02 2017 -0600
+
+    workign code.
+
+commit f66076716120fcbbd8e7aea83d4d2919a9d9f1c0
+Author: Amelia Atiles <aatiles@mymail.mines.edu>
+Date:   Mon Oct 23 23:28:56 2017 -0600
+
+    Fixed NullPointer Exception
+
+commit e480e3a3233a4ac84c8cc7972014bb531234593b
+Author: Amelia Atiles <aatiles@mymail.mines.edu>
+Date:   Mon Oct 23 23:22:02 2017 -0600
+
+    Filled out skeleton code of Board
+
+commit 27b12f1f244e8760682638b64d254e31664c0a82
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 23 21:58:19 2017 -0600
+
+     Adjacency tests still need to be finished.
+
+commit 75142faf51fddd94f5742ff07323f1585f2d415b
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Sun Oct 22 12:36:42 2017 -0600
+
+    Failing Part III Board Adjacency Tests.
+
+commit 8e83ae4d62da6637558f8358e51d2c6334c99c95
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Thu Oct 12 23:18:11 2017 -0600
+
+    Final comments made and verified that all tests work!
+
+commit 331bb74d93fdd714f4f67bb59c41f37a60c5d186
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Thu Oct 12 16:53:18 2017 -0600
+
+    All tests pass sucessfully, still have commenting to do. DAMN YOU NULL POINTER VALUES
+
+commit 2e24e8269898c9a68aafab6cd7bbf745d87140ce
+Merge: 2d8da45 bf5a7ab
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Thu Oct 12 13:03:59 2017 -0600
+
+    Merge branch 'ConnorWork'
+
+commit bf5a7ab6a07ef575cfaf8cd20651f50ee62a09c9
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Thu Oct 12 13:00:36 2017 -0600
+
+    Everything working but exception tests.
+
+commit 2d8da4508a9b0e883941ff891ec6a80c4fb051a1
+Author: Amelia Atiles <aatiles@mymail.mines.edu>
+Date:   Wed Oct 11 20:33:17 2017 -0600
+
+    Added CR_ExceptionTests Class
+
+commit 598d7cc6046f572e938f0b2404be830972aaf4f7
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Wed Oct 11 14:05:14 2017 -0600
+
+    Files purposely fail.
+
+commit 1e36e42c6b43565f627f7f70f03c8f45d3822762
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Oct 9 12:01:55 2017 -0600
+
+    Added layout and legend to project.
+
+commit 2b5b6c924c96c7efebaed481644b21938e8f549f
+Author: Amelia Atiles <aatiles@mymail.mines.edu>
+Date:   Fri Oct 6 20:45:35 2017 -0600
+
+    All pass and fail tests entered
+
+commit 173dc0b546702cad272e43cba2a09c76574ec537
+Author: Amelia Atiles <aatiles@mymail.mines.edu>
+Date:   Fri Oct 6 20:44:57 2017 -0600
+
+    Corrected IntBoard method of calTarget
+
+commit da92735396ea1be0fbebe3aba5b2b7ffdb94f121
+Author: Amelia Atiles <aatiles@mymail.mines.edu>
+Date:   Fri Oct 6 19:44:10 2017 -0600
+
+    Corrected IndexOutOfBounds Error
+
+commit c5960f94c717dbb81ec6b70047005f925a812213
+Author: Amelia Atiles <aatiles@mymail.mines.edu>
+Date:   Fri Oct 6 19:02:16 2017 -0600
+
+    IntBoardTests added
+
+commit a5639af41f35ec7d2338bf979c45f5f08365a4f2
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Thu Oct 5 18:28:21 2017 -0600
+
+    Most methods should work! A few blanks left to finish!
+
+commit dd38958fb02648cc7b6bb4574dbd97745999531d
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Thu Oct 5 14:59:15 2017 -0600
+
+    Initial commit
