@@ -49,17 +49,19 @@ public class Board {
 		return theInstance;
 	}
 
+	// return the legend
 	public Map<Character, String> getLegend() {
 		
 		return legend;
 	}
 
-
+    // return the number of rows of the grid
 	public int getNumRows() {
 		
 		return numRows;
 	}
 
+	// return the number of columns of the grid.
 	public int getNumColumns() {
 		
 		return numCols;
@@ -77,6 +79,7 @@ public class Board {
 	// both methods have to throw exceptions so try/catch blocks are used
 	public void initialize() 
 	{
+		// reinitialize everything to clear it.
 		legend = new HashMap<Character, String>();
 		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 		visited = new HashSet<BoardCell>();
@@ -84,6 +87,7 @@ public class Board {
 
 		try
 		{
+			//load the board, room, and calculate all possible adjacencies.
 			loadRoomConfig();
 			loadBoardConfig();
 			calcAdjacencies();
@@ -138,10 +142,12 @@ public class Board {
 				legendReader.close();
 				throw new BadConfigFormatException("The card format file is incorrect for " + entry);
 			}
+			// put the  found character and the room name in the legend.
 			legend.put(character, roomName);
 
 
 		}
+		// close the scanner
 		legendReader.close();
 
 
@@ -208,8 +214,8 @@ public class Board {
 			currentRow++;
 		}
 		// when we reach the last row of the board layout, set the number of rows 
-		// close the scanner
 		numRows = currentRow++;
+		// close the scanner
 		boardReader.close();
 	}
 
@@ -230,16 +236,20 @@ public class Board {
 	public void calcAdjacencies()
 	{
 
+		
+		// set the matrix that will be filled with board cells
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 
 		for( int i =  0; i < numRows; i++ )
 		{
 			for( int j = 0; j < numCols; j++)
 			{
+				//calc list for each cell
 				calcSingleAdjacencyList(i,j);
 			}
 		}
 
+		// confirmation message.
 		System.out.println("This should be working!");	
 	}
 
