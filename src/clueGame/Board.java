@@ -348,18 +348,24 @@ public class Board {
 	public void findAllTargets(BoardCell startCell, int pathLength)
 	{
 		Set<BoardCell> adjCells = adjMtx.get(startCell);
-		for (BoardCell adjCell: adjCells) {
-			if (visited.contains(adjCell)) {
+		for (BoardCell adjCell: adjCells) 
+		{
+			if (visited.contains(adjCell)) 
+			{
 
-			} else {
+			} 
+			else 
+			{
 				visited.add(adjCell);
 				if(adjCell.isDoorway())
 				{
 					targets.add(adjCell);
 				}
-				else if (pathLength ==1) {
+				else if (pathLength ==1) 
+				{
 					targets.add(adjCell);
-				} else {
+				} else 
+				{
 					findAllTargets(adjCell, pathLength-1);
 				}
 				visited.remove(adjCell);

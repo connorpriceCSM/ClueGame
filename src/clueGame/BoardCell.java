@@ -127,32 +127,5 @@ public class BoardCell {
 			break;	
 		}
 	}
-	// Hashcode for Comparing Cells
-	@Override
-	public int hashCode() 
-	{
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + cellColumn;
-		result = prime * result + cellRow;
-		return result;   
-	}
-
-	//Override Equals method  to compare BoardCells if need be.
-	@Override
-	public boolean equals(Object obj) 
-	{
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BoardCell other = (BoardCell) obj;
-		if (cellColumn != other.cellColumn)
-			return false;
-		if (cellRow != other.cellRow)
-			return false;
-		return true;
-	}	
+	
 }
