@@ -49,19 +49,19 @@ public class Board {
 		return theInstance;
 	}
 
-
 	public Map<Character, String> getLegend() {
-		// TODO Auto-generated method stub
+		
 		return legend;
 	}
 
+
 	public int getNumRows() {
-		// TODO Auto-generated method stub
+		
 		return numRows;
 	}
 
 	public int getNumColumns() {
-		// TODO Auto-generated method stub
+		
 		return numCols;
 	}
 
@@ -97,13 +97,13 @@ public class Board {
 
 
 	}
-	
 
 
-	// read the legend file
+
+	/* read the legend file
 	// make sure that the format (including commas and spaces)  of each entry is correct
 	// throw errors otherwise
-	// if the entries are good, load them into the legend (our Map)
+	 if the entries are good, load them into the legend (our Map)*/
 	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
 	{
 		FileReader fileReader = new FileReader(roomConfigFile);
@@ -229,9 +229,9 @@ public class Board {
 	// Method that calculates adjancies for each board cell in the game.
 	public void calcAdjacencies()
 	{
-		
+
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		
+
 		for( int i =  0; i < numRows; i++ )
 		{
 			for( int j = 0; j < numCols; j++)
@@ -241,7 +241,7 @@ public class Board {
 		}
 
 		System.out.println("This should be working!");	
-		}
+	}
 
 
 	// calc list for only one cell
@@ -250,10 +250,10 @@ public class Board {
 		Set<BoardCell> adjacentCells = new HashSet<BoardCell>();
 		BoardCell startCell = grid[row][col];
 		// if the cell is a room, there will be no adjacency list
-	
-		
+
+
 		// if the cell is a doorway, we need to check the exit paths.
-	     if(startCell.isDoorway())
+		if(startCell.isDoorway())
 		{
 			setDoorWayList(row, col, startCell.getDoorDirection(), adjacentCells);
 		}
@@ -266,7 +266,7 @@ public class Board {
 			checkCell(row - 1, col, adjacentCells, DoorDirection.DOWN);
 			checkCell(row + 1, col, adjacentCells, DoorDirection.UP);
 
-			
+
 		}
 
 		adjMtx.put(startCell, adjacentCells);
@@ -375,6 +375,7 @@ public class Board {
 	{
 		return targets;
 	}
+	
 	public BoardCell[][] getGrid()
 	{
 		return grid;
