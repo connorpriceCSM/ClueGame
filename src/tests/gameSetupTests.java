@@ -35,18 +35,37 @@ public class gameSetupTests {
 	@Test
 	public void testPeople()
 	{
+		/*
+		 * This method will need to test to make sure that
+		 * 1) 6 players have been loaded in according to CluePlayers.txt
+		 * 2) 1 of the 6 players is the human player (easy to just make it the first player read from the file --> James Bond)
+		 * 3) The location of a couple of selected players is correct
+		 * 4) The color of those same selected players is correct
+		 */
 		
 	}
 	
 	@Test
 	public void testCards()
 	{
+		/*
+		 * This method will need to test to make sure that
+		 * 1) 6 weapon cards have been loaded
+		 * 2) 6 player cards have been loaded
+		 * 3) 9 rooms have been loaded
+		 * 4) 3 select cards have already been seen by the player.
+		 */
 		
 	}
 	
 	@Test
 	public void testDraw()
 	{
+		/*
+		 * This method will need to test to make sure that
+		 * 18 total cards are given out, 3 to each player
+		 * 
+		 */
 		
 	}
 }
