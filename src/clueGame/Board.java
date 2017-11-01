@@ -8,6 +8,7 @@ import java.util.Set;
 import clueGame.BoardCell;
 
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -21,6 +22,8 @@ public class Board {
 	private HashSet<BoardCell> visited;
 	private HashSet<BoardCell> targets;
 	private HashMap<Character, String> legend;
+	private ArrayList<Player> players =  new ArrayList();
+	private ArrayList<Card> cards = new ArrayList();
 	private BoardCell[][] grid;
 	private static Board theInstance = new Board();
 

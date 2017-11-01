@@ -1,0 +1,6 @@
+Lightsaber
+Handguns
+Staff
+Machine Gun
+Phaser
+Stun Watch

@@ -45,6 +45,19 @@ public abstract class Player {
 	public void setColor(Color color) {
 		this.color = color;
 	}
+	public ArrayList<Card> getCards()
+	{
+		return myCards;
+	}
+	public void setLocation(BoardCell cell)
+	{
+		this.row = cell.getRow();
+		this.column = cell.getColumn();
+	}
+	public void addCard()
+	{
+		
+	}
 	
 	
 }
