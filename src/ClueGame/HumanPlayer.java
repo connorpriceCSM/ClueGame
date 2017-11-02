@@ -10,36 +10,40 @@ public class HumanPlayer extends Player
 	private int column;
 	private Color color;
 	private ArrayList<Card> myCards = new ArrayList();
-	
+
 	public HumanPlayer(String playerName, int row, int column, Color color) 
 	{
 		super(playerName, row, column, color);
 		// TODO Auto-generated constructor stub
 	}
 	
+	public HumanPlayer()
+	{}
+
+
 	// For tests
-		public String getPlayerName() {
-			return playerName;
-		}
-		public void setPlayerName(String playerName) {
-			this.playerName = playerName;
-		}
-		public int getRow() {
-			return row;
-		}
-		public void setRow(int row) {
-			this.row = row;
-		}
-		public int getColumn() {
-			return column;
-		}
-		public void setColumn(int column) {
-			this.column = column;
-		}
-		public Color getColor() {
-			return color;
-		}
-		public void setColor(Color color) {
-			this.color = color;
-		}
+	public String getPlayerName() {
+		return playerName;
+	}
+	public void setPlayerName(String playerName) {
+		this.playerName = playerName;
+	}
+	public int getRow() {
+		return row;
+	}
+	public void setRow(int row) {
+		this.row = row;
+	}
+	public int getColumn() {
+		return column;
+	}
+	public void setColumn(int column) {
+		this.column = column;
+	}
+	public Color getColor() {
+		return color;
+	}
+	public void setColor(Color color) {
+		this.color = color;
+	}
 }

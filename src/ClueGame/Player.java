@@ -3,14 +3,15 @@ package clueGame;
 import java.awt.Color;
 import java.util.ArrayList;
 
-public abstract class Player {
-  
+public class Player {
+
 	private String playerName;
 	private int row;
 	private int column;
 	private Color color;
 	private ArrayList<Card> myCards = new ArrayList();
-	
+
+	// constructor for player. name, location, and color.
 	public Player( String playerName, int row, int column, Color color)
 	{
 		this.playerName = playerName;
@@ -18,7 +19,9 @@ public abstract class Player {
 		this.column = column;
 		this.color = color;
 	}
-	
+	public Player()
+	{}
+
 
 	// For tests
 	public String getPlayerName() {
@@ -54,10 +57,6 @@ public abstract class Player {
 		this.row = cell.getRow();
 		this.column = cell.getColumn();
 	}
-	public void addCard()
-	{
-		
-	}
-	
-	
+
+
 }

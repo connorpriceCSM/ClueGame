@@ -2,6 +2,7 @@ package clueGame;
 
 
 import java.util.Map;
+
 import java.util.Scanner;
 import java.util.Set;
 
@@ -10,8 +11,10 @@ import clueGame.BoardCell;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.awt.Color;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Field;
 
 
 //Authors: Amelia Atiles and Connor Price
@@ -22,8 +25,13 @@ public class Board {
 	private HashSet<BoardCell> visited;
 	private HashSet<BoardCell> targets;
 	private HashMap<Character, String> legend;
+	// these need to be initialized up here because several config methods will add to cards/players and they can't be reset in between.
 	private ArrayList<Player> players =  new ArrayList();
 	private ArrayList<Card> cards = new ArrayList();
+	private ArrayList<String> weaponNames;
+	private ArrayList<String> roomNames;
+	private ArrayList<String> playerNames;
+	private HumanPlayer humanPlayer;
 	private BoardCell[][] grid;
 	private static Board theInstance = new Board();
 
@@ -37,6 +45,8 @@ public class Board {
 
 	private String boardConfigFile;
 	private String roomConfigFile;
+	private String weaponConfigFile = "ClueWeapons.txt";
+	private String playerConfigFile = "CluePlayers.txt";
 
 
 	// constructor is private to ensure only one can be created
@@ -48,25 +58,6 @@ public class Board {
 	{
 		return theInstance;
 	}
-
-	// return the legend
-	public Map<Character, String> getLegend() 
-	{
-		return legend;
-	}
-
-    // return the number of rows of the grid
-	public int getNumRows() 
-	{
-		return numRows;
-	}
-
-	// return the number of columns of the grid.
-	public int getNumColumns() 
-	{
-		return numCols;
-	}
-
 
 	//Set the config files correctly.
 	public void setConfigFiles(String boardConfig, String roomConfig)
@@ -103,7 +94,7 @@ public class Board {
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	/* read the legend file
 	// make sure that the format (including commas and spaces)  of each entry is correct
 	// throw errors otherwise
@@ -135,12 +126,17 @@ public class Board {
 			// Check this one to be careful.
 			// trim eliminates whitespace which is big given the layout of the legend file.
 			String roomName =   new String(parts[1].trim());
-			String cardName =  new String(parts[2].trim());
+			String roomType =  new String(parts[2].trim());
 			// Must check card name to make sure it isn't anything other than "Other" or "Card"
-			if ((!cardName.equals("Card")) && (!cardName.equals("Other")))
+			if ((!roomType.equals("Card")) && (!roomType.equals("Other")))
 			{
 				legendReader.close();
 				throw new BadConfigFormatException("The card format file is incorrect for " + entry);
+			}
+			if(roomType.equals("Card"))
+			{
+				cards.add(new Card(roomName, CardType.ROOM));
+				roomNames.add(roomName);
 			}
 			// put the  found character and the room name in the legend.
 			legend.put(character, roomName);
@@ -148,7 +144,7 @@ public class Board {
 		// close the scanner
 		legendReader.close();
 	}
-	
+
 	// Read the board layout file
 	// Put each string (character) into  it's own little board cell spot
 	//  Check to make sure each spot is filled and that each character actually corresponds to a room/
@@ -213,7 +209,65 @@ public class Board {
 		// close the scanner
 		boardReader.close();
 	}
-	
+	public void loadWeaponConfig() throws FileNotFoundException, BadConfigFormatException
+	{
+		weaponNames = new ArrayList<String>();
+		FileReader filereader = new FileReader(weaponConfigFile);
+		Scanner weaponReader =  new Scanner(filereader);
+		while(weaponReader.hasNextLine())
+		{
+			String weapon  = weaponReader.nextLine();
+			cards.add(new Card(weapon.trim(), CardType.WEAPON));
+			weaponNames.add(weapon.trim());
+		}
+		
+	}
+	public void loadPlayersConfig() throws FileNotFoundException, BadConfigFormatException
+	{
+		playerNames = new ArrayList<String>();
+		FileReader fileReader  = new FileReader(playerConfigFile);		
+		Scanner playerReader = new Scanner(fileReader);
+		while(playerReader.hasNextLine())
+		{
+			String player =  playerReader.nextLine();
+			Player currentPlayer;
+			if(players.size() == 0)
+			{
+				humanPlayer = new HumanPlayer();
+				currentPlayer =  humanPlayer;
+			}
+			else
+			{
+				currentPlayer =  new ComputerPlayer();
+			}
+			
+			String[] tokens =  player.split(",");
+			String playerName =  tokens[0];
+			int row = Integer.parseInt(tokens[1].trim());
+			int col = Integer.parseInt(tokens[2].trim());
+			String colorName = tokens[3].trim();
+			
+			//Found code to convert string to color! :D
+			Color color;
+			try {
+			    Field field = Class.forName("java.awt.Color").getField(colorName);
+			    color = (Color)field.get(null);
+			} catch (Exception e) {
+			    color = null; // Not defined
+			}
+			
+		  //setting the fields for our player based off of what we've read from file.
+		  currentPlayer.setPlayerName(playerName);
+		  currentPlayer.setRow(row);
+		  currentPlayer.setColumn(col);
+		  currentPlayer.setColor(color);
+		  // adding the player card to our cards list as well as to two separate list keeping track of 
+		  // player names and overall players.
+		  cards.add(new Card(currentPlayer.getPlayerName(), CardType.PERSON));
+		  playerNames.add(currentPlayer.getPlayerName());
+		  players.add(currentPlayer);
+		}
+	}
 	// Get the boardcell;
 	public BoardCell getCellAt(int row, int col)
 	{
@@ -354,7 +408,7 @@ public class Board {
 				}
 				else if (pathLength ==1) 
 				{
-					
+
 					targets.add(adjCell);
 				} 
 				else 
@@ -371,9 +425,57 @@ public class Board {
 	{
 		return targets;
 	}
-	
+
 	public BoardCell[][] getGrid()
 	{
 		return grid;
 	}
+	public  HumanPlayer getHumanPlayer()
+	{
+		return humanPlayer;
+	}
+	public ArrayList<Player> getPlayers() {
+		return players;
+	}
+
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+
+	public void setCards(ArrayList<Card> cards) {
+		this.cards = cards;
+	}
+
+	public ArrayList<String> getWeaponNames() {
+		return weaponNames;
+	}
+
+
+	public ArrayList<String> getRoomNames() {
+		return roomNames;
+	}
+	
+	public ArrayList<String> getPlayerNames()
+	{
+		return playerNames;
+	}
+
+	// return the legend
+	public Map<Character, String> getLegend() 
+	{
+		return legend;
+	}
+
+	// return the number of rows of the grid
+	public int getNumRows() 
+	{
+		return numRows;
+	}
+
+	// return the number of columns of the grid.
+	public int getNumColumns() 
+	{
+		return numCols;
+	}
+
 }

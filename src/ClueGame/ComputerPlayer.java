@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.ArrayList;
 
 public class ComputerPlayer extends Player {
-	
+
 	private String playerName;
 	private int row;
 	private int column;
@@ -15,6 +15,10 @@ public class ComputerPlayer extends Player {
 		super(playerName, row, column, color);
 		// TODO Auto-generated constructor stub
 	}
+
+	public ComputerPlayer()
+	{}
+
 	// For tests
 	public String getPlayerName() {
 		return playerName;
