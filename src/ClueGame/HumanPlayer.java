@@ -11,12 +11,13 @@ public class HumanPlayer extends Player
 	private Color color;
 	private ArrayList<Card> myCards = new ArrayList();
 
+	//inherited constructor
 	public HumanPlayer(String playerName, int row, int column, Color color) 
 	{
 		super(playerName, row, column, color);
 		// TODO Auto-generated constructor stub
 	}
-	
+	// basic constructor
 	public HumanPlayer()
 	{}
 

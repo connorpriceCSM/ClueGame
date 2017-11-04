@@ -2,11 +2,15 @@ package tests;
 
 
 import clueGame.Board;
+
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.ComputerPlayer;
+
+import static org.junit.Assert.*;
+
 import java.awt.Color;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -34,7 +38,7 @@ public class gameSetupTests {
 	
 	@Test
 	public void testPeople()
-	{
+	{   
 		/*
 		 * This method will need to test to make sure that
 		 * 1) 6 players have been loaded in according to CluePlayers.txt
@@ -63,7 +67,7 @@ public class gameSetupTests {
 	{
 		/*
 		 * This method will need to test to make sure that
-		 * 18 total cards are given out, 3 to each player
+		 * 21 total cards are given out, 3 players will get 4 cards and the remaining 3 players will get 3 cards.
 		 * 
 		 */
 		

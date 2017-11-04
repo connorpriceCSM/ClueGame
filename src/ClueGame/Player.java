@@ -9,7 +9,7 @@ public class Player {
 	private int row;
 	private int column;
 	private Color color;
-	private ArrayList<Card> myCards = new ArrayList();
+	private ArrayList<Card> playerCards = new ArrayList();
 
 	// constructor for player. name, location, and color.
 	public Player( String playerName, int row, int column, Color color)
@@ -19,6 +19,7 @@ public class Player {
 		this.column = column;
 		this.color = color;
 	}
+	//basic constructor
 	public Player()
 	{}
 
@@ -50,13 +51,16 @@ public class Player {
 	}
 	public ArrayList<Card> getCards()
 	{
-		return myCards;
+		return playerCards;
 	}
 	public void setLocation(BoardCell cell)
 	{
 		this.row = cell.getRow();
 		this.column = cell.getColumn();
 	}
-
+	public void addCard(Card card) 
+	{
+		 playerCards.add(card);
+	}
 
 }

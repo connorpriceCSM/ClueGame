@@ -73,6 +73,11 @@ public class Board {
 		grid = new BoardCell[MAX_BOARD_SIZE][MAX_BOARD_SIZE];
 		visited = new HashSet<BoardCell>();
 		targets = new HashSet<BoardCell>();
+		weaponNames = new ArrayList<String>();
+		roomNames = new ArrayList<String>();
+		playerNames = new ArrayList<String>();
+		humanPlayer =  new HumanPlayer();
+
 
 	}
 	// load the rooms and boards.
@@ -86,6 +91,8 @@ public class Board {
 			loadRoomConfig();
 			loadBoardConfig();
 			calcAdjacencies();
+			loadWeaponConfig();
+			loadPlayersConfig();
 			System.out.print("Files loaded.");
 		}
 		//our FileNotFound and BadConfig Exceptions!
@@ -101,6 +108,7 @@ public class Board {
 	 if the entries are good, load them into the legend (our Map)*/
 	public void loadRoomConfig() throws FileNotFoundException, BadConfigFormatException
 	{
+		roomNames = new ArrayList<String>();
 		FileReader fileReader = new FileReader(roomConfigFile);
 		Scanner legendReader = new Scanner(fileReader);
 		// NECESSARY FOR EXCEPTION TESTS BECAUSE INITIALIZE ISNT CALLED IN THEM
@@ -133,6 +141,8 @@ public class Board {
 				legendReader.close();
 				throw new BadConfigFormatException("The card format file is incorrect for " + entry);
 			}
+			// If the room should be a card, create a new card with the room name and the ROOM type.
+			// also add it to room names for testing purposes, convenience, etc.
 			if(roomType.equals("Card"))
 			{
 				cards.add(new Card(roomName, CardType.ROOM));
@@ -209,63 +219,74 @@ public class Board {
 		// close the scanner
 		boardReader.close();
 	}
+	// Load the weapons. This is very simple compared to the other  loaders
 	public void loadWeaponConfig() throws FileNotFoundException, BadConfigFormatException
 	{
+		// start up scanners and file readers
 		weaponNames = new ArrayList<String>();
 		FileReader filereader = new FileReader(weaponConfigFile);
 		Scanner weaponReader =  new Scanner(filereader);
+		// read and create a card for the weapon
 		while(weaponReader.hasNextLine())
 		{
 			String weapon  = weaponReader.nextLine();
 			cards.add(new Card(weapon.trim(), CardType.WEAPON));
 			weaponNames.add(weapon.trim());
 		}
-		
+
 	}
+	// Read and load the players, their names, and their cards, into their respective arrays.
 	public void loadPlayersConfig() throws FileNotFoundException, BadConfigFormatException
 	{
+		//start up scanners and file readers
 		playerNames = new ArrayList<String>();
 		FileReader fileReader  = new FileReader(playerConfigFile);		
 		Scanner playerReader = new Scanner(fileReader);
+		// read and load the player
 		while(playerReader.hasNextLine())
 		{
 			String player =  playerReader.nextLine();
 			Player currentPlayer;
+			// The first player read will be the human player!
+			// This if statement should only be called once to create ONE human player
 			if(players.size() == 0)
 			{
 				humanPlayer = new HumanPlayer();
 				currentPlayer =  humanPlayer;
 			}
+			// the rest will be computer players!
 			else
 			{
 				currentPlayer =  new ComputerPlayer();
 			}
-			
+
+			// dividing up the name, row, col, and color of the player using the split method just like we did  with loadBoardConfig() and loadRoomConfig() methods.
 			String[] tokens =  player.split(",");
 			String playerName =  tokens[0];
 			int row = Integer.parseInt(tokens[1].trim());
 			int col = Integer.parseInt(tokens[2].trim());
 			String colorName = tokens[3].trim();
-			
-			//Found code to convert string to color! :D
+
+			//Found code on to convert string to color! :D
+			// Credit to Stack Overflow for this one.
 			Color color;
 			try {
-			    Field field = Class.forName("java.awt.Color").getField(colorName);
-			    color = (Color)field.get(null);
+				Field field = Class.forName("java.awt.Color").getField(colorName);
+				color = (Color)field.get(null);
 			} catch (Exception e) {
-			    color = null; // Not defined
+				color = null; // Not defined
 			}
-			
-		  //setting the fields for our player based off of what we've read from file.
-		  currentPlayer.setPlayerName(playerName);
-		  currentPlayer.setRow(row);
-		  currentPlayer.setColumn(col);
-		  currentPlayer.setColor(color);
-		  // adding the player card to our cards list as well as to two separate list keeping track of 
-		  // player names and overall players.
-		  cards.add(new Card(currentPlayer.getPlayerName(), CardType.PERSON));
-		  playerNames.add(currentPlayer.getPlayerName());
-		  players.add(currentPlayer);
+
+			//setting the fields for our player based off of what we've read from file.
+			currentPlayer.setPlayerName(playerName);
+			currentPlayer.setRow(row);
+			currentPlayer.setColumn(col);
+			currentPlayer.setColor(color);
+			// adding the player card to our cards list as well as to two separate list keeping track of 
+			// player names and overall players.
+			cards.add(new Card(currentPlayer.getPlayerName(), CardType.PERSON));
+			playerNames.add(currentPlayer.getPlayerName());
+			players.add(currentPlayer);
 		}
 	}
 	// Get the boardcell;
@@ -430,31 +451,38 @@ public class Board {
 	{
 		return grid;
 	}
+	// return the Human player!
 	public  HumanPlayer getHumanPlayer()
 	{
 		return humanPlayer;
 	}
-	public ArrayList<Player> getPlayers() {
+	// return the list of players
+	public ArrayList<Player> getPlayers() 
+	{
 		return players;
 	}
-
-	public ArrayList<Card> getCards() {
+	// return the list of cards
+	public ArrayList<Card> getCards() 
+	{
 		return cards;
 	}
-
-	public void setCards(ArrayList<Card> cards) {
+	// changing the cards if that is ever needed.
+	public void setCards(ArrayList<Card> cards) 
+	{
 		this.cards = cards;
 	}
-
-	public ArrayList<String> getWeaponNames() {
+	// return the weapon names 
+	public ArrayList<String> getWeaponNames() 
+	{
 		return weaponNames;
 	}
 
-
-	public ArrayList<String> getRoomNames() {
+	// return the rooms of all the players
+	public ArrayList<String> getRoomNames()
+	{
 		return roomNames;
 	}
-	
+	// return the names of all the players
 	public ArrayList<String> getPlayerNames()
 	{
 		return playerNames;
@@ -476,6 +504,34 @@ public class Board {
 	public int getNumColumns() 
 	{
 		return numCols;
+	}
+
+	// Deal all the cards in the deck to each player.
+	// playerCount will increment every time a card is dealt.
+	// Each player should get one card at a time until the end
+	// End result is that half of the players half of the players have 3 cards and half of them have 4
+	// This is temporary until solution is implemented later.
+	public void dealCards()
+	{
+		// player count keeps track of which player is getting which card.
+		int playerCount = 0;
+		// temporary cardRack so our original arraylist isn't messed up
+		ArrayList<Card> cardRack = cards;
+		for(Card card : cardRack)
+		{
+			// go back to player 0 after the last player gets his/her card
+			if(playerCount == players.size())
+			{
+				playerCount  = 0;
+			}
+			else
+			{
+				// give player the next card in the array!
+				Player player = players.get(playerCount);
+				player.addCard(card);
+				playerCount++;
+			}
+		}
 	}
 
 }

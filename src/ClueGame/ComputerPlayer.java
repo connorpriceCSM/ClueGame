@@ -11,15 +11,17 @@ public class ComputerPlayer extends Player {
 	private Color color;
 	private ArrayList<Card> myCards = new ArrayList();
 
+	//inherited constructor
 	public ComputerPlayer(String playerName, int row, int column, Color color) {
 		super(playerName, row, column, color);
 		// TODO Auto-generated constructor stub
 	}
 
+	// basic constructor
 	public ComputerPlayer()
 	{}
 
-	// For tests
+	// For tests 
 	public String getPlayerName() {
 		return playerName;
 	}
