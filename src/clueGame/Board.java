@@ -517,15 +517,11 @@ public class Board {
 		int playerCount = 0;
 		// temporary cardRack so our original arraylist isn't messed up
 		ArrayList<Card> cardRack = cards;
-		for(Card card : cardRack)
-		{
+		for(Card card : cardRack) {
 			// go back to player 0 after the last player gets his/her card
-			if(playerCount == players.size())
-			{
+			if(playerCount == players.size()) {
 				playerCount  = 0;
-			}
-			else
-			{
+			} else {
 				// give player the next card in the array!
 				Player player = players.get(playerCount);
 				player.addCard(card);

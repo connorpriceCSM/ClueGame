@@ -12,8 +12,7 @@ public class Player {
 	private ArrayList<Card> playerCards = new ArrayList<Card>();
 
 	// constructor for player. name, location, and color.
-	public Player( String playerName, int row, int column, Color color)
-	{
+	public Player(String playerName, int row, int column, Color color) {
 		this.playerName = playerName;
 		this.row = row;
 		this.column = column;
@@ -49,17 +48,14 @@ public class Player {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	public ArrayList<Card> getCards()
-	{
+	public ArrayList<Card> getCards() {
 		return playerCards;
 	}
-	public void setLocation(BoardCell cell)
-	{
+	public void setLocation(BoardCell cell) {
 		this.row = cell.getRow();
 		this.column = cell.getColumn();
 	}
-	public void addCard(Card card) 
-	{
+	public void addCard(Card card) {
 		 playerCards.add(card);
 	}
 

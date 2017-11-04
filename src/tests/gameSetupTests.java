@@ -42,13 +42,16 @@ public class gameSetupTests {
 		/*
 		 * This method will need to test to make sure that
 		 * 1) 6 players have been loaded in according to CluePlayers.txt
-		 * 2) 1 of the 6 players is the human player (easy to just make it the first player read from the file --> James Bond)
+		 * 2) 1 of the 6 players is the human player
 		 * 3) The location of a couple of selected players is correct
 		 * 4) The color of those same selected players is correct
 		 */
 		ArrayList<Player> players = board.getPlayers();
+		//Check to see if there are all 6 players
 		assertEquals(players.size(), 6);
-		
+		//Test to see if one player is a human
+		assertTrue(players.contains(board.getHumanPlayer()));
+		//Test locations 
 	}
 	
 	@Test
@@ -61,7 +64,7 @@ public class gameSetupTests {
 		 * 3) 9 rooms have been loaded
 		 * 4) 3 select cards have already been seen by the player.
 		 */
-		
+		ArrayList<Card> cards = board.getCards();
 	}
 	
 	@Test
@@ -69,9 +72,10 @@ public class gameSetupTests {
 	{
 		/*
 		 * This method will need to test to make sure that
-		 * 21 total cards are given out, 3 players will get 4 cards and the remaining 3 players will get 3 cards.
-		 * 
+		 * 21 total cards are given out, 3 players will get 4 cards 
+		 * and the remaining 3 players will get 3 cards.
 		 */
-		
+		ArrayList<Player> players = board.getPlayers();
+		//assertEquals(, );
 	}
 }
