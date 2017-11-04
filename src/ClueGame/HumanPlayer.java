@@ -9,7 +9,7 @@ public class HumanPlayer extends Player
 	private int row;
 	private int column;
 	private Color color;
-	private ArrayList<Card> myCards = new ArrayList();
+	private ArrayList<Card> myCards = new ArrayList<Card>();
 
 	//inherited constructor
 	public HumanPlayer(String playerName, int row, int column, Color color) 

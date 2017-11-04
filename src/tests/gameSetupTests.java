@@ -46,6 +46,8 @@ public class gameSetupTests {
 		 * 3) The location of a couple of selected players is correct
 		 * 4) The color of those same selected players is correct
 		 */
+		ArrayList<Player> players = board.getPlayers();
+		assertEquals(players.size(), 6);
 		
 	}
 	

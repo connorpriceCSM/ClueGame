@@ -26,8 +26,8 @@ public class Board {
 	private HashSet<BoardCell> targets;
 	private HashMap<Character, String> legend;
 	// these need to be initialized up here because several config methods will add to cards/players and they can't be reset in between.
-	private ArrayList<Player> players =  new ArrayList();
-	private ArrayList<Card> cards = new ArrayList();
+	private ArrayList<Player> players =  new ArrayList<Player>();
+	private ArrayList<Card> cards = new ArrayList<Card>();
 	private ArrayList<String> weaponNames;
 	private ArrayList<String> roomNames;
 	private ArrayList<String> playerNames;

@@ -9,7 +9,7 @@ public class Player {
 	private int row;
 	private int column;
 	private Color color;
-	private ArrayList<Card> playerCards = new ArrayList();
+	private ArrayList<Card> playerCards = new ArrayList<Card>();
 
 	// constructor for player. name, location, and color.
 	public Player( String playerName, int row, int column, Color color)
