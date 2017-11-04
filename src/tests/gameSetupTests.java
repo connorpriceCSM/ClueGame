@@ -64,6 +64,9 @@ public class gameSetupTests {
 		System.out.println(play3er.getPlayerName());
 		
 		//Test colors of players
+		assertEquals(Color.BLACK, play1er.getColor());
+		assertEquals(Color.BLUE, play2er.getColor());
+		assertEquals(Color.WHITE, play3er.getColor());
 		
 	}
 	
