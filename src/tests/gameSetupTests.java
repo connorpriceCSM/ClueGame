@@ -34,6 +34,7 @@ public class gameSetupTests {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueMap.csv", "ClueLegend.txt");		
 		board.initialize();
+		board.dealCards();
 	}
 	
 	@Test
@@ -55,7 +56,10 @@ public class gameSetupTests {
 		Player play1er = players.get(0);
 		Player play2er = players.get(1);
 		Player play3er = players.get(2);
-		//assertEquals(board.getCellAt(8, 21), new BoardCell(play1er.getRow(), play1er.getColumn()));
+		System.out.println(play1er.getPlayerName());
+		System.out.println(play2er.getPlayerName());
+		System.out.println(play3er.getPlayerName());
+		//assertEquals();
 		
 		//Test colors of players
 		
@@ -73,11 +77,32 @@ public class gameSetupTests {
 		 */
 		ArrayList<Card> cards = board.getCards();
 		ArrayList<String> weapons = board.getWeaponNames();
-		//assertTrue(cards.contains());
+		Player human = board.getHumanPlayer();
+		int numPersons = 0;
+		int numRooms = 0;
 		
+		for (Card currentCard:cards) {
+			if (currentCard.getCardType().equals(CardType.PERSON)) {
+				numPersons++;
+			}
+			if (currentCard.getCardType().equals(CardType.ROOM)) {
+				numRooms++;
+			}
+		}
 		//Check weapon cards
+		assertEquals(weapons.size(), 6);
 		assertTrue(weapons.contains("Lightsaber"));
 		assertTrue(weapons.contains("Handguns"));
+		assertTrue(weapons.contains("Staff"));
+		assertTrue(weapons.contains("Machine Gun"));
+		assertTrue(weapons.contains("Phaser"));
+		assertTrue(weapons.contains("Stun Watch"));
+		//Check player cards
+		assertEquals(numPersons, 6);
+		//Test for the 9 room cards
+		assertEquals(numRooms, 9);
+		//Check player has seen cards
+		assertEquals((human.getCards()).size(), 3);
 	}
 	
 	@Test
@@ -89,6 +114,12 @@ public class gameSetupTests {
 		 * and the remaining 3 players will get 3 cards.
 		 */
 		ArrayList<Player> players = board.getPlayers();
-		//assertEquals(, );
+		ArrayList<Card> cards = board.getCards();
+		//Test total number of cards
+		assertEquals(cards.size(), 21);
+		for (Player playa:players) {
+			assertEquals((playa.getCards()).size(), 3);
+		}
+
 	}
 }
