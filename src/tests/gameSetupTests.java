@@ -2,7 +2,7 @@ package tests;
 
 
 import clueGame.Board;
-
+import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.HumanPlayer;
@@ -51,7 +51,14 @@ public class gameSetupTests {
 		assertEquals(players.size(), 6);
 		//Test to see if one player is a human
 		assertTrue(players.contains(board.getHumanPlayer()));
-		//Test locations 
+		//Test locations
+		Player play1er = players.get(0);
+		Player play2er = players.get(1);
+		Player play3er = players.get(2);
+		//assertEquals(board.getCellAt(8, 21), new BoardCell(play1er.getRow(), play1er.getColumn()));
+		
+		//Test colors of players
+		
 	}
 	
 	@Test
@@ -65,6 +72,12 @@ public class gameSetupTests {
 		 * 4) 3 select cards have already been seen by the player.
 		 */
 		ArrayList<Card> cards = board.getCards();
+		ArrayList<String> weapons = board.getWeaponNames();
+		//assertTrue(cards.contains());
+		
+		//Check weapon cards
+		assertTrue(weapons.contains("Lightsaber"));
+		assertTrue(weapons.contains("Handguns"));
 	}
 	
 	@Test
