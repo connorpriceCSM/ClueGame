@@ -49,13 +49,14 @@ public class gameSetupTests {
 		 */
 		ArrayList<Player> players = board.getPlayers();
 		//Check to see if there are all 6 players
-		assertEquals(players.size(), 6);
+		assertEquals(6, players.size());
 		//Test to see if one player is a human
 		assertTrue(players.contains(board.getHumanPlayer()));
 		//Test locations
 		Player play1er = players.get(0);
 		Player play2er = players.get(1);
 		Player play3er = players.get(2);
+		//assertEquals();
 		System.out.println(play1er.getPlayerName());
 		System.out.println(play2er.getPlayerName());
 		System.out.println(play3er.getPlayerName());
@@ -77,20 +78,12 @@ public class gameSetupTests {
 		 */
 		ArrayList<Card> cards = board.getCards();
 		ArrayList<String> weapons = board.getWeaponNames();
+		ArrayList<String> rooms = board.getRoomNames();
+		ArrayList<String> people = board.getPlayerNames();
 		Player human = board.getHumanPlayer();
-		int numPersons = 0;
-		int numRooms = 0;
 		
-		for (Card currentCard:cards) {
-			if (currentCard.getCardType().equals(CardType.PERSON)) {
-				numPersons++;
-			}
-			if (currentCard.getCardType().equals(CardType.ROOM)) {
-				numRooms++;
-			}
-		}
 		//Check weapon cards
-		assertEquals(weapons.size(), 6);
+		assertEquals(6, weapons.size());
 		assertTrue(weapons.contains("Lightsaber"));
 		assertTrue(weapons.contains("Handguns"));
 		assertTrue(weapons.contains("Staff"));
@@ -98,11 +91,11 @@ public class gameSetupTests {
 		assertTrue(weapons.contains("Phaser"));
 		assertTrue(weapons.contains("Stun Watch"));
 		//Check player cards
-		assertEquals(numPersons, 6);
+		assertEquals(6, people.size());
 		//Test for the 9 room cards
-		assertEquals(numRooms, 9);
+		assertEquals(9, rooms.size());
 		//Check player has seen cards
-		assertEquals((human.getCards()).size(), 3);
+		assertEquals(3, (human.getCards()).size());
 	}
 	
 	@Test

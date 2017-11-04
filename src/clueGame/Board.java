@@ -317,7 +317,7 @@ public class Board {
 		}
 
 		// confirmation message.
-		System.out.println("This should be working!");	
+		//System.out.println("This should be working!");	
 	}
 
 	// calc list for only one cell
