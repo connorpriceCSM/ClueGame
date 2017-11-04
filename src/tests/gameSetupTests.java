@@ -126,7 +126,7 @@ public class gameSetupTests {
 		assertTrue(rooms.contains("Library"));
 		
 		//Check player has seen cards
-		assertEquals(4, (human.getCards()).size());
+		assertEquals(4,(human.getCards()).size());
 	}
 	
 	@Test
@@ -142,11 +142,10 @@ public class gameSetupTests {
 		//Test total number of cards
 		assertEquals(cards.size(), 21);
 		for (int i = 0; i < players.size(); i++) {
-			if (i < 3) {
-				assertEquals(((players.get(i)).getCards()).size(), 4);
-			} else {
-				assertEquals(((players.get(i)).getCards()).size(), 3);
-			}
+			
+			// check to make sure the players have the same if not, roughly equal number of cards.
+				assertTrue((players.get(i).getCards().size() == 4) || (players.get(i).getCards().size() == 3));
+			 
 			
 		}
 

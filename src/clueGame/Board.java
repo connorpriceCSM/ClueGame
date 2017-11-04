@@ -87,7 +87,7 @@ public class Board {
 		clearHolders();
 		try
 		{
-			//load the board, room, and calculate all possible adjacencies.
+			//load the board, room,weapons, players, and calculate all possible adjacencies.
 			loadRoomConfig();
 			loadBoardConfig();
 			calcAdjacencies();
