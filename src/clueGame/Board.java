@@ -521,12 +521,11 @@ public class Board {
 			// go back to player 0 after the last player gets his/her card
 			if(playerCount == players.size()) {
 				playerCount  = 0;
-			} else {
+			}
 				// give player the next card in the array!
 				Player player = players.get(playerCount);
 				player.addCard(card);
 				playerCount++;
-			}
 		}
 	}
 

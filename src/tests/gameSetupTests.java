@@ -126,7 +126,7 @@ public class gameSetupTests {
 		assertTrue(rooms.contains("Library"));
 		
 		//Check player has seen cards
-		assertEquals(3, (human.getCards()).size());
+		assertEquals(4, (human.getCards()).size());
 	}
 	
 	@Test
@@ -141,8 +141,13 @@ public class gameSetupTests {
 		ArrayList<Card> cards = board.getCards();
 		//Test total number of cards
 		assertEquals(cards.size(), 21);
-		for (Player playa:players) {
-			assertEquals((playa.getCards()).size(), 3);
+		for (int i = 0; i < players.size(); i++) {
+			if (i < 3) {
+				assertEquals(((players.get(i)).getCards()).size(), 4);
+			} else {
+				assertEquals(((players.get(i)).getCards()).size(), 3);
+			}
+			
 		}
 
 	}
