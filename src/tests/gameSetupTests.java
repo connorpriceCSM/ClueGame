@@ -48,19 +48,20 @@ public class gameSetupTests {
 		 * 4) The color of those same selected players is correct
 		 */
 		ArrayList<Player> players = board.getPlayers();
+		
 		//Check to see if there are all 6 players
 		assertEquals(6, players.size());
+		
 		//Test to see if one player is a human
 		assertTrue(players.contains(board.getHumanPlayer()));
+		
 		//Test locations
 		Player play1er = players.get(0);
 		Player play2er = players.get(1);
 		Player play3er = players.get(2);
-		//assertEquals();
 		System.out.println(play1er.getPlayerName());
 		System.out.println(play2er.getPlayerName());
 		System.out.println(play3er.getPlayerName());
-		//assertEquals();
 		
 		//Test colors of players
 		
@@ -90,10 +91,28 @@ public class gameSetupTests {
 		assertTrue(weapons.contains("Machine Gun"));
 		assertTrue(weapons.contains("Phaser"));
 		assertTrue(weapons.contains("Stun Watch"));
+		
 		//Check player cards
 		assertEquals(6, people.size());
+		assertTrue(people.contains("James Bond"));
+		assertTrue(people.contains("Lara Croft"));
+		assertTrue(people.contains("Gandalf"));
+		assertTrue(people.contains("Obi-Wan Kenobi"));
+		assertTrue(people.contains("Spock"));
+		assertTrue(people.contains("Rambo"));
+		
 		//Test for the 9 room cards
 		assertEquals(9, rooms.size());
+		assertTrue(rooms.contains("Bedroom"));
+		assertTrue(rooms.contains("Garden"));
+		assertTrue(rooms.contains("Kitchen"));
+		assertTrue(rooms.contains("Sauna"));
+		assertTrue(rooms.contains("Foyer"));
+		assertTrue(rooms.contains("Entertainment room"));
+		assertTrue(rooms.contains("Observatory"));
+		assertTrue(rooms.contains("Bathroom"));
+		assertTrue(rooms.contains("Library"));
+		
 		//Check player has seen cards
 		assertEquals(3, (human.getCards()).size());
 	}
