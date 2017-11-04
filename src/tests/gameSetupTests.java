@@ -59,9 +59,18 @@ public class gameSetupTests {
 		Player play1er = players.get(0);
 		Player play2er = players.get(1);
 		Player play3er = players.get(2);
-		System.out.println(play1er.getPlayerName());
-		System.out.println(play2er.getPlayerName());
-		System.out.println(play3er.getPlayerName());
+		
+		//Player one location
+		assertEquals(8, play1er.getRow());
+		assertEquals(21, play1er.getColumn());
+		
+		//Player two location
+		assertEquals(19, play2er.getRow());
+		assertEquals(21, play2er.getColumn());
+		
+		//Player three location
+		assertEquals(0, play3er.getRow());
+		assertEquals(14, play3er.getColumn());
 		
 		//Test colors of players
 		assertEquals(Color.BLACK, play1er.getColor());
