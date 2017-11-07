@@ -125,50 +125,72 @@ public class gameActionTests {
 
 	}
 
-@Test
-public void testTargetsRoomNotVisted()
-{
-	board.calcTargets(2, 13, 2);
-	player =  new ComputerPlayer();
-	//doorway cell for the Lounge
-	BoardCell idealCell = board.getCellAt(1, 12);
-	BoardCell selectedCell = player.pickLocation(board.getTargets());
-	assertEquals(idealCell, selectedCell);
+	@Test
+	public void testTargetsRoomNotVisted()
+	{
+		board.calcTargets(2, 13, 2);
+		player =  new ComputerPlayer();
+		//doorway cell for the Lounge
+		BoardCell idealCell = board.getCellAt(1, 12);
+		BoardCell selectedCell = player.pickLocation(board.getTargets());
+		assertEquals(idealCell, selectedCell);
 
-	board.calcTargets(19, 19, 2);
-	player =  new ComputerPlayer();
-	//doorway cell for the Garden
-	BoardCell idealCell2 = board.getCellAt(20, 18);
-	BoardCell selectedCell2 = player.pickLocation(board.getTargets());
-	assertEquals(idealCell2, selectedCell2);
-
-	board.calcTargets(22, 10, 2);
-	player =  new ComputerPlayer();
-	//doorway cell for the D Room I don't remember
-	BoardCell idealCell3 = board.getCellAt(21, 11);
-	BoardCell selectedCell3 = player.pickLocation(board.getTargets());
-	assertEquals(idealCell3, selectedCell3);
-
-	board.calcTargets(10, 14, 1);
-	player =  new ComputerPlayer();
-	//doorway cell for the Sauna
-	BoardCell idealCell4 = board.getCellAt(10, 15);
-	BoardCell selectedCell4 = player.pickLocation(board.getTargets());
-	assertEquals(idealCell4, selectedCell4);
-
-	board.calcTargets(6, 1, 1);
-	player =  new ComputerPlayer();
-	//doorway cell for the kitchen
-	BoardCell idealCell5 = board.getCellAt(5, 1);
-	BoardCell selectedCell5 = player.pickLocation(board.getTargets());
-	assertEquals(idealCell5, selectedCell5);
+		board.calcTargets(19, 19, 2);
+		player =  new ComputerPlayer();
+		//doorway cell for the Garden
+		BoardCell idealCell2 = board.getCellAt(20, 18);
+		BoardCell selectedCell2 = player.pickLocation(board.getTargets());
+		assertEquals(idealCell2, selectedCell2);
 
 
+		board.calcTargets(22, 10, 2);
+		player =  new ComputerPlayer();
+		//doorway cell for the D Room I don't remember
+		BoardCell idealCell3 = board.getCellAt(21, 11);
+		BoardCell selectedCell3 = player.pickLocation(board.getTargets());
+		assertEquals(idealCell3, selectedCell3);
 
-}
-@Test
-public void testTargetsRoomVisited()
-{
- assertEquals(1,3);
-}
+		board.calcTargets(10, 14, 1);
+		player =  new ComputerPlayer();
+		//doorway cell for the Sauna
+		BoardCell idealCell4 = board.getCellAt(10, 15);
+		BoardCell selectedCell4 = player.pickLocation(board.getTargets());
+		assertEquals(idealCell4, selectedCell4);
+
+		board.calcTargets(6, 1, 1);
+		player =  new ComputerPlayer();
+		//doorway cell for the kitchen
+		BoardCell idealCell5 = board.getCellAt(5, 1);
+		BoardCell selectedCell5 = player.pickLocation(board.getTargets());
+		assertEquals(idealCell5, selectedCell5);
+
+
+
+	}
+	@Test
+	public void testTargetsRoomVisited()
+	{
+		// get targets near Entertainment Room
+		board.calcTargets(20, 3, 2);
+		player = new ComputerPlayer();
+		player.setLastVisitedRoom('E');
+		boolean roomCell = false;
+		boolean walkwayCell = false;
+		for(int i = 0; i < 100; i++)
+		{
+			BoardCell selectedCell = player.pickLocation(board.getTargets());
+		    if(selectedCell == board.getCellAt(22, 3))
+			{
+				walkwayCell = true;
+			}
+		    else if(selectedCell == board.getCellAt(19, 2));
+			{
+				roomCell = true;
+			}
+			
+		}
+		//both cells should be visited
+		assertTrue(roomCell);
+		assertTrue(walkwayCell);
+	}
 }
