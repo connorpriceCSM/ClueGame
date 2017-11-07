@@ -80,11 +80,11 @@ public class gameActionTests {
 	}
 	
 	
-	
+	@Test
 	public void testTargetsNoRooms()
 	{
      
-     
+     assertEquals(1,2);
 		
 		
 	}
