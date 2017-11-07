@@ -64,7 +64,29 @@ public class ComputerPlayer extends Player {
 	// This code will send the computer player to a door whenever possible.
 	public BoardCell pickLocation(Set<BoardCell> targets)
 	  {
-	   return null;
+	   
+		 if (targets.size() == 0) {
+		      System.out.println("no targets!");
+		    }
+		    //pick a random Target
+		    int select = this.rand.nextInt(targets.size());
+		    int index = 0;
+		    BoardCell result = null;
+		    for (BoardCell piece : targets)
+		    {
+		    	// check to see if the piece is a door and also that it hasn't previously been visited.
+		    	// if both conditions are true, return that cell, otherwise keep scrolling until a random location is selected
+		      if ((piece.isDoorway()) && (piece.getInitial() != this.lastVisitedRoom))
+		      {
+		        this.lastVisitedRoom = piece.getInitial();
+		        return piece;
+		      }
+		      if (index == select) {
+		        result = piece;
+		      }
+		      index++;
+		    }
+		return result;
 	  }
 	
 }

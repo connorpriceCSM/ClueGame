@@ -91,16 +91,41 @@ public class gameActionTests {
 	@Test
 	public void testTargetsRoomNotVisted()
 	{
-		 board.calcTargets(19, 19, 2);
+		 board.calcTargets(2, 13, 2);
+	     player =  new ComputerPlayer();
+	     //doorway cell for the Lounge
+	     BoardCell idealCell = board.getCellAt(1, 12);
+	     BoardCell selectedCell = player.pickLocation(board.getTargets());
+	     assertEquals(idealCell, selectedCell);
+	     
+	     board.calcTargets(19, 19, 2);
 	     player =  new ComputerPlayer();
 	     //doorway cell for the Garden
-	     BoardCell idealCell = board.getCellAt(20, 18);
-	     for( int i = 0; i < 50; i++)
-	     {
-	    	 BoardCell selectedCell = player.pickLocation(board.getTargets());
-	    	 assertEquals(idealCell, selectedCell);
-	    	 player.setLastVisitedRoom(' ');
-	     }
+	     BoardCell idealCell2 = board.getCellAt(20, 18);
+	     BoardCell selectedCell2 = player.pickLocation(board.getTargets());
+	     assertEquals(idealCell2, selectedCell2);
+	     
+	     board.calcTargets(22, 10, 2);
+	     player =  new ComputerPlayer();
+	     //doorway cell for the D Room I don't remember
+	     BoardCell idealCell3 = board.getCellAt(21, 11);
+	     BoardCell selectedCell3 = player.pickLocation(board.getTargets());
+	     assertEquals(idealCell3, selectedCell3);
+	     
+	     board.calcTargets(10, 14, 1);
+	     player =  new ComputerPlayer();
+	     //doorway cell for the Sauna
+	     BoardCell idealCell4 = board.getCellAt(10, 15);
+	     BoardCell selectedCell4 = player.pickLocation(board.getTargets());
+	     assertEquals(idealCell4, selectedCell4);
+	     
+	     board.calcTargets(6, 1, 1);
+	     player =  new ComputerPlayer();
+	     //doorway cell for the kitchen
+	     BoardCell idealCell5 = board.getCellAt(5, 1);
+	     BoardCell selectedCell5 = player.pickLocation(board.getTargets());
+	     assertEquals(idealCell5, selectedCell5);
+	 
 	     
 		
 	}
