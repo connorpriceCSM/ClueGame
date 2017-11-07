@@ -85,6 +85,7 @@ public class gameActionTests {
 	{
 
 		board.calcTargets(6, 13, 1);
+		player =  new ComputerPlayer();
 		// 5, 13
 		boolean northCell = false;
 		// 7,13
@@ -165,9 +166,9 @@ public void testTargetsRoomNotVisted()
 
 
 }
-
+@Test
 public void testTargetsRoomVisited()
 {
-
+ assertEquals(1,3);
 }
 }
