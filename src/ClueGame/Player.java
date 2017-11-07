@@ -10,6 +10,7 @@ public class Player {
 	private int column;
 	private Color color;
 	private ArrayList<Card> playerCards = new ArrayList<Card>();
+	private ArrayList<Card> seenCards  = new ArrayList<Card>();
 
 	// constructor for player. name, location, and color.
 	public Player(String playerName, int row, int column, Color color) {
@@ -57,6 +58,13 @@ public class Player {
 	}
 	public void addCard(Card card) {
 		 playerCards.add(card);
+		 seenCards.add(card);
 	}
+	public void addSeenCard(Card card)
+	{
+		seenCards.add(card);
+	}
+	
+	
 
 }
