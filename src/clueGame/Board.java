@@ -34,7 +34,7 @@ public class Board {
 	private HumanPlayer humanPlayer;
 	private BoardCell[][] grid;
 	private static Board theInstance = new Board();
-	private Solution solution;
+	private Suggestion solution;
 
 	private int numRows,numCols;
 	final static int MAX_BOARD_SIZE = 50;

@@ -10,7 +10,8 @@ public class Player {
 	private int column;
 	private Color color;
 	private ArrayList<Card> playerCards = new ArrayList<Card>();
-	private ArrayList<Card> seenCards  = new ArrayList<Card>();
+	// needs to be protected because every player will have a unique set of cards
+	protected ArrayList<Card> seenCards  = new ArrayList<Card>();
 
 	// constructor for player. name, location, and color.
 	public Player(String playerName, int row, int column, Color color) {

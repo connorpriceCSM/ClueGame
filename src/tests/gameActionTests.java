@@ -25,25 +25,27 @@ public class gameActionTests {
 
 	private static Board board;
 	ComputerPlayer player =  new ComputerPlayer();
-	private static Card mustardCard;
-	private static Card whiteCard;
-	private static Card diningRoomCard;
-	private static Card studyCard;
-	private static Card candlestickCard;
-	private static Card revolverCard;
-	private static Card peacockCard;
+	private static Card bondCard;
+	private static Card croftCard;
+	private static Card gandalfCard;
+	private static Card kenobiCard;
+	private static Card spockCard;
+	private static Card ramboCard;
+	private static Card lightsaberCard;
+	private static Card handgunsCard;
+	private static Card staffCard;
+	private static Card machinegunCard;
+	private static Card phaserCard;
+	private static Card stunwatchCard;
 	private static Card libraryCard;
-	private static Card wrenchCard;
-	private static Card knifeCard;
-	private static Card greenCard;
-	private static Card plumCard;
-	private static Card ballroomCard;
+	private static Card bathroomCard;
+	private static Card observatoryCard;
+	private static Card foyerCard;
+	private static Card saunaCard;
 	private static Card kitchenCard;
-	private static Card hallCard;
-	private static Card pipeCard;
-	private static Card scarletCard;
-	private static Card ropeCard;
-	private static Card conservatoryCard;
+	private static Card gardenCard;
+	private static Card bedroomCard;
+	private static Card entertainmentCard;
 
 
 	// set up the board as we've done every other time.
@@ -56,27 +58,29 @@ public class gameActionTests {
 		board.initialize();
 		board.dealCards();
 
-		mustardCard = new Card("Colonel Mustard", CardType.PERSON);
-		whiteCard = new Card("Mrs. White", CardType.PERSON);
-		peacockCard = new Card("Mrs. Peacock", CardType.PERSON);
-		greenCard = new Card("Mr. Green", CardType.PERSON);
-		plumCard = new Card("Professor Plum", CardType.PERSON);
-		scarletCard = new Card("Miss Scarlet", CardType.PERSON);
+		bondCard = new Card("James Bond", CardType.PERSON);
+		croftCard = new Card("Lara Croft", CardType.PERSON);
+		gandalfCard = new Card("Gandalf", CardType.PERSON);
+		kenobiCard = new Card("Obi-Wan Kenobi", CardType.PERSON);
+		spockCard = new Card("Spock", CardType.PERSON);
+		ramboCard = new Card("Rambo", CardType.PERSON);
 
-		diningRoomCard = new Card("Dining Room", CardType.ROOM);
-		studyCard = new Card("Study", CardType.ROOM);
-		ballroomCard = new Card("Ballroom", CardType.ROOM);
-		kitchenCard = new Card("Kitchen", CardType.ROOM);
-		hallCard = new Card("Hall", CardType.ROOM);
 		libraryCard = new Card("Library", CardType.ROOM);
-		conservatoryCard = new Card("Conservatory", CardType.ROOM);
+		bathroomCard = new Card("Bathroom", CardType.ROOM);
+		observatoryCard = new Card("Observatory", CardType.ROOM);
+		foyerCard = new Card("Foyer", CardType.ROOM);
+		saunaCard = new Card("Sauna", CardType.ROOM);
+		kitchenCard = new Card("Kitchen", CardType.ROOM);
+		gardenCard = new Card("Garden", CardType.ROOM);
+		bedroomCard = new Card("Bedroom", CardType.ROOM);
+		entertainmentCard =  new Card("Entertainment room", CardType.ROOM);
 
-		candlestickCard = new Card("Candlestick", CardType.WEAPON);
-		revolverCard = new Card("Revolver", CardType.WEAPON);
-		wrenchCard = new Card("Wrench", CardType.WEAPON);
-		knifeCard = new Card("Knife", CardType.WEAPON);
-		pipeCard = new Card("Lead Pipe",CardType.WEAPON);
-		ropeCard = new Card("Rope", CardType.WEAPON);
+		lightsaberCard = new Card("Lightsaber", CardType.WEAPON);
+		handgunsCard = new Card("Handguns", CardType.WEAPON);
+		staffCard = new Card("Staff", CardType.WEAPON);
+		machinegunCard = new Card("Machine Gun", CardType.WEAPON);
+		phaserCard = new Card("Phaser",CardType.WEAPON);
+		stunwatchCard = new Card("Stun Watch", CardType.WEAPON);
 	}
 
 
@@ -193,4 +197,27 @@ public class gameActionTests {
 		assertTrue(roomCell);
 		assertTrue(walkwayCell);
 	}
+	 @Test
+	  public void testMakeSuggestionOneMissing()
+	  {
+		 // make computer player appear in Garden
+	    ComputerPlayer player = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+	    
+	    player.addSeenCard(bondCard);
+	    player.addSeenCard(Card);
+	    player.addSeenCard(scarletCard);
+	    player.updateSeen(plumCard);
+	    player.updateSeen(greenCard);
+	    player.updateSeen(candlestickCard);
+	    player.updateSeen(knifeCard);
+	    player.updateSeen(pipeCard);
+	    player.updateSeen(ropeCard);
+	    player.updateSeen(revolverCard);
+	    player.createSuggestion("Garden");
+	    Assert.assertEquals("Conservatory", player.getSuggestion().room);
+	    Assert.assertEquals("Mrs. White", player.getSuggestion().person);
+	    Assert.assertEquals("Wrench", player.getSuggestion().weapon);
+	  }
+	  
+	 
 }
