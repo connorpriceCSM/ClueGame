@@ -15,8 +15,7 @@ public class ComputerPlayer extends Player {
 	private char lastVisitedRoom;
 	private Random rand = new Random();
 	private Suggestion suggestion = new Suggestion();
-
-
+	
 	//inherited constructor
 	public ComputerPlayer(String playerName, int row, int column, Color color) {
 		super(playerName, row, column, color);
@@ -66,17 +65,27 @@ public class ComputerPlayer extends Player {
 		suggestion.setRoom(theRoom);
 
 		ArrayList<String> possibleWeapons =  new ArrayList();
-		for(String s : Board.getInstance().getWeaponNames() )
+		ArrayList<String> weaponNames = Board.getInstance().getWeaponNames();
+		for(String s : weaponNames )
 		{
-			if(!(seenCards.contains(s)))
+			if((seenCards.contains(s)))
+			{
+				
+			}
+			else
 			{
 				possibleWeapons.add(s);
 			}
 		}
 		ArrayList<String> possiblePlayers =  new ArrayList();
-		for(String s : Board.getInstance().getPlayerNames() )
+		ArrayList<String> playerNames = Board.getInstance().getPlayerNames();
+		for(String s : playerNames)
 		{
-			if(!(seenCards.contains(s)))
+			if((seenCards.contains(s)))
+			{
+				
+			}
+			else
 			{
 				possiblePlayers.add(s);
 			}
@@ -86,11 +95,11 @@ public class ComputerPlayer extends Player {
 		suggestion.setWeapon(possibleWeapons.get(selectedWeapon));
 		int selectedPerson = rand.nextInt(possiblePlayers.size());
 		suggestion.setPerson(possiblePlayers.get(selectedPerson));
-		
-		
+	}
 
-
-
+	// crucial getter
+	public Suggestion getSuggestion() {
+		return suggestion;
 	}
 
 	// For tests 

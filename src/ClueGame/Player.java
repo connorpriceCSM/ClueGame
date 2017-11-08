@@ -11,7 +11,7 @@ public class Player {
 	private Color color;
 	private ArrayList<Card> playerCards = new ArrayList<Card>();
 	// needs to be protected because every player will have a unique set of cards
-	protected ArrayList<Card> seenCards  = new ArrayList<Card>();
+	protected ArrayList<String> seenCards  = new ArrayList<String>();
 
 	// constructor for player. name, location, and color.
 	public Player(String playerName, int row, int column, Color color) {
@@ -59,11 +59,15 @@ public class Player {
 	}
 	public void addCard(Card card) {
 		 playerCards.add(card);
-		 seenCards.add(card);
+		 seenCards.add(card.getCardName());
 	}
 	public void addSeenCard(Card card)
 	{
-		seenCards.add(card);
+		seenCards.add(card.getCardName());
+	}
+	public ArrayList<String> getSeenCards()
+	{
+		return seenCards;
 	}
 	
 	

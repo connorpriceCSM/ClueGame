@@ -2,9 +2,9 @@ package clueGame;
 
 public class Suggestion {
 
-	private String room;
-	private String weapon;
-	private String person;
+	public String room;
+	public String weapon;
+	public String person;
 
 	public Suggestion( String room, String weapon, String person)
 	{

@@ -197,26 +197,29 @@ public class gameActionTests {
 		assertTrue(roomCell);
 		assertTrue(walkwayCell);
 	}
+	// This computer player has not seen the Cards for Spock and the Phaser
+	// Every other weapon and player card has been seen
 	 @Test
 	  public void testMakeSuggestionOneMissing()
 	  {
-		 // make computer player appear in Garden
-	    ComputerPlayer player = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+		 // make computer player appear in lower right board cell (Garden)
+	    ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+	    // the computer has seen 10 out of the 12 cards.
+	    testPlayer.addSeenCard(bondCard);
+	    testPlayer.addSeenCard(croftCard);
+	    testPlayer.addSeenCard(gandalfCard);
+	    testPlayer.addSeenCard(kenobiCard);
+	    testPlayer.addSeenCard(ramboCard);
+	    testPlayer.addSeenCard(lightsaberCard);
+	    testPlayer.addSeenCard(handgunsCard);
+	    testPlayer.addSeenCard(staffCard);
+	    testPlayer.addSeenCard(machinegunCard);
+	    testPlayer.addSeenCard(stunwatchCard);
 	    
-	    player.addSeenCard(bondCard);
-	    player.addSeenCard(Card);
-	    player.addSeenCard(scarletCard);
-	    player.updateSeen(plumCard);
-	    player.updateSeen(greenCard);
-	    player.updateSeen(candlestickCard);
-	    player.updateSeen(knifeCard);
-	    player.updateSeen(pipeCard);
-	    player.updateSeen(ropeCard);
-	    player.updateSeen(revolverCard);
-	    player.createSuggestion("Garden");
-	    Assert.assertEquals("Conservatory", player.getSuggestion().room);
-	    Assert.assertEquals("Mrs. White", player.getSuggestion().person);
-	    Assert.assertEquals("Wrench", player.getSuggestion().weapon);
+	    testPlayer.createSuggestion("Garden");
+	    Assert.assertEquals("Garden", testPlayer.getSuggestion().room);
+	    Assert.assertEquals("Spock", testPlayer.getSuggestion().person);
+	    Assert.assertEquals("Phaser", testPlayer.getSuggestion().weapon);
 	  }
 	  
 	 
