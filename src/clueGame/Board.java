@@ -34,7 +34,8 @@ public class Board {
 	private HumanPlayer humanPlayer;
 	private BoardCell[][] grid;
 	private static Board theInstance = new Board();
-	private Suggestion solution;
+	private Suggestion winningSolution;
+
 
 	private int numRows,numCols;
 	final static int MAX_BOARD_SIZE = 50;
@@ -523,11 +524,25 @@ public class Board {
 			if(playerCount == players.size()) {
 				playerCount  = 0;
 			}
-				// give player the next card in the array!
-				Player player = players.get(playerCount);
-				player.addCard(card);
-				playerCount++;
+			// give player the next card in the array!
+			Player player = players.get(playerCount);
+			player.addCard(card);
+			playerCount++;
 		}
 	}
+
+	public boolean checkAccusation(Suggestion accusation)
+	{
+		if((accusation.getPerson() == winningSolution.getPerson()) &&
+				(accusation.getRoom() == winningSolution.getRoom()) &&
+				(accusation.getWeapon() == winningSolution.getWeapon()))
+		{
+			return true;
+		}
+		return false;
+	}
+
+
+
 
 }

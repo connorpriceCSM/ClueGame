@@ -57,7 +57,8 @@ public class gameActionTests {
 		board.setConfigFiles("ClueMap.csv", "ClueLegend.txt");		
 		board.initialize();
 		board.dealCards();
-
+		
+        // loading all the cards that will be needed for the tests!
 		bondCard = new Card("James Bond", CardType.PERSON);
 		croftCard = new Card("Lara Croft", CardType.PERSON);
 		gandalfCard = new Card("Gandalf", CardType.PERSON);
@@ -276,6 +277,11 @@ public class gameActionTests {
 		Assert.assertTrue(seenRambo);
 		Assert.assertTrue(seenWatch);
 		Assert.assertTrue(seenPhaser);
+	}
+	@Test
+	public void testAccusation()
+	{
+		assertTrue(1 == 2);
 	}
 
 
