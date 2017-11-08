@@ -183,15 +183,15 @@ public class gameActionTests {
 		for(int i = 0; i < 100; i++)
 		{
 			BoardCell selectedCell = player.pickLocation(board.getTargets());
-		    if(selectedCell == board.getCellAt(22, 3))
+			if(selectedCell == board.getCellAt(22, 3))
 			{
 				walkwayCell = true;
 			}
-		    else if(selectedCell == board.getCellAt(19, 2));
+			else if(selectedCell == board.getCellAt(19, 2));
 			{
 				roomCell = true;
 			}
-			
+
 		}
 		//both cells should be visited
 		assertTrue(roomCell);
@@ -199,28 +199,86 @@ public class gameActionTests {
 	}
 	// This computer player has not seen the Cards for Spock and the Phaser
 	// Every other weapon and player card has been seen
-	 @Test
-	  public void testMakeSuggestionOneMissing()
-	  {
-		 // make computer player appear in lower right board cell (Garden)
-	    ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
-	    // the computer has seen 10 out of the 12 cards.
-	    testPlayer.addSeenCard(bondCard);
-	    testPlayer.addSeenCard(croftCard);
-	    testPlayer.addSeenCard(gandalfCard);
-	    testPlayer.addSeenCard(kenobiCard);
-	    testPlayer.addSeenCard(ramboCard);
-	    testPlayer.addSeenCard(lightsaberCard);
-	    testPlayer.addSeenCard(handgunsCard);
-	    testPlayer.addSeenCard(staffCard);
-	    testPlayer.addSeenCard(machinegunCard);
-	    testPlayer.addSeenCard(stunwatchCard);
-	    
-	    testPlayer.createSuggestion("Garden");
-	    Assert.assertEquals("Garden", testPlayer.getSuggestion().room);
-	    Assert.assertEquals("Spock", testPlayer.getSuggestion().person);
-	    Assert.assertEquals("Phaser", testPlayer.getSuggestion().weapon);
-	  }
-	  
-	 
+	@Test
+	public void testMakeSuggestionOneMissing()
+	{
+		// make computer player appear in lower right board cell (Garden)
+		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+		// the computer has seen 10 out of the 12 cards.
+		testPlayer.addSeenCard(bondCard);
+		testPlayer.addSeenCard(croftCard);
+		testPlayer.addSeenCard(gandalfCard);
+		testPlayer.addSeenCard(kenobiCard);
+		testPlayer.addSeenCard(ramboCard);
+		testPlayer.addSeenCard(lightsaberCard);
+		testPlayer.addSeenCard(handgunsCard);
+		testPlayer.addSeenCard(staffCard);
+		testPlayer.addSeenCard(machinegunCard);
+		testPlayer.addSeenCard(stunwatchCard);
+
+		testPlayer.createSuggestion("Garden");
+		Assert.assertEquals("Garden", testPlayer.getSuggestion().room);
+		Assert.assertEquals("Spock", testPlayer.getSuggestion().person);
+		Assert.assertEquals("Phaser", testPlayer.getSuggestion().weapon);
+	}
+	// This computer player has not seen the Cards for Spock, Rambo, stunwatch, or phaser
+	// Every other weapon and player card has been seen
+	@Test
+	public void testMakeSuggestionTwoMissing()
+	{
+		// make computer player appear in lower right board cell (Garden)
+		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+		// the computer has seen 8 out of the 12 cards minus Spock and Rambo
+		testPlayer.addSeenCard(bondCard);
+		testPlayer.addSeenCard(croftCard);
+		testPlayer.addSeenCard(gandalfCard);
+		testPlayer.addSeenCard(kenobiCard);
+		testPlayer.addSeenCard(lightsaberCard);
+		testPlayer.addSeenCard(handgunsCard);
+		testPlayer.addSeenCard(staffCard);
+		testPlayer.addSeenCard(machinegunCard);
+		boolean seenSpock  = false;
+		boolean seenRambo = false;
+		boolean seenPhaser = false;
+		boolean seenWatch = false;
+		for( int i =  0; i < 100; i++)
+		{
+			testPlayer.createSuggestion("Garden");
+			String playerGuess = testPlayer.getSuggestion().getPerson();
+			if(playerGuess.equals("Rambo"))
+			{
+				seenRambo = true;
+			}
+			else if(playerGuess.equals("Spock"))
+			{
+				seenSpock = true;
+			}
+			else
+			{
+				System.out.println("The computer made no guess!");
+			}
+			String weaponGuess = testPlayer.getSuggestion().getWeapon();
+			if(weaponGuess.equals("Stun Watch"))
+			{
+				seenWatch = true;
+			}
+			else if(weaponGuess.equals("Phaser"))
+			{
+				seenPhaser = true;
+			}
+			else
+			{
+				System.out.println("The computer made no guess!");
+			}
+		}
+		Assert.assertEquals("Garden", testPlayer.getSuggestion().room);
+		Assert.assertFalse(seenSpock);
+		Assert.assertFalse(seenRambo);
+		Assert.assertFalse(seenWatch);
+		Assert.assertFalse(seenPhaser);
+	}
+
+
+
+
 }
