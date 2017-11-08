@@ -8,6 +8,7 @@ import clueGame.CardType;
 import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.ComputerPlayer;
+import clueGame.Suggestion;
 
 import static org.junit.Assert.*;
 
@@ -281,7 +282,42 @@ public class gameActionTests {
 	@Test
 	public void testAccusation()
 	{
-		assertTrue(1 == 2);
+		
+		board.setWinningSolution("Bathroom", "Lightsaber", "Gandalf");
+		boolean allRight = false;
+		boolean wrongRoom = false;
+		boolean wrongWeapon = false;
+		boolean wrongPerson = false;
+		Suggestion allCorrect = new Suggestion("Bathroom", "Lightsaber", "Gandalf");
+		Suggestion incorrectRoom = new Suggestion("Library", "Lightsaber", "Gandalf");
+		Suggestion incorrectWeapon = new Suggestion("Bathroom", "Staff", "Gandalf");
+		Suggestion incorrectPlayer = new Suggestion("Bathroom", "Lightsaber", "James Bond");
+		//all correct!
+		if(board.checkAccusation(allCorrect))
+		{
+			allRight = true;
+		}
+		// wrong Room
+		if(!(board.checkAccusation(incorrectRoom)));
+		{
+			wrongRoom = true;
+		}
+		// wrong Weapon
+		if(!(board.checkAccusation(incorrectWeapon)))
+		{
+			wrongWeapon = true;
+		}
+		// wrong Person
+		if(!(board.checkAccusation(incorrectPlayer)))
+		{
+			wrongPerson = true;
+		}
+		// ensure all are true!
+		Assert.assertTrue(allRight);
+		Assert.assertTrue(wrongRoom);
+		Assert.assertTrue(wrongPerson);
+		Assert.assertTrue(wrongWeapon);
+		
 	}
 
 

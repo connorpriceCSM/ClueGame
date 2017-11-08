@@ -530,6 +530,14 @@ public class Board {
 			playerCount++;
 		}
 	}
+	
+	public void setWinningSolution(String room, String weapon, String  person)
+	{
+		winningSolution  = new Suggestion();
+		winningSolution.setPerson(person);
+		winningSolution.setRoom(room);
+		winningSolution.setWeapon(weapon);
+	}
 
 	public boolean checkAccusation(Suggestion accusation)
 	{
