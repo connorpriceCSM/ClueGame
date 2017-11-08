@@ -272,10 +272,10 @@ public class gameActionTests {
 			}
 		}
 		Assert.assertEquals("Garden", testPlayer.getSuggestion().room);
-		Assert.assertFalse(seenSpock);
-		Assert.assertFalse(seenRambo);
-		Assert.assertFalse(seenWatch);
-		Assert.assertFalse(seenPhaser);
+		Assert.assertTrue(seenSpock);
+		Assert.assertTrue(seenRambo);
+		Assert.assertTrue(seenWatch);
+		Assert.assertTrue(seenPhaser);
 	}
 
 
