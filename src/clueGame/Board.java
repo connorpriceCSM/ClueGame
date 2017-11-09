@@ -549,9 +549,6 @@ public class Board {
 		}
 		return false;
 	}
-
-
-
 	//Handle suggestions from any player.
 	//Checks to see if suggestion is correct
 	public Card testSuggestion(Suggestion sug) {
