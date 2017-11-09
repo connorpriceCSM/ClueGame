@@ -342,7 +342,7 @@ public class gameActionTests {
 		assertEquals(chosenCard3, null);
 			
 	}
-	public void disproveSolutionOneMatches()
+	public void disproveSolutionOneMatch()
 	{
 		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
 		testPlayer.addCard(gandalfCard);
@@ -358,10 +358,10 @@ public class gameActionTests {
 		Suggestion suggestion2 = new Suggestion("Kitchen", "Handguns", "James Bond");
 		Card chosenCard2 = testPlayer.disproveSuggestion(suggestion2);
 		assertEquals(chosenCard2, handgunsCard);
-		// should return handguns
+		// should return gandalf
 		Suggestion suggestion3 = new Suggestion("Garden", "Machine Gun", "Gandalf");
 		Card chosenCard3 = testPlayer.disproveSuggestion(suggestion3);
-		assertEquals(chosenCard3, null);
+		assertEquals(chosenCard3, gandalfCard);
 			
 	}
 	
