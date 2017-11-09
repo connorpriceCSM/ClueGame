@@ -29,12 +29,10 @@ public class Card {
 	// comparison method for later.
 	public boolean equals(Card otherCard)
 	{
-		if(this == otherCard)
-		{
+		if(this == otherCard) {
 			return true;
 		}
-		if(this.cardName.equals(otherCard.cardName) && this.cardType == otherCard.cardType)
-		{
+		if(this.cardName.equals(otherCard.cardName) && this.cardType == otherCard.cardType) {
 			return true;
 		}
 		return false;

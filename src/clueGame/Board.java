@@ -554,15 +554,15 @@ public class Board {
 
 	//Handle suggestions from any player.
 	//Checks to see if suggestion is correct
-	public String testSuggestion(Suggestion sug) {
-		if (!(sug.getRoom()).equals(winningSolution.getRoom())) {
-			return sug.getRoom();
-		} else if (!(sug.getWeapon()).equals(winningSolution.getWeapon())) {
-			return sug.getWeapon();
-		} else if (!(sug.getPerson()).equals(winningSolution.getPerson())) {
-			return sug.getPerson();
+	public Card testSuggestion(Suggestion sug) {
+		Card result = null;
+		for (Player playa: players) {
+			if (!(playa.getPlayerName()).equals(humanPlayer.getPlayerName())) {
+				result = ((ComputerPlayer) playa).disproveSuggestion(sug);
+			}
+			
 		}
-		return "You win!";
+		return result;
 	}
 
 }
