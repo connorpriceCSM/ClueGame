@@ -320,16 +320,27 @@ public class gameActionTests {
 		Assert.assertTrue(wrongWeapon);
 		
 	}
+	// has to return null;
 	@Test 
 	public void disproveSolutionNoMatches()
 	{
 		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
-		testPlayer.addSeenCard(gandalfCard);
-		testPlayer.addSeenCard(kenobiCard);
-		testPlayer.addSeenCard(lightsaberCard);
-		testPlayer.addSeenCard(handgunsCard);
-		
-		
+		testPlayer.addCard(gandalfCard);
+		testPlayer.addCard(kenobiCard);
+		testPlayer.addCard(lightsaberCard);
+		testPlayer.addCard(handgunsCard);
+		testPlayer.addCard(bedroomCard);
+		//should return null;
+		Suggestion suggestion = new Suggestion("Garden", "Phaser", "Rambo");
+		Card chosenCard = testPlayer.disproveSuggestion(suggestion);
+		assertEquals(chosenCard, null);
+		Suggestion suggestion2 = new Suggestion("Kitchen", "Staff", "James Bond");
+		Card chosenCard2 = testPlayer.disproveSuggestion(suggestion2);
+		assertEquals(chosenCard2, null);
+		Suggestion suggestion3 = new Suggestion("Garden", "Machine Gun", "Spock");
+		Card chosenCard3 = testPlayer.disproveSuggestion(suggestion3);
+		assertEquals(chosenCard3, null);
+			
 	}
 
 

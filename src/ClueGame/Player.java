@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player {
 
@@ -10,6 +11,7 @@ public class Player {
 	private int column;
 	private Color color;
 	private ArrayList<Card> playerCards = new ArrayList<Card>();
+	private Random rand = new Random();
 	// needs to be protected because every player will have a unique set of cards
 	protected ArrayList<String> seenCards  = new ArrayList<String>();
 
@@ -69,9 +71,28 @@ public class Player {
 	{
 		return seenCards;
 	}
-	//Make suggestion to the board
-	public Suggestion makeSuggestion(String room, String weapon, String currentRoom) {
-		return new Suggestion(room, weapon, currentRoom);
-	}
 	
+	//Disprove Suggestion
+		public Card disproveSuggestion(Suggestion sug) {
+			ArrayList<Card> possibleCards = new ArrayList();
+			for (Card curCard: playerCards) 
+			{
+				if (curCard.getCardName().equals(sug.person))
+					possibleCards.add(curCard);
+				if (curCard.getCardName().equals(sug.room))
+					possibleCards.add(curCard);
+				if (curCard.getCardName().equals(sug.weapon))
+					possibleCards.add(curCard);
+			}
+			if(possibleCards.size() > 0)
+			{
+			int randomCardIndex = rand.nextInt(possibleCards.size());
+			Card chosenCard = possibleCards.get(randomCardIndex);
+			return chosenCard;
+			}
+			
+			return null;
+		}
+	
+
 }

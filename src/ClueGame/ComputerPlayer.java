@@ -136,25 +136,6 @@ public class ComputerPlayer extends Player {
 	{
 		lastVisitedRoom = roomCharacter;
 	}
-	//Disprove Suggestion
-	public Card disproveSuggestion(Suggestion sug) {
-		ArrayList<Card> possibleCards = new ArrayList();
-		for (Card curCard: myCards) {
-			if (curCard.getCardName().equals(sug.person))
-				possibleCards.add(curCard);
-			if (curCard.getCardName().equals(sug.room))
-				possibleCards.add(curCard);
-			if (curCard.getCardName().equals(sug.weapon))
-				possibleCards.add(curCard);
-		}
-		if(possibleCards.size() > 0)
-		{
-		int randomCardIndex = rand.nextInt(possibleCards.size());
-		Card chosenCard = possibleCards.get(randomCardIndex);
-		return chosenCard;
-		}
-		
-		return null;
-	}
+	
 
 }
