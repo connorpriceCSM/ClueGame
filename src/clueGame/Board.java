@@ -551,14 +551,13 @@ public class Board {
 	}
 	//Handle suggestions from any player.
 	//Checks to see if suggestion is correct
-	public Card testSuggestion(Suggestion sug) {
-		Card result = null;
+	public Card handleSuggestion(Suggestion sug, Player suggester) {
 		for (Player playa: players) {
-			if (!(playa.getPlayerName()).equals(humanPlayer.getPlayerName())) {
-				result = playa.disproveSuggestion(sug);
+			if (!(playa.getPlayerName()).equals(suggester.getPlayerName())) {
+				return playa.disproveSuggestion(sug);
 			}
 		}
-		return result;
+		return null;
 	}
 
 }
