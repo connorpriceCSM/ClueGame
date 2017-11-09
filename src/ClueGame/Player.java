@@ -69,7 +69,9 @@ public class Player {
 	{
 		return seenCards;
 	}
+	//Make suggestion to the board
+	public Suggestion makeSuggestion(String room, String weapon, String currentRoom) {
+		return new Suggestion(room, weapon, currentRoom);
+	}
 	
-	
-
 }
