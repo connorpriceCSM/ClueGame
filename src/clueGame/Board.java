@@ -529,5 +529,16 @@ public class Board {
 				playerCount++;
 		}
 	}
-
+	//Handle suggestions from any player.
+	//Checks to see if suggestion is correct
+	public String testSuggestion(Suggestion sug) {
+		if (!(sug.getRoom()).equals(solution.getRoom())) {
+			return sug.getRoom();
+		} else if (!(sug.getWeapon()).equals(solution.getWeapon())) {
+			return sug.getWeapon();
+		} else if (!(sug.getPerson()).equals(solution.getPerson())) {
+			return sug.getPerson();
+		}
+		return "You win!";
+	}
 }

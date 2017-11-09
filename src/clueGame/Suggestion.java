@@ -6,7 +6,7 @@ public class Suggestion {
 	public String weapon;
 	public String person;
 
-	public Suggestion( String room, String weapon, String person)
+	public Suggestion(String room, String weapon, String person)
 	{
 		this.room = room;
 		this.weapon = weapon;
