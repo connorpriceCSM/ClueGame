@@ -96,6 +96,10 @@ public class ComputerPlayer extends Player {
 		int selectedPerson = rand.nextInt(possiblePlayers.size());
 		suggestion.setPerson(possiblePlayers.get(selectedPerson));
 	}
+	//Make suggestion to the board
+		public Suggestion makeSuggestion(String room, String weapon, String currentRoom) {
+			return new Suggestion(room, weapon, currentRoom);
+		}
 
 	// crucial getter
 	public Suggestion getSuggestion() {
@@ -136,6 +140,6 @@ public class ComputerPlayer extends Player {
 	{
 		lastVisitedRoom = roomCharacter;
 	}
-	
+
 
 }

@@ -60,8 +60,8 @@ public class Player {
 		this.column = cell.getColumn();
 	}
 	public void addCard(Card card) {
-		 playerCards.add(card);
-		 seenCards.add(card.getCardName());
+		playerCards.add(card);
+		seenCards.add(card.getCardName());
 	}
 	public void addSeenCard(Card card)
 	{
@@ -71,28 +71,31 @@ public class Player {
 	{
 		return seenCards;
 	}
-	
+
 	//Disprove Suggestion
-		public Card disproveSuggestion(Suggestion sug) {
-			ArrayList<Card> possibleCards = new ArrayList();
-			for (Card curCard: playerCards) 
-			{
-				if (curCard.getCardName().equals(sug.person))
-					possibleCards.add(curCard);
-				if (curCard.getCardName().equals(sug.room))
-					possibleCards.add(curCard);
-				if (curCard.getCardName().equals(sug.weapon))
-					possibleCards.add(curCard);
-			}
-			if(possibleCards.size() > 0)
-			{
+	public Card disproveSuggestion(Suggestion sug) {
+		ArrayList<Card> possibleCards = new ArrayList();
+		for (Card curCard: playerCards) 
+		{
+			if (curCard.getCardName().equals(sug.person))
+				possibleCards.add(curCard);
+			if (curCard.getCardName().equals(sug.room))
+				possibleCards.add(curCard);
+			if (curCard.getCardName().equals(sug.weapon))
+				possibleCards.add(curCard);
+		}
+		if(possibleCards.size() > 0)
+		{
 			int randomCardIndex = rand.nextInt(possibleCards.size());
 			Card chosenCard = possibleCards.get(randomCardIndex);
 			return chosenCard;
-			}
-			
-			return null;
 		}
+
+		return null;
+	}
 	
+	
+
+
 
 }
