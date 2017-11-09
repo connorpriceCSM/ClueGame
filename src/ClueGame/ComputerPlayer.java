@@ -138,14 +138,22 @@ public class ComputerPlayer extends Player {
 	}
 	//Disprove Suggestion
 	public Card disproveSuggestion(Suggestion sug) {
+		ArrayList<Card> possibleCards = new ArrayList();
 		for (Card curCard: myCards) {
 			if (curCard.getCardName().equals(sug.person))
-				return curCard;
+				possibleCards.add(curCard);
 			if (curCard.getCardName().equals(sug.room))
-				return curCard;
+				possibleCards.add(curCard);
 			if (curCard.getCardName().equals(sug.weapon))
-				return curCard;
+				possibleCards.add(curCard);
 		}
+		if(possibleCards.size() > 0)
+		{
+		int randomCardIndex = rand.nextInt(possibleCards.size());
+		Card chosenCard = possibleCards.get(randomCardIndex);
+		return chosenCard;
+		}
+		
 		return null;
 	}
 
