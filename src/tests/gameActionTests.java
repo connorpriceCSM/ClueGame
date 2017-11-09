@@ -58,8 +58,8 @@ public class gameActionTests {
 		board.setConfigFiles("ClueMap.csv", "ClueLegend.txt");		
 		board.initialize();
 		board.dealCards();
-		
-        // loading all the cards that will be needed for the tests!
+
+		// loading all the cards that will be needed for the tests!
 		bondCard = new Card("James Bond", CardType.PERSON);
 		croftCard = new Card("Lara Croft", CardType.PERSON);
 		gandalfCard = new Card("Gandalf", CardType.PERSON);
@@ -245,7 +245,7 @@ public class gameActionTests {
 		boolean seenWatch = false;
 		for( int i =  0; i < 100; i++)	
 		{
-			
+
 			testPlayer.createSuggestion("Garden");
 			String playerGuess = testPlayer.getSuggestion().getPerson();
 			if(playerGuess.equals("Rambo"))
@@ -283,7 +283,7 @@ public class gameActionTests {
 	@Test
 	public void testAccusation()
 	{
-		
+
 		board.setWinningSolution("Bathroom", "Lightsaber", "Gandalf");
 		boolean allRight = false;
 		boolean wrongRoom = false;
@@ -318,10 +318,84 @@ public class gameActionTests {
 		Assert.assertTrue(wrongRoom);
 		Assert.assertTrue(wrongPerson);
 		Assert.assertTrue(wrongWeapon);
-		
+
 	}
+	// has to return null;
+	@Test 
+	public void disproveSolutionNoMatches()
+	{
+		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+		testPlayer.addCard(gandalfCard);
+		testPlayer.addCard(kenobiCard);
+		testPlayer.addCard(lightsaberCard);
+		testPlayer.addCard(handgunsCard);
+		testPlayer.addCard(bedroomCard);
+		//should all return null with 3 different tests of 9 values!
+		Suggestion suggestion = new Suggestion("Garden", "Phaser", "Rambo");
+		Card chosenCard = testPlayer.disproveSuggestion(suggestion);
+		assertEquals(chosenCard, null);
+		Suggestion suggestion2 = new Suggestion("Kitchen", "Staff", "James Bond");
+		Card chosenCard2 = testPlayer.disproveSuggestion(suggestion2);
+		assertEquals(chosenCard2, null);
+		Suggestion suggestion3 = new Suggestion("Sauna", "Machine Gun", "Spock");
+		Card chosenCard3 = testPlayer.disproveSuggestion(suggestion3);
+		assertEquals(chosenCard3, null);
 
+	}
+	@Test
+	public void disproveSolutionOneMatch()
+	{
+		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+		testPlayer.addCard(gandalfCard);
+		testPlayer.addCard(kenobiCard);
+		testPlayer.addCard(lightsaberCard);
+		testPlayer.addCard(handgunsCard);
+		testPlayer.addCard(bedroomCard);
+		//should return bedroom!
+		Suggestion suggestion = new Suggestion("Bedroom", "Phaser", "Rambo");
+		Card chosenCard = testPlayer.disproveSuggestion(suggestion);
+		assertEquals(chosenCard, bedroomCard );
+		// should return handguns
+		Suggestion suggestion2 = new Suggestion("Kitchen", "Handguns", "James Bond");
+		Card chosenCard2 = testPlayer.disproveSuggestion(suggestion2);
+		assertEquals(chosenCard2, handgunsCard);
+		// should return gandalf
+		Suggestion suggestion3 = new Suggestion("Garden", "Machine Gun", "Gandalf");
+		Card chosenCard3 = testPlayer.disproveSuggestion(suggestion3);
+		assertEquals(chosenCard3, gandalfCard);
 
+	}
+	@Test
+	public void disproveSolutionTwoMatches()
+	{
+		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+		testPlayer.addCard(gandalfCard);
+		testPlayer.addCard(kenobiCard);
+		testPlayer.addCard(lightsaberCard);
+		testPlayer.addCard(handgunsCard);
+		testPlayer.addCard(bedroomCard);
+		boolean handgunsSeen = false;
+		boolean bedroomSeen = false;
+		//should return bedroom or handguns
+		for( int i = 0; i < 100; i++)
+		{
+			Suggestion suggestion = new Suggestion("Bedroom", "Handguns", "Rambo");
+			Card chosenCard = testPlayer.disproveSuggestion(suggestion);
+			if(chosenCard == bedroomCard)
+			{
+				bedroomSeen = true;
+			}
+			else if(chosenCard == handgunsCard)
+			{
+				handgunsSeen = true;
+			}
+		}
 
+		assertTrue(bedroomSeen);
+		assertTrue(handgunsSeen);
+		
 
+	}
 }
+
+
