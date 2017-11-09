@@ -554,7 +554,8 @@ public class Board {
 	public Card handleSuggestion(Suggestion sug, Player suggester) {
 		for (Player playa: players) {
 			if (!(playa.getPlayerName()).equals(suggester.getPlayerName())) {
-				return playa.disproveSuggestion(sug);
+				if (playa.disproveSuggestion(sug)!= null)
+					return playa.disproveSuggestion(sug);
 			}
 		}
 		return null;
