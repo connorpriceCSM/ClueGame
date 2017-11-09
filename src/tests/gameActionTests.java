@@ -243,8 +243,9 @@ public class gameActionTests {
 		boolean seenRambo = false;
 		boolean seenPhaser = false;
 		boolean seenWatch = false;
-		for( int i =  0; i < 100; i++)
+		for( int i =  0; i < 100; i++)	
 		{
+			
 			testPlayer.createSuggestion("Garden");
 			String playerGuess = testPlayer.getSuggestion().getPerson();
 			if(playerGuess.equals("Rambo"))
