@@ -342,6 +342,7 @@ public class gameActionTests {
 		assertEquals(chosenCard3, null);
 
 	}
+	@Test
 	public void disproveSolutionOneMatch()
 	{
 		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
@@ -364,6 +365,7 @@ public class gameActionTests {
 		assertEquals(chosenCard3, gandalfCard);
 
 	}
+	@Test
 	public void disproveSolutionTwoMatches()
 	{
 		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
@@ -389,7 +391,10 @@ public class gameActionTests {
 			}
 		}
 
+		assertTrue(bedroomSeen);
+		assertTrue(handgunsSeen);
 		
+
 	}
 }
 
