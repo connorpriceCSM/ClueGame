@@ -64,7 +64,7 @@ public class ComputerPlayer extends Player {
 	{
 		suggestion.setRoom(theRoom);
 
-		ArrayList<String> possibleWeapons =  new ArrayList();
+		ArrayList<String> possibleWeapons =  new ArrayList<String>();
 		ArrayList<String> weaponNames = Board.getInstance().getWeaponNames();
 		for(String s : weaponNames )
 		{
@@ -77,7 +77,7 @@ public class ComputerPlayer extends Player {
 				possibleWeapons.add(s);
 			}
 		}
-		ArrayList<String> possiblePlayers =  new ArrayList();
+		ArrayList<String> possiblePlayers =  new ArrayList<String>();
 		ArrayList<String> playerNames = Board.getInstance().getPlayerNames();
 		for(String s : playerNames)
 		{

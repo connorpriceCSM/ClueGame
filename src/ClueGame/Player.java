@@ -74,7 +74,7 @@ public class Player {
 
 	//Disprove Suggestion
 	public Card disproveSuggestion(Suggestion sug) {
-		ArrayList<Card> possibleCards = new ArrayList();
+		ArrayList<Card> possibleCards = new ArrayList<Card>();
 		for (Card curCard: playerCards) 
 		{
 			if (curCard.getCardName().equals(sug.person))
