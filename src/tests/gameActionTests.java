@@ -320,6 +320,17 @@ public class gameActionTests {
 		Assert.assertTrue(wrongWeapon);
 		
 	}
+	@Test 
+	public void disproveSolutionNoMatches()
+	{
+		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
+		testPlayer.addSeenCard(gandalfCard);
+		testPlayer.addSeenCard(kenobiCard);
+		testPlayer.addSeenCard(lightsaberCard);
+		testPlayer.addSeenCard(handgunsCard);
+		
+		
+	}
 
 
 
