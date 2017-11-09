@@ -530,7 +530,7 @@ public class Board {
 			playerCount++;
 		}
 	}
-	
+
 	public void setWinningSolution(String room, String weapon, String  person)
 	{
 		winningSolution  = new Suggestion();
@@ -552,5 +552,17 @@ public class Board {
 
 
 
+	//Handle suggestions from any player.
+	//Checks to see if suggestion is correct
+	public String testSuggestion(Suggestion sug) {
+		if (!(sug.getRoom()).equals(winningSolution.getRoom())) {
+			return sug.getRoom();
+		} else if (!(sug.getWeapon()).equals(winningSolution.getWeapon())) {
+			return sug.getWeapon();
+		} else if (!(sug.getPerson()).equals(winningSolution.getPerson())) {
+			return sug.getPerson();
+		}
+		return "You win!";
+	}
 
 }
