@@ -136,17 +136,5 @@ public class ComputerPlayer extends Player {
 	{
 		lastVisitedRoom = roomCharacter;
 	}
-	//Disprove Suggestion
-	public Card disproveSuggestion(Suggestion sug) {
-		for (Card curCard: myCards) {
-			if (curCard.getCardName().equals(sug.person))
-				return curCard;
-			if (curCard.getCardName().equals(sug.room))
-				return curCard;
-			if (curCard.getCardName().equals(sug.weapon))
-				return curCard;
-		}
-		return null;
-	}
 
 }

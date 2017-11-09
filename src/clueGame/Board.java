@@ -558,9 +558,8 @@ public class Board {
 		Card result = null;
 		for (Player playa: players) {
 			if (!(playa.getPlayerName()).equals(humanPlayer.getPlayerName())) {
-				result = ((ComputerPlayer) playa).disproveSuggestion(sug);
+				result = playa.disproveSuggestion(sug);
 			}
-			
 		}
 		return result;
 	}

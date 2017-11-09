@@ -73,5 +73,16 @@ public class Player {
 	public Suggestion makeSuggestion(String room, String weapon, String currentRoom) {
 		return new Suggestion(room, weapon, currentRoom);
 	}
-	
+	//Disprove Suggestion
+		public Card disproveSuggestion(Suggestion sug) {
+			for (Card curCard: playerCards) {
+				if (curCard.getCardName().equals(sug.person))
+					return curCard;
+				if (curCard.getCardName().equals(sug.room))
+					return curCard;
+				if (curCard.getCardName().equals(sug.weapon))
+					return curCard;
+			}
+			return null;
+		}
 }
