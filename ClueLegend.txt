@@ -1,11 +1,11 @@
-L, Library, Card
+L, Library, Card 
 B, Bathroom, Card
 O, Observatory, Card
-F, Foyer, Card
+F, Foyer, Card 
 S, Sauna, Card
 K, Kitchen, Card
-G, Garden, Card
+G, Garden, Card 
 D, Bedroom, Card
-E, Entertainment room, Card
+E, Entertainment room, Card 
 X, Closet, Other
 W, Pathway, Other

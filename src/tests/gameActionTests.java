@@ -365,9 +365,12 @@ public class gameActionTests {
 		assertEquals(chosenCard3, gandalfCard);
 
 	}
+	// Test a suggestion where the player has two of the suggested cards
+	// randomly return either Bedroom or Handguns
 	@Test
 	public void disproveSolutionTwoMatches()
 	{
+		// generate computer player
 		ComputerPlayer testPlayer = new ComputerPlayer("Lara Croft", 22, 21, Color.blue);
 		testPlayer.addCard(gandalfCard);
 		testPlayer.addCard(kenobiCard);
@@ -396,9 +399,53 @@ public class gameActionTests {
 		assertTrue(handgunsSeen);
 
 	}
+	// Create a few players (including a human player), and run a few suggestions to ensure the board handles them.
+	//  Both null tests and valid tests
+	// Important to note here that not all cards have been added and generated
 	@Test
 	public void handleSuggestion()
 	{
+		//adding  our human
+		ArrayList<Player> testPlayers = new ArrayList<Player>();
+		HumanPlayer human =  new HumanPlayer("James Bond", 1, 1, Color.black );
+		human.addCard(libraryCard);
+		human.addCard(croftCard);
+		human.addCard(entertainmentCard);
+		human.addCard(phaserCard);
+		
+		testPlayers.add(human);
+		
+		// adding our bots
+		ComputerPlayer gandalf = new ComputerPlayer("Gandalf", 2, 2, Color.white);
+		gandalf.addCard(kenobiCard);
+		gandalf.addCard(handgunsCard);
+		gandalf.addCard(stunwatchCard);
+		gandalf.addCard(foyerCard);
+		
+		testPlayers.add(gandalf);
+		
+		ComputerPlayer rambo = new ComputerPlayer("Rambo", 3 , 3, Color.green);
+		rambo.addCard(ramboCard);
+		rambo.addCard(bondCard);
+		rambo.addCard(staffCard);
+		rambo.addCard(lightsaberCard);
+		
+		testPlayers.add(rambo);
+		
+		ComputerPlayer croft = new ComputerPlayer("Lara Croft", 4 ,4, Color.blue);
+		croft.addCard(gardenCard);
+		
+		testPlayers.add(croft);
+		
+		board.setPlayers(testPlayers);
+		board.setHumanPlayer(human);
+		// Kitchen, spock and machine gun weren't added to anyone's cardList
+		Suggestion firstSuggestion =  new Suggestion("Kitchen", "Spock", "Machine Gun");
+		Assert.assertNull(board.handleSuggestion(firstSuggestion, rambo));
+		Assert.assertNull(board.handleSuggestion(firstSuggestion, gandalf));
+		Assert.assertNull(board.handleSuggestion(firstSuggestion, croft));
+		
+		
 		
 	}
 }

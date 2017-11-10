@@ -1,6 +1,6 @@
-James Bond, 8, 21, black
-Lara Croft, 19, 21, blue
+James Bond, 8, 21, black 
+Lara Croft, 19, 21, blue 
 Gandalf, 0, 14, white
-Obi-Wan Kenobi, 14, 1, brown
+Obi-Wan Kenobi, 14, 1, brown 
 Spock, 6, 0, red
-Rambo, 22, 10, green
+Rambo, 22, 10, green 

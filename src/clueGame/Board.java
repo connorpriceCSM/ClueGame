@@ -473,6 +473,16 @@ public class Board {
 	{
 		this.cards = cards;
 	}
+	// setting the players for the game
+	public void setPlayers(ArrayList<Player> players)
+	{
+		this.players = players;
+	}
+	// setting the human Player for the game
+	public void setHumanPlayer(HumanPlayer humanPlayer)
+	{
+		this.humanPlayer = humanPlayer;
+	}
 	// return the weapon names 
 	public ArrayList<String> getWeaponNames() 
 	{
@@ -570,7 +580,6 @@ public class Board {
 
 		}
 		return null;
-
 	}
 }
 
