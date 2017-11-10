@@ -389,12 +389,17 @@ public class gameActionTests {
 			{
 				handgunsSeen = true;
 			}
+
 		}
 
 		assertTrue(bedroomSeen);
 		assertTrue(handgunsSeen);
-		
 
+	}
+	@Test
+	public void handleSuggestion()
+	{
+		
 	}
 }
 

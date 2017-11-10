@@ -531,6 +531,8 @@ public class Board {
 		}
 	}
 
+
+	// set the overall soltuo
 	public void setWinningSolution(String room, String weapon, String  person)
 	{
 		winningSolution  = new Suggestion();
@@ -553,12 +555,22 @@ public class Board {
 	//Checks to see if suggestion is correct
 	public Card handleSuggestion(Suggestion sug, Player suggester) {
 		for (Player playa: players) {
-			if (!(playa.getPlayerName()).equals(suggester.getPlayerName())) {
+			if (!(playa == suggester)) {
+				Card chosenCard = playa.disproveSuggestion(sug);
 				if (playa.disproveSuggestion(sug)!= null)
-					return playa.disproveSuggestion(sug);
+				{
+					for(Player p : players)
+					{
+						p.addSeenCard(playa.disproveSuggestion(sug));
+
+					}
+					return chosenCard;
+				}
 			}
+
 		}
 		return null;
-	}
 
+	}
 }
+
