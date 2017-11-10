@@ -15,7 +15,7 @@ public class ComputerPlayer extends Player {
 	private char lastVisitedRoom;
 	private Random rand = new Random();
 	private Suggestion suggestion = new Suggestion();
-	
+
 	//inherited constructor
 	public ComputerPlayer(String playerName, int row, int column, Color color) {
 		super(playerName, row, column, color);
@@ -62,18 +62,22 @@ public class ComputerPlayer extends Player {
 	//  A random weapon or room will be put into the suggestion
 	public void createSuggestion(String theRoom)
 	{
+		//set the room
 		suggestion.setRoom(theRoom);
 
+		// set up the array lists to keep track of what CAN be suggested by the Computer
+		//both weapons and players
 		ArrayList<String> possibleWeapons =  new ArrayList<String>();
 		ArrayList<String> weaponNames = Board.getInstance().getWeaponNames();
 		for(String s : weaponNames )
 		{
 			if((seenCards.contains(s)))
 			{
-				
+
 			}
 			else
 			{
+				// add the weapon to the suggestion list!
 				possibleWeapons.add(s);
 			}
 		}
@@ -83,30 +87,32 @@ public class ComputerPlayer extends Player {
 		{
 			if((seenCards.contains(s)))
 			{
-				
+
 			}
 			else
 			{
+				// add the player the suggestion list
 				possiblePlayers.add(s);
 			}
 		}
-		
+
+		// randomly select a weapon and player from our respective lists
 		int selectedWeapon = rand.nextInt(possibleWeapons.size());
 		suggestion.setWeapon(possibleWeapons.get(selectedWeapon));
 		int selectedPerson = rand.nextInt(possiblePlayers.size());
 		suggestion.setPerson(possiblePlayers.get(selectedPerson));
 	}
 	//Make suggestion to the board
-		public Suggestion makeSuggestion(String room, String weapon, String currentRoom) {
-			return new Suggestion(room, weapon, currentRoom);
-		}
+	public Suggestion makeSuggestion(String room, String weapon, String currentRoom) {
+		return new Suggestion(room, weapon, currentRoom);
+	}
 
 	// crucial getter
 	public Suggestion getSuggestion() {
 		return suggestion;
 	}
 
-	// For tests 
+	// getters/setters
 	public String getPlayerName() {
 		return playerName;
 	}
@@ -131,11 +137,12 @@ public class ComputerPlayer extends Player {
 	public void setColor(Color color) {
 		this.color = color;
 	}
-	//important getters and setters for the computer player
+	//important getters and setters for the computer player regarding targets and movements
 	public char getLastVisitedRoom()
 	{
 		return lastVisitedRoom;
 	}
+	
 	public void setLastVisitedRoom(char roomCharacter)
 	{
 		lastVisitedRoom = roomCharacter;

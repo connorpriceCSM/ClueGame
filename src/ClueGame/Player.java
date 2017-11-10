@@ -67,14 +67,19 @@ public class Player {
 	{
 		seenCards.add(card.getCardName());
 	}
+	
 	public ArrayList<String> getSeenCards()
 	{
 		return seenCards;
 	}
 
 	//Disprove Suggestion
+
 	public Card disproveSuggestion(Suggestion sug) {
+		//much like createSuggestion, we need a list of possible cards to present
+		// could range from 0 to 3
 		ArrayList<Card> possibleCards = new ArrayList<Card>();
+		// if the card is there, add it to the list!
 		for (Card curCard: playerCards) 
 		{
 			if (curCard.getCardName().equals(sug.person))
@@ -84,18 +89,13 @@ public class Player {
 			if (curCard.getCardName().equals(sug.weapon))
 				possibleCards.add(curCard);
 		}
+		// provided there is a card in the list that can be shown, show a random one!
 		if(possibleCards.size() > 0)
 		{
 			int randomCardIndex = rand.nextInt(possibleCards.size());
 			Card chosenCard = possibleCards.get(randomCardIndex);
 			return chosenCard;
 		}
-
 		return null;
 	}
-	
-	
-
-
-
 }

@@ -414,7 +414,7 @@ public class Board {
 		visited.add(startCell);
 		findAllTargets(startCell,pathLength);
 	}
-	// method is just like intboard only isDoorway is implemented to make sure it's read
+	// method is just like int board only isDoorway is implemented to make sure it's read
 	public void findAllTargets(BoardCell startCell, int pathLength)
 	{
 		Set<BoardCell> adjCells = adjMtx.get(startCell);
@@ -448,7 +448,7 @@ public class Board {
 	{
 		return targets;
 	}
-
+	// Getter method for the grid
 	public BoardCell[][] getGrid()
 	{
 		return grid;
@@ -542,7 +542,7 @@ public class Board {
 	}
 
 
-	// set the overall soltuo
+	// set the overall solution of the game
 	public void setWinningSolution(String room, String weapon, String  person)
 	{
 		winningSolution  = new Suggestion();
@@ -551,6 +551,8 @@ public class Board {
 		winningSolution.setWeapon(weapon);
 	}
 
+	//check if the accusation matches the board's answers. 
+	// Room, person, and weapon all must match for this to be valid
 	public boolean checkAccusation(Suggestion accusation)
 	{
 		if((accusation.getPerson() == winningSolution.getPerson()) &&
@@ -565,12 +567,13 @@ public class Board {
 	//Checks to see if suggestion is correct
 	public Card handleSuggestion(Suggestion sug, Player suggester) {
 		// find the index of the accuser, the first person to be asked will go right after him
+		// at index + 1, then index + 2, and so on.
 		int playaIndex = players.indexOf(suggester);
 		int count = 0;
 		// go through the players
 		while( count < players.size())
 		{
-			// really cool remainder method to cycle through an array starting at any point
+			// really cool remainder method using modulus to cycle through an array starting at any point
 			// Taken from stackOverflow!
 			playaIndex = (playaIndex + 1) % this.players.size();
 			Player playa = players.get(playaIndex);
@@ -591,7 +594,7 @@ public class Board {
 				}
 			}
 			//increment count
-           count++;
+			count++;
 		}
 		// if no Cards can be shown, return null
 		return null;
