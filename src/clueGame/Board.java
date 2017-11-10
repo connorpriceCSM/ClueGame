@@ -564,8 +564,16 @@ public class Board {
 	//Handle suggestions from any player.
 	//Checks to see if suggestion is correct
 	public Card handleSuggestion(Suggestion sug, Player suggester) {
+		// find the index of the accuser, the first person to be asked will go right after him
+		int playaIndex = players.indexOf(suggester);
+		int count = 0;
 		// go through the players
-		for (Player playa: players) {
+		while( count < players.size())
+		{
+			// really cool remainder method to cycle through an array starting at any point
+			// Taken from stackOverflow!
+			playaIndex = (playaIndex + 1) % this.players.size();
+			Player playa = players.get(playaIndex);
 			// if the player at hand isn't the accuser, they will show a card or do nothing
 			if (!(playa == suggester)) {
 				Card chosenCard = playa.disproveSuggestion(sug);
@@ -582,7 +590,8 @@ public class Board {
 					return chosenCard;
 				}
 			}
-
+			//increment count
+           count++;
 		}
 		// if no Cards can be shown, return null
 		return null;

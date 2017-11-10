@@ -243,6 +243,8 @@ public class gameActionTests {
 		boolean seenRambo = false;
 		boolean seenPhaser = false;
 		boolean seenWatch = false;
+		// run through our tests multiple times to make sure every boolean is turned true
+		// a.k.a every card is suggested.
 		for( int i =  0; i < 100; i++)	
 		{
 
@@ -283,7 +285,7 @@ public class gameActionTests {
 	@Test
 	public void testAccusation()
 	{
-
+		// set the winning answer on the board and test some accusations
 		board.setWinningSolution("Bathroom", "Lightsaber", "Gandalf");
 		boolean allRight = false;
 		boolean wrongRoom = false;
@@ -320,7 +322,7 @@ public class gameActionTests {
 		Assert.assertTrue(wrongWeapon);
 
 	}
-	// has to return null;
+	// Testing when the suggestion has no  matches anywhere
 	@Test 
 	public void disproveSolutionNoMatches()
 	{
@@ -331,6 +333,7 @@ public class gameActionTests {
 		testPlayer.addCard(handgunsCard);
 		testPlayer.addCard(bedroomCard);
 		//should all return null with 3 different tests of 9 values!
+		// Lara has none of the suggestions mentioned below
 		Suggestion suggestion = new Suggestion("Garden", "Phaser", "Rambo");
 		Card chosenCard = testPlayer.disproveSuggestion(suggestion);
 		assertEquals(chosenCard, null);
@@ -402,41 +405,50 @@ public class gameActionTests {
 	// Create a few players (including a human player), and run a few suggestions to ensure the board handles them.
 	//  Both null tests and valid tests
 	// Important to note here that not all cards have been added and generated
+	// NOTE: Every player is added here in the same order as in CluePlayers.txt
 	@Test
 	public void handleSuggestion()
 	{
-		//adding  our human
+		//adding our human with some cards
 		ArrayList<Player> testPlayers = new ArrayList<Player>();
 		HumanPlayer human =  new HumanPlayer("James Bond", 1, 1, Color.black );
 		human.addCard(libraryCard);
 		human.addCard(croftCard);
 		human.addCard(entertainmentCard);
 		human.addCard(phaserCard);
-		
+
 		testPlayers.add(human);
-		
-		// adding our bots
+
+		// adding our bots, three of them have cards, the others are empty
+		ComputerPlayer croft = new ComputerPlayer("Lara Croft", 4 ,4, Color.blue);
+		croft.addCard(gardenCard);
+
+		testPlayers.add(croft);
+
 		ComputerPlayer gandalf = new ComputerPlayer("Gandalf", 2, 2, Color.white);
 		gandalf.addCard(kenobiCard);
 		gandalf.addCard(handgunsCard);
 		gandalf.addCard(stunwatchCard);
 		gandalf.addCard(foyerCard);
-		
+
 		testPlayers.add(gandalf);
-		
+
+		ComputerPlayer kenobi = new ComputerPlayer("Obi-Wan Kenobi", 0, 0, Color.black);
+
+		testPlayers.add(kenobi);
+
+		ComputerPlayer spock = new ComputerPlayer("Spock", 5 ,5, Color.red);
+
+		testPlayers.add(spock);
+
 		ComputerPlayer rambo = new ComputerPlayer("Rambo", 3 , 3, Color.green);
 		rambo.addCard(ramboCard);
 		rambo.addCard(bondCard);
 		rambo.addCard(staffCard);
 		rambo.addCard(lightsaberCard);
-		
+
 		testPlayers.add(rambo);
-		
-		ComputerPlayer croft = new ComputerPlayer("Lara Croft", 4 ,4, Color.blue);
-		croft.addCard(gardenCard);
-		
-		testPlayers.add(croft);
-		
+
 		board.setPlayers(testPlayers);
 		board.setHumanPlayer(human);
 		// Kitchen, spock and machine gun weren't added to anyone's cardList
@@ -444,9 +456,56 @@ public class gameActionTests {
 		Assert.assertNull(board.handleSuggestion(firstSuggestion, rambo));
 		Assert.assertNull(board.handleSuggestion(firstSuggestion, gandalf));
 		Assert.assertNull(board.handleSuggestion(firstSuggestion, croft));
-		
-		
-		
+		Assert.assertNull(board.handleSuggestion(firstSuggestion, human));
+
+		// Observatory, Gandalf, and Machine gun weren't added to anyone's list.
+		Suggestion secondSuggestion =  new Suggestion("Observatory", "Gandalf", "Machine Gun");
+		Assert.assertNull(board.handleSuggestion(secondSuggestion, rambo));
+		Assert.assertNull(board.handleSuggestion(secondSuggestion, gandalf));
+		Assert.assertNull(board.handleSuggestion(secondSuggestion, croft));
+		Assert.assertNull(board.handleSuggestion(secondSuggestion, human));
+
+		// This suggestion will have a card someone has.
+		// Lara Croft has the garden card.
+		Suggestion thirdSuggestion =  new Suggestion("Garden", "Gandalf", "Machine Gun");
+
+		// Gandalf should be able to get the Card shown
+		Assert.assertEquals(gardenCard, board.handleSuggestion(thirdSuggestion, gandalf));
+		// Lara is the accuser and the holder of the card so this should return null;
+		Assert.assertNull( board.handleSuggestion(thirdSuggestion, croft));
+
+		// This suggestion can only be disproved by the human player (James Bond)
+		// He is the only one carrying the phaserCard
+		Suggestion fourthSuggestion =  new Suggestion("Kitchen", "Spock", "Phaser");
+
+		Assert.assertEquals(phaserCard,board.handleSuggestion(fourthSuggestion, rambo));
+
+		// Only the human player can disprove this suggestion, this should return null;
+		Assert.assertNull(board.handleSuggestion(fourthSuggestion, human));
+
+		// This suggestion can be disproved by both gandalf and rambo
+		// Rambo has the lightsaber and gandalf has the foyer
+		Suggestion fifthSuggestion =  new Suggestion("Foyer", "Spock", "Lightsaber");
+
+		//Rambo will be called before Gandalf on our testPlayers array list due to spock's location
+		// so Rambo's lightsaber card should be returned here.
+		// Spock's index is 4. Rambo's is 5. Gandalf's is 2. 
+		Assert.assertEquals(lightsaberCard, board.handleSuggestion(fifthSuggestion, spock));
+
+		/*
+		 * This one can be tricky.
+		 * The human player holds both the library and Lara Croft cards
+		 * Rambo holds the staff
+		 * Lara Croft, who is at index 1, is making the accusation. 
+		 * Rambo should be called first because he is ahead of Lara at index 5
+		 * James Bond should not be called because he is at index 0, despite having more cards
+		 */
+		Suggestion sixthSuggestion = new Suggestion("Library", "Lara Croft", "Staff");
+
+		Assert.assertEquals(staffCard, board.handleSuggestion(sixthSuggestion, croft));
+
+
+
 	}
 }
 
