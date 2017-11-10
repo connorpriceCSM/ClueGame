@@ -439,14 +439,11 @@ public class gameActionTests {
 		
 		board.setPlayers(testPlayers);
 		board.setHumanPlayer(human);
-		// Kitchen, spock and machine gun weren't added to anyone's cardList
+		// Kitchen, Spock and machine gun weren't added to anyone's cardList
 		Suggestion firstSuggestion =  new Suggestion("Kitchen", "Spock", "Machine Gun");
 		Assert.assertNull(board.handleSuggestion(firstSuggestion, rambo));
 		Assert.assertNull(board.handleSuggestion(firstSuggestion, gandalf));
 		Assert.assertNull(board.handleSuggestion(firstSuggestion, croft));
-		
-		
-		
 	}
 }
 

@@ -414,7 +414,7 @@ public class Board {
 		visited.add(startCell);
 		findAllTargets(startCell,pathLength);
 	}
-	// method is just like intboard only isDoorway is implemented to make sure it's read
+	// method is just like int board only isDoorway is implemented to make sure it's read
 	public void findAllTargets(BoardCell startCell, int pathLength)
 	{
 		Set<BoardCell> adjCells = adjMtx.get(startCell);
@@ -448,7 +448,7 @@ public class Board {
 	{
 		return targets;
 	}
-
+	// Getter method for the grid
 	public BoardCell[][] getGrid()
 	{
 		return grid;
@@ -542,7 +542,7 @@ public class Board {
 	}
 
 
-	// set the overall soltuo
+	// set the overall solution of the game
 	public void setWinningSolution(String room, String weapon, String  person)
 	{
 		winningSolution  = new Suggestion();
@@ -550,7 +550,8 @@ public class Board {
 		winningSolution.setRoom(room);
 		winningSolution.setWeapon(weapon);
 	}
-
+	
+	//check suggestion is the answer
 	public boolean checkAccusation(Suggestion accusation)
 	{
 		if((accusation.getPerson() == winningSolution.getPerson()) &&
