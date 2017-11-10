@@ -564,21 +564,27 @@ public class Board {
 	//Handle suggestions from any player.
 	//Checks to see if suggestion is correct
 	public Card handleSuggestion(Suggestion sug, Player suggester) {
+		// go through the players
 		for (Player playa: players) {
+			// if the player at hand isn't the accuser, they will show a card or do nothing
 			if (!(playa == suggester)) {
 				Card chosenCard = playa.disproveSuggestion(sug);
 				if (playa.disproveSuggestion(sug)!= null)
 				{
+					// Vital to ensure every player does see a card if one is presented
+					// to disprove a solution
 					for(Player p : players)
 					{
 						p.addSeenCard(playa.disproveSuggestion(sug));
 
 					}
+					// return the card for all to see.
 					return chosenCard;
 				}
 			}
 
 		}
+		// if no Cards can be shown, return null
 		return null;
 	}
 }
