@@ -26,6 +26,9 @@ public class ControlPanel extends JPanel {
 	{
 		createBothButtons();
 		createRollDisplay();
+		createTurnDisplay();
+		createGuessStatusDisplay();
+		createGuessResultDisplay();
 	}
 	
 	// needed listener class for buttons.
@@ -48,7 +51,7 @@ public class ControlPanel extends JPanel {
 	
 	public void createBothButtons() {
 		JPanel buttonPanel = new JPanel();
-		buttonPanel.setLayout(new GridLayout(2,1));
+		buttonPanel.setLayout(new GridLayout(1,0));
 		ButtonListener listerner =  new ButtonListener();
 		
 		nextPlayer =  new JButton("Next Player (End Turn");
@@ -59,18 +62,60 @@ public class ControlPanel extends JPanel {
 		buttonPanel.add(accusePlayer);
 		add(buttonPanel);
 	}
-	public JPanel  createRollDisplay()
+	public void createRollDisplay()
 	{
         JLabel rollLabel = new JLabel("Roll");
-        dieRoll = new JTextField(2);
+        dieRoll = new JTextField(4);
         dieRoll.setEditable(false);
         JPanel rollPanel = new JPanel();
         rollPanel.setLayout(new GridLayout(1, 2));
         rollPanel.add(rollLabel);
         rollPanel.add(dieRoll);
         rollPanel.setBorder(new TitledBorder(new EtchedBorder(), "Die Roll"));
-        return rollPanel;
+        add(rollPanel);
+        
+     
 	}
+	private void createTurnDisplay()
+	  {
+	    JPanel turnPanel = new JPanel();
+	    JLabel turnLabel = new JLabel("Player Moving :");
+	    turnPanel.add(turnLabel);
+	    this.whoseTurn = new JTextField(10);
+	    this.whoseTurn.setEditable(false);
+	    
+	    turnPanel.add(this.whoseTurn);
+	   add(turnPanel);
+	    
+	  }
+	
+	
+	private void createGuessStatusDisplay()
+	  {
+	    JLabel guessLabel = new JLabel("Guess Made ");
+	    this.guessMade = new JTextField(20);
+	    this.guessMade.setEditable(false);
+	    JPanel guessPanel = new JPanel();
+	    guessPanel.setLayout(new GridLayout(2, 0));
+	    guessPanel.add(guessLabel);
+	    guessPanel.add(this.guessMade);
+	    guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Status"));
+	   add(guessPanel);
+	  }
+	
+	private void createGuessResultDisplay()
+	  {
+	    JLabel guessLabel = new JLabel("Guess Response");
+	    this.guessResult = new JTextField(10);
+	    this.guessResult.setEditable(false);
+	    JPanel guessPanel = new JPanel();
+	    guessPanel.setLayout(new GridLayout(1, 2));
+	    guessPanel.add(guessLabel);
+	    guessPanel.add(this.guessResult);
+	    guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
+	    add(guessPanel);
+	  }
+	
 
 	public static void main(String[] args) {
 		// Create a JFrame with all the normal functionality
