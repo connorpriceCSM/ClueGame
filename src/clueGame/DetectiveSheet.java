@@ -11,5 +11,10 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 public class DetectiveSheet {
+	
+	
+	//use the board to get names, weapons, and rooms!!
+	private Board board;
+	
 
 }
