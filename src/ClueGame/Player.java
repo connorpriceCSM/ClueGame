@@ -1,6 +1,7 @@
 package clueGame;
 
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -97,5 +98,16 @@ public class Player {
 			return chosenCard;
 		}
 		return null;
+	}
+	// draw the circle player
+	public void draw(Graphics2D g,  Board board)
+	{
+		int playerSize = BoardCell.PIECE_SIZE;
+		int x = playerSize * column;
+		int y = playerSize * row;
+		
+		g.setColor(color);
+		g.fillOval(x, y, playerSize, playerSize);
+		
 	}
 }

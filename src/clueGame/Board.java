@@ -6,19 +6,24 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JPanel;
+
+import com.sun.prism.Graphics;
+
 import clueGame.BoardCell;
 
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
+import java.awt.Graphics2D;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Field;
 
 
 //Authors: Amelia Atiles and Connor Price
-public class Board {
+public class Board extends JPanel {
 	// variable used for singleton pattern
 
 	private HashMap<BoardCell, Set<BoardCell>> adjMtx;
@@ -32,7 +37,7 @@ public class Board {
 	private ArrayList<String> roomNames;
 	private ArrayList<String> playerNames;
 	private HumanPlayer humanPlayer;
-	private BoardCell[][] grid;
+	private BoardCell[][] grid = new BoardCell[80][80];
 	private static Board theInstance = new Board();
 	private Suggestion winningSolution;
 
@@ -494,6 +499,12 @@ public class Board {
 	{
 		return roomNames;
 	}
+	// return the room corresponding to the character parameter in our Legend set
+	public String getSpecificRoom(Character initial)
+	{
+		return legend.get(initial);
+	}
+	
 	// return the names of all the players
 	public ArrayList<String> getPlayerNames()
 	{
@@ -599,5 +610,34 @@ public class Board {
 		// if no Cards can be shown, return null
 		return null;
 	}
+
+	public void paintComponent(Graphics2D g)
+	{
+		super.paintComponent(g);
+		Graphics2D newGraphics  = (Graphics2D)g;
+		drawGrid(newGraphics);
+		drawPlayers(newGraphics);
+	}
+
+	public void drawGrid(Graphics2D g)
+	{
+		for (int row = 0; row < this.numRows; row++) 
+		{
+			for (int col = 0; col < this.numCols; col++)
+			{
+				grid[row][col].draw(g);
+			}
+		}
+	}
+
+	public void drawPlayers(Graphics2D g)
+	{
+		for (Player p : this.players) 
+		{
+			p.draw(g, this);
+		}
+	}
+
+
 }
 
