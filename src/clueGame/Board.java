@@ -40,6 +40,7 @@ public class Board extends JPanel {
 	private BoardCell[][] grid = new BoardCell[80][80];
 	private static Board theInstance = new Board();
 	private Suggestion winningSolution;
+	private ControlPanel controlPanel;
 
 
 	private int numRows,numCols;
@@ -528,6 +529,10 @@ public class Board extends JPanel {
 	{
 		return numCols;
 	}
+	public void setControlPanel(ControlPanel panel)
+	{
+		this.controlPanel = panel;
+	}
 
 	// Deal all the cards in the deck to each player.
 	// playerCount will increment every time a card is dealt.
@@ -610,13 +615,14 @@ public class Board extends JPanel {
 		// if no Cards can be shown, return null
 		return null;
 	}
+	
 
 	public void paintComponent(Graphics2D g)
 	{
 		super.paintComponent(g);
-		Graphics2D newGraphics  = (Graphics2D)g;
-		drawGrid(newGraphics);
-		drawPlayers(newGraphics);
+		
+		drawGrid(g);
+		drawPlayers(g);
 	}
 
 	public void drawGrid(Graphics2D g)

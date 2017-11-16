@@ -120,18 +120,16 @@ public class ControlPanel extends JPanel {
 
 	public static void main(String[] args) 
 	{
-		// Create a JFrame with all the normal functionality
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("GUI Example");
-		frame.setSize(250, 150);	
-		// Create the JPanel and add it to the JFrame
-		ControlPanel panel = new ControlPanel();
-		frame.add(panel, BorderLayout.CENTER);
-		// Now let's view it
-		frame.setVisible(true);
 
+	    Board board = Board.getInstance();
+	    ControlPanel panel = new ControlPanel();
+	    JFrame frame = new JFrame();
+	    frame.setContentPane(panel);
+	    frame.setSize(750, 200);
+	    frame.setDefaultCloseOperation(3);
+	    frame.setVisible(true);
 	}
+	
 
 
 }
