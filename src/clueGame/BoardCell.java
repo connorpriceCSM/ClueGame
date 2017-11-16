@@ -154,7 +154,7 @@ public class BoardCell {
 		// solid gray tiles for the rooms!
 		else
 		{
-			g.setColor(Color.darkGray);
+			g.setColor(Color.gray);
 		}
 		g.fillRect(x, y, PIECE_SIZE, PIECE_SIZE);
 		

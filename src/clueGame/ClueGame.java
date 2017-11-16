@@ -36,7 +36,7 @@ public class ClueGame extends JFrame {
 	public void setUpGame()
 	{
 		setTitle("Clue Game");
-		board = board.getInstance();
+		board = Board.getInstance();
 		// set files so the board is actually read properly!
 		board.setConfigFiles(boardConfigFile, roomConfigFile);
 		try
@@ -56,12 +56,12 @@ public class ClueGame extends JFrame {
 	{
 
 		setDefaultCloseOperation(3);
-		// Our Control Panel will be at the top of the frame
+		// Our Control Panel will be at the bottom of the frame
 		{
 			setControlPanel();
 			setBoard();
 			createMenuBar();
-			this.setSize(1000,1000);
+			this.setSize(1500,1000);
 			//sheet = new DetectiveSheet()
 
 		}
@@ -77,7 +77,7 @@ public class ClueGame extends JFrame {
 		// set the grid's position
 		public void setBoard()
 		{
-			add(board, "Center");
+			add(board, "North");
 		}
 		// create the menu bar on the top of the Frame!
 		public void createMenuBar()
