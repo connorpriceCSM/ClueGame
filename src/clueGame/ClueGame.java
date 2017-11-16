@@ -55,7 +55,7 @@ public class ClueGame extends JFrame {
 	public void setGUI()
 	{
 
-		setDefaultCloseOperation(3);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Our Control Panel will be at the bottom of the frame
 		{
 			setControlPanel();
@@ -90,7 +90,7 @@ public class ClueGame extends JFrame {
 		public JMenu createMenuFileTab()
 		{
 			// set tab title
-			JMenu menuTab = new JMenu("File");
+			JMenu menuTab = new JMenu("Clue Board");
 			// add the exit and detective sheet tabs to the file tab!
 			menuTab.add(createFileExitTab());
 			menuTab.add(createFileDetectiveSheetTab());

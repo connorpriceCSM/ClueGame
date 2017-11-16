@@ -529,6 +529,7 @@ public class Board extends JPanel {
 	{
 		return numCols;
 	}
+	//Control Panel method
 	public void setControlPanel(ControlPanel panel)
 	{
 		this.controlPanel = panel;
@@ -616,22 +617,22 @@ public class Board extends JPanel {
 		return null;
 	}
 	
-
+	//Graphics methods for the board
 	public void paintComponent(Graphics graphics)
 	{
 		super.paintComponent((java.awt.Graphics) graphics);
-		 Graphics2D g2 = (Graphics2D)graphics;
+		Graphics2D g2 = (Graphics2D)graphics;
 		drawGrid(g2);
 		drawPlayers(g2);
 	}
-
+	
 	public void drawGrid(Graphics2D g)
 	{
 		for (int row = 0; row < this.numRows; row++) 
 		{
 			for (int col = 0; col < this.numCols; col++)
 			{
-				grid[row][col].draw(g);
+				(grid[row][col]).draw(g);
 			}
 		}
 	}

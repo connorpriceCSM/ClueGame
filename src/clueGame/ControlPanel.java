@@ -120,13 +120,14 @@ public class ControlPanel extends JPanel {
 
 	public static void main(String[] args) 
 	{
-
 	    Board board = Board.getInstance();
+	    //board.initialize();
 	    ControlPanel panel = new ControlPanel();
-	    JFrame frame = new JFrame();
+	    JFrame frame = new JFrame("Clue Game");
 	    frame.setContentPane(panel);
-	    frame.setSize(750, 200);
-	    frame.setDefaultCloseOperation(3);
+	    frame.setSize(750, 900);
+	    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    //frame.add(board);
 	    frame.setVisible(true);
 	}
 	
