@@ -107,7 +107,7 @@ public class Player {
 		int y = playerSize * row;
 		
 		g.setColor(color);
-		
+	
 		g.fillOval(x, y, playerSize, playerSize);
 		g.setColor(color.BLACK);
 		g.drawOval(x, y, playerSize, playerSize);

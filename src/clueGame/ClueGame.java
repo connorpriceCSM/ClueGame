@@ -101,7 +101,13 @@ public class ClueGame extends JFrame {
 	{
 		// set tab title
 		JMenuItem exitTab = new JMenuItem("Exit Program");
-
+		exitTab.addActionListener(new ActionListener()
+		{
+			// if the Detective Sheet tab is clicked, open the sheet!
+			public void actionPerformed(ActionEvent e)
+			{
+				System.exit(0);			}
+		});
 		// needs a returnable value so it can be put in our menu bar!
 		return exitTab;
 	}

@@ -10,7 +10,7 @@ public class ComputerPlayer extends Player {
 	private String playerName;
 	//private int row;
 	//private int column;
-	private Color color;
+	//private Color color;
 	private ArrayList<Card> myCards = new ArrayList<Card>();
 	private char lastVisitedRoom;
 	private Random rand = new Random();
@@ -131,13 +131,13 @@ public class ComputerPlayer extends Player {
 	public void setColumn(int column) {
 		this.column = column;
 	}
-	*/
+	
 	public Color getColor() {
 		return color;
 	}
 	public void setColor(Color color) {
 		this.color = color;
-	}
+	}*/
 	//important getters and setters for the computer player regarding targets and movements
 	public char getLastVisitedRoom()
 	{

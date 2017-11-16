@@ -8,7 +8,7 @@ public class HumanPlayer extends Player
 	private String playerName;
 	//private int row;
 	//private int column;
-	private Color color;
+	//private Color color;
 	private ArrayList<Card> myCards = new ArrayList<Card>();
 
 	//inherited constructor
@@ -41,11 +41,11 @@ public class HumanPlayer extends Player
 	public void setColumn(int column) {
 		this.column = column;
 		
-	}*/
+	}
 	public Color getColor() {
 		return color;
 	}
 	public void setColor(Color color) {
 		this.color = color;
-	}
+	}*/
 }
