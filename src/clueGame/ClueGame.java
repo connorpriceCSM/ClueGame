@@ -2,6 +2,7 @@ package clueGame;
 
 import javax.swing.JFrame;
 
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -30,7 +31,7 @@ public class ClueGame extends JFrame {
 	public ClueGame()
 	{ 
 		setUpGame();
-      
+
 	}
 
 	public void setUpGame()
@@ -61,72 +62,72 @@ public class ClueGame extends JFrame {
 			setControlPanel();
 			setBoard();
 			createMenuBar();
-			
-			//sheet = new DetectiveSheet()
+			sheet = new DetectiveSheet();
 
 		}
 	}
-		public void setControlPanel()
-		{
+	public void setControlPanel()
+	{
 
 		controlPanel =  new ControlPanel();
 		board.setControlPanel(controlPanel);
 		add(controlPanel, "South");
-		}
+	}
 
-		// set the grid up
-		public void setBoard()
+	// set the grid up
+	public void setBoard()
+	{
+		add(board, "North");
+	}
+	// create the menu bar on the top of the Frame!
+	public JMenuBar createMenuBar()
+	{
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		// add the file Tab to the bar
+		menuBar.add(createMenuFileTab());
+		return menuBar;
+	}
+	public JMenu createMenuFileTab()
+	{
+		// set tab title
+		JMenu menuTab = new JMenu("File");
+		// add the exit and detective sheet tabs to the file tab!
+		menuTab.add(createFileExitTab());
+		menuTab.add(createFileDetectiveSheetTab());
+		return menuTab;
+	}
+	public JMenuItem createFileExitTab()
+	{
+		// set tab title
+		JMenuItem exitTab = new JMenuItem("Exit Program");
+		exitTab.addActionListener(new ActionListener()
 		{
-			add(board, "North");
-		}
-		// create the menu bar on the top of the Frame!
-		public void createMenuBar()
+			public void actionPerformed(ActionEvent e)
+			{   // When Exit program is clicked, the program will close.
+				System.exit(0);
+			}
+		});
+		// needs a returnable value so it can be put in our menu bar!
+		return exitTab;
+	}
+	public JMenuItem createFileDetectiveSheetTab()
+	{
+		JMenuItem sheetTab = new JMenuItem("Detective Sheet");
+		sheetTab.addActionListener(new ActionListener()
 		{
-			JMenuBar menuBar = new JMenuBar();
-			setJMenuBar(menuBar);
-			// add the file Tab to the bar
-			menuBar.add(createMenuFileTab());
-		}
-		public JMenu createMenuFileTab()
-		{
-			// set tab title
-			JMenu menuTab = new JMenu("File");
-			// add the exit and detective sheet tabs to the file tab!
-			menuTab.add(createFileExitTab());
-			menuTab.add(createFileDetectiveSheetTab());
-			return menuTab;
-		}
-		public JMenuItem createFileExitTab()
-		{
-			// set tab title
-			JMenuItem exitTab = new JMenuItem("Exit Program");
-			exitTab.addActionListener(new ActionListener()
+			public void actionPerformed(ActionEvent e)
 			{
-				public void actionPerformed(ActionEvent e)
-				{   // When Exit program is clicked, the program will close.
-					System.exit(0);
-				}
-			});
-			// needs a returnable value so it can be put in our menu bar!
-			return exitTab;
-		}
-		public JMenuItem createFileDetectiveSheetTab()
-		{
-			JMenuItem sheetTab = new JMenuItem("Detective Sheet");
-			sheetTab.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					//ClueGame.this.sheet.setVisible(true);
-				}
-			});
-			return sheetTab;
-		}
-		public static void main(String[] args)
-		{
-			ClueGame game = new ClueGame();
-			game.setSize(1500,1000);
-			game.setVisible(true);
-		}
+				sheet.setVisible(true);
+			}
+		});
+		return sheetTab;
+	}
+	public static void main(String[] args)
+	{
+		ClueGame game = new ClueGame();
+		game.setVisible(true);
+		game.setSize(1500,1000);
+	}
 }
-	
+
