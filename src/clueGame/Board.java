@@ -37,7 +37,7 @@ public class Board extends JPanel {
 	private ArrayList<String> roomNames;
 	private ArrayList<String> playerNames;
 	private HumanPlayer humanPlayer;
-	private BoardCell[][] grid = new BoardCell[80][80];
+	private BoardCell[][] grid = new BoardCell[100][100];
 	private static Board theInstance = new Board();
 	private Suggestion winningSolution;
 	private ControlPanel controlPanel;
@@ -617,12 +617,12 @@ public class Board extends JPanel {
 	}
 	
 
-	public void paintComponent(Graphics2D g)
+	public void paintComponent(Graphics graphics)
 	{
-		super.paintComponent(g);
-		
-		drawGrid(g);
-		drawPlayers(g);
+		super.paintComponent((java.awt.Graphics) graphics);
+		 Graphics2D g2 = (Graphics2D)graphics;
+		drawGrid(g2);
+		drawPlayers(g2);
 	}
 
 	public void drawGrid(Graphics2D g)
