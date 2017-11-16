@@ -14,8 +14,7 @@ public class BoardCell {
 	private boolean showRoomName;
 	private int x;
 	private int y;
-	public static int PIECE_SIZE = 25;
-	private final int DOOR_SLIVER = 5;
+	public static int PIECE_SIZE = 35;
 	/*
 	 * Easier to just use a string type as the 3rd parameter
 	 * because some cells will have more than one character for doors
@@ -27,8 +26,8 @@ public class BoardCell {
 		this.cellRow = row;
 		this.cellColumn = column;
 		this.showRoomName = false;
-		x = cellRow * PIECE_SIZE;
-		y = cellColumn * PIECE_SIZE;
+		x = (cellRow * PIECE_SIZE);
+		y = (cellColumn * PIECE_SIZE);
 		// BoardCell is guaranteed to have at least one character
 		cellInitial = characters.charAt(0);
 		direction = DoorDirection.NONE;
@@ -148,7 +147,7 @@ public class BoardCell {
 		// Brown tiles for pathways
 		if(this.isPathway())
 		{
-			Color brown = new Color(165,42,42);
+			Color brown = new Color(110,42,42);
 			g.setColor(brown);
 		}
 		// solid gray tiles for the rooms!
@@ -189,22 +188,30 @@ public class BoardCell {
 		{
 			g.fillRect(x,y,PIECE_SIZE,PIECE_SIZE);
 			drawPathway(g);
+			g.setColor(Color.blue);
+			g.drawString(String.valueOf('R'), x -1 , y - 1);
 			
 		}
 		if(this.getDoorDirection() == DoorDirection.LEFT)
 		{
 			g.fillRect(x,y,PIECE_SIZE,PIECE_SIZE);
 			drawPathway(g);
+			g.setColor(Color.blue);
+			g.drawString(String.valueOf('L'), x, y);
 		}
 		if(this.getDoorDirection() == DoorDirection.DOWN)
 		{
 			g.fillRect(x,y,PIECE_SIZE,PIECE_SIZE);
 			drawPathway(g);
+			g.setColor(Color.blue);
+			g.drawString(String.valueOf('D'), x, y);
 		}
 		if(this.getDoorDirection() == DoorDirection.UP)
 		{
 			g.fillRect(x,y,PIECE_SIZE,PIECE_SIZE);
 			drawPathway(g);
+			g.setColor(Color.blue);
+			g.drawString(String.valueOf('U'), x, y);
 		}
 		
 	}
@@ -212,7 +219,7 @@ public class BoardCell {
 	{
 		if(showRoomName == true)
 		{
-			g.setColor(Color.ORANGE);
+			g.setColor(Color.BLUE);
 			g.drawString(Board.getInstance().getSpecificRoom(getInitial()).toUpperCase(), x , y);
 		}
 	}

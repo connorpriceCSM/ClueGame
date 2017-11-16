@@ -24,8 +24,8 @@ public class DetectiveSheet extends JDialog {
 		board = Board.getInstance();
 		createDetectiveSheet();
 		setTitle("Detective Sheet");
-		setSize(500, 550);
-		setLayout(new GridLayout(3,2));
+		setSize(700, 700);
+		setLayout(new GridLayout(2,2));
 	}
 
 
@@ -63,8 +63,8 @@ public class DetectiveSheet extends JDialog {
 	{
 		// create the panel and set the layout + size
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0, 3));
-		panel.setPreferredSize(new Dimension(100, 50));
+		panel.setLayout(new GridLayout(0, 2));
+		panel.setPreferredSize(new Dimension(200,300 ));
 		panel.setBorder(new TitledBorder(new EtchedBorder(), label));
 		// create our drop down boxes and add values to them,
 		// in this case, the values are our cards that we read from the cards list.

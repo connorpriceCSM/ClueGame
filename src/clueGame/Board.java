@@ -3,12 +3,12 @@ package clueGame;
 
 import java.util.Map;
 
+
 import java.util.Scanner;
 import java.util.Set;
 
 import javax.swing.JPanel;
 
-import com.sun.prism.Graphics;
 
 import clueGame.BoardCell;
 
@@ -16,6 +16,7 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -37,7 +38,7 @@ public class Board extends JPanel {
 	private ArrayList<String> roomNames;
 	private ArrayList<String> playerNames;
 	private HumanPlayer humanPlayer;
-	private BoardCell[][] grid = new BoardCell[100][100];
+	private BoardCell[][] grid = new BoardCell[75][75];
 	private static Board theInstance = new Board();
 	private Suggestion winningSolution;
 	private ControlPanel controlPanel;
@@ -616,10 +617,10 @@ public class Board extends JPanel {
 		return null;
 	}
 	
-	public void paintComponent(Graphics graphics)
+	protected void paintComponent(Graphics g)
 	{
-		super.printComponent((java.awt.Graphics) graphics);
-		 Graphics2D g2 = (Graphics2D)graphics;
+		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D )g;
 		drawGrid(g2);
 		drawPlayers(g2);
 	}
@@ -635,6 +636,7 @@ public class Board extends JPanel {
 		}
 	}
 
+	// draw the players on the board
 	public void drawPlayers(Graphics2D g)
 	{
 		for (Player p : this.players) 

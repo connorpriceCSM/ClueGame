@@ -60,12 +60,13 @@ public class ClueGame extends JFrame {
 		// Our Control Panel will be at the bottom of the frame
 		{
 			setControlPanel();
-			setBoard();
+			add(this.board);
 			createMenuBar();
 			sheet = new DetectiveSheet();
 
 		}
 	}
+	// set the control panel at the bottom of the Frame
 	public void setControlPanel()
 	{
 
@@ -75,10 +76,7 @@ public class ClueGame extends JFrame {
 	}
 
 	// set the grid up
-	public void setBoard()
-	{
-		add(board, "North");
-	}
+	
 	// create the menu bar on the top of the Frame!
 	public JMenuBar createMenuBar()
 	{
@@ -123,11 +121,13 @@ public class ClueGame extends JFrame {
 		});
 		return sheetTab;
 	}
+	
+	// Main method to create our frame
 	public static void main(String[] args)
 	{
 		ClueGame game = new ClueGame();
 		game.setVisible(true);
-		game.setSize(1500,1000);
+		game.setSize(800,800);
 	}
 }
 
