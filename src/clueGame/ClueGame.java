@@ -2,6 +2,7 @@ package clueGame;
 
 import javax.swing.JFrame;
 
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -30,7 +31,7 @@ public class ClueGame extends JFrame {
 	public ClueGame()
 	{ 
 		setUpGame();
-      
+
 	}
 
 	public void setUpGame()
@@ -61,18 +62,17 @@ public class ClueGame extends JFrame {
 			setControlPanel();
 			setBoard();
 			createMenuBar();
-			this.setSize(1500,1000);
-			//sheet = new DetectiveSheet()
+			sheet = new DetectiveSheet();
 
 		}
 	}
-		public void setControlPanel()
-		{
+	public void setControlPanel()
+	{
 
 		controlPanel =  new ControlPanel();
 		board.setControlPanel(controlPanel);
 		add(controlPanel, "South");
-		}
+	}
 
 		// set the grid's position
 		public void setBoard()
@@ -96,36 +96,31 @@ public class ClueGame extends JFrame {
 			menuTab.add(createFileDetectiveSheetTab());
 			return menuTab;
 		}
-		public JMenuItem createFileExitTab()
+	public JMenuItem createFileExitTab()
+	{
+		// set tab title
+		JMenuItem exitTab = new JMenuItem("Exit Program");
+
+		// needs a returnable value so it can be put in our menu bar!
+		return exitTab;
+	}
+	public JMenuItem createFileDetectiveSheetTab()
+	{
+		JMenuItem sheetTab = new JMenuItem("Detective Sheet");
+		sheetTab.addActionListener(new ActionListener()
 		{
-			// set tab title
-			JMenuItem exitTab = new JMenuItem("Exit Program");
-			exitTab.addActionListener(new ActionListener()
+			public void actionPerformed(ActionEvent e)
 			{
-				public void actionPerformed(ActionEvent e)
-				{   // When Exit program is clicked, the program will close.
-					System.exit(0);
-				}
-			});
-			// needs a returnable value so it can be put in our menu bar!
-			return exitTab;
-		}
-		public JMenuItem createFileDetectiveSheetTab()
-		{
-			JMenuItem sheetTab = new JMenuItem("Detective Sheet");
-			sheetTab.addActionListener(new ActionListener()
-			{
-				public void actionPerformed(ActionEvent e)
-				{
-					//ClueGame.this.sheet.setVisible(true);
-				}
-			});
-			return sheetTab;
-		}
-		public static void main(String[] args)
-		{
-			ClueGame game = new ClueGame();
-			game.setVisible(true);
-		}
+				sheet.setVisible(true);
+			}
+		});
+		return sheetTab;
+	}
+	public static void main(String[] args)
+	{
+		ClueGame game = new ClueGame();
+		game.setVisible(true);
+		game.setSize(1500,1000);
+	}
 }
-	
+
