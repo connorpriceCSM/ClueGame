@@ -56,7 +56,7 @@ public class ClueGame extends JFrame {
 	public void setGUI()
 	{
 
-		setDefaultCloseOperation(3);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Our Control Panel will be at the bottom of the frame
 		{
 			setControlPanel();
@@ -95,17 +95,12 @@ public class ClueGame extends JFrame {
 		menuTab.add(createFileDetectiveSheetTab());
 		return menuTab;
 	}
+
 	public JMenuItem createFileExitTab()
 	{
 		// set tab title
 		JMenuItem exitTab = new JMenuItem("Exit Program");
-		exitTab.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{   // When Exit program is clicked, the program will close.
-				System.exit(0);
-			}
-		});
+
 		// needs a returnable value so it can be put in our menu bar!
 		return exitTab;
 	}
