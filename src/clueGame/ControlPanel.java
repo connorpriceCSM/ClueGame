@@ -55,7 +55,7 @@ public class ControlPanel extends JPanel {
 		buttonPanel.setLayout(new GridLayout(1,0));
 		ButtonListener listerner =  new ButtonListener();
 
-		nextPlayer =  new JButton("Next Player (End Turn");
+		nextPlayer =  new JButton("Next Player (End Turn)");
 		nextPlayer.addActionListener(listerner);
 		accusePlayer =  new JButton("Accuse a player");
 		accusePlayer.addActionListener(listerner);
