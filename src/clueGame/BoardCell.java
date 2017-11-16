@@ -1,6 +1,8 @@
 package clueGame;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;
+
 
 //Authors: Amelia Atiles and Connor Price
 public class BoardCell {
@@ -191,7 +193,9 @@ public class BoardCell {
 			drawPathway(g);
 			g.setColor(Color.RED);
 			int size = PIECE_SIZE;
-			g.drawString(String.valueOf('R'), x  + (float)(PIECE_SIZE / 3 ), y + (float)(PIECE_SIZE / 2));
+			g.setFont( new Font("TimesRoman", Font.PLAIN, (PIECE_SIZE / 2 )));
+			g.drawString(String.valueOf('R'), x  + (float)(PIECE_SIZE / 2 ), y + (float)(PIECE_SIZE / 2));
+			
 			
 		}
 		if(this.getDoorDirection() == DoorDirection.LEFT)

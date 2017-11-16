@@ -3,6 +3,7 @@ package clueGame;
 import javax.swing.JFrame;
 
 
+
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -138,6 +139,9 @@ public class ClueGame extends JFrame {
 		ClueGame game = new ClueGame();
 		game.setVisible(true);
 		game.setSize(800,800);
+		// welcome message!
+		JOptionPane.showMessageDialog(game, "You are the fantastic James Bond. Press Next Player to start. Good luck!");
+		
 	}
 }
 

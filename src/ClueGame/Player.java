@@ -100,7 +100,7 @@ public class Player {
 		return null;
 	}
 	// draw the circle player
-	public void draw(Graphics2D g, Board board)
+	public void draw(Graphics2D g)
 	{
 		int playerSize = BoardCell.PIECE_SIZE;
 		int x = playerSize * column;

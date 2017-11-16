@@ -646,7 +646,7 @@ public class Board extends JPanel {
 	{
 		for (Player p : this.players) 
 		{
-			p.draw(g, this);
+			p.draw(g);
 		}
 	}
 
