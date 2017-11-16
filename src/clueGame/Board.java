@@ -616,10 +616,9 @@ public class Board extends JPanel {
 		return null;
 	}
 	
-
 	public void paintComponent(Graphics graphics)
 	{
-		super.paintComponent((java.awt.Graphics) graphics);
+		super.printComponent(graphics);
 		 Graphics2D g2 = (Graphics2D)graphics;
 		drawGrid(g2);
 		drawPlayers(g2);

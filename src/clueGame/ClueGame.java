@@ -61,7 +61,7 @@ public class ClueGame extends JFrame {
 			setControlPanel();
 			setBoard();
 			createMenuBar();
-			this.setSize(1500,1000);
+			
 			//sheet = new DetectiveSheet()
 
 		}
@@ -74,7 +74,7 @@ public class ClueGame extends JFrame {
 		add(controlPanel, "South");
 		}
 
-		// set the grid's position
+		// set the grid up
 		public void setBoard()
 		{
 			add(board, "North");
@@ -125,6 +125,7 @@ public class ClueGame extends JFrame {
 		public static void main(String[] args)
 		{
 			ClueGame game = new ClueGame();
+			game.setSize(1500,1000);
 			game.setVisible(true);
 		}
 }
