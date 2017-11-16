@@ -11,10 +11,9 @@ public class BoardCell {
 	private char doorChar;
 	private DoorDirection direction;
 	private int index;
-	private boolean showRoomName;
 	private int x;
 	private int y;
-	public static int PIECE_SIZE = 35;
+	public static int PIECE_SIZE = 40;
 	/*
 	 * Easier to just use a string type as the 3rd parameter
 	 * because some cells will have more than one character for doors
@@ -25,9 +24,8 @@ public class BoardCell {
 	{
 		this.cellRow = row;
 		this.cellColumn = column;
-		this.showRoomName = false;
-		x = (cellRow * PIECE_SIZE);
-		y = (cellColumn * PIECE_SIZE);
+		x = (cellColumn * PIECE_SIZE);
+		y = (cellRow * PIECE_SIZE);
 		// BoardCell is guaranteed to have at least one character
 		cellInitial = characters.charAt(0);
 		direction = DoorDirection.NONE;
@@ -37,12 +35,12 @@ public class BoardCell {
 			// accounting for Baldwin's room placements
 			if(characters.charAt(1) != 'N')
 			{
-			doorChar = characters.charAt(1);
-			setDoor();
+				doorChar = characters.charAt(1);
+				setDoor();
 			}
 			else
 			{
-				showRoomName = true;
+				
 			}
 		}
 		// method to set door 
@@ -83,7 +81,7 @@ public class BoardCell {
 	{
 		return cellColumn;
 	}
-	
+
 	public char getInitial()
 	{
 		return cellInitial;
@@ -92,7 +90,7 @@ public class BoardCell {
 	{
 		return direction;
 	}
-	
+
 	//check if this cell is a pathway
 	public boolean isPathway()
 	{
@@ -147,8 +145,7 @@ public class BoardCell {
 		// Brown tiles for pathways
 		if(this.isPathway())
 		{
-			Color brown = new Color(110,42,42);
-			g.setColor(brown);
+			g.setColor(Color.white);
 		}
 		// solid gray tiles for the rooms!
 		else
@@ -156,7 +153,7 @@ public class BoardCell {
 			g.setColor(Color.LIGHT_GRAY);
 		}
 		g.fillRect(x, y, PIECE_SIZE, PIECE_SIZE);
-		
+
 		// Draw black outline of the square
 		if(this.isPathway())
 		{
@@ -167,61 +164,81 @@ public class BoardCell {
 		{
 			drawDoorway(g);
 		}
-		// Make Orange titled rooms cause I can!
-		if(this.isRoom())
-		{
-			drawRoomName(g);
-		}
+		// Make Magenta titled rooms cause I can!
+		drawRoomTitles(g);
+			
 		
 	}
+
+	
+	//Create grid squares to mmore easily identify spots
 	public void drawPathway(Graphics2D g)
 	{
 		g.setColor(Color.BLACK);
 		g.drawRect(x,y,PIECE_SIZE, PIECE_SIZE );
 	}
-	
+
+	// set the doorways! The direction of the doorway is indicated by its Red initial.
+	// Doorways are in Green
+	// Proportions are set.
 	public void drawDoorway(Graphics2D g)
 	{
 		g.setColor(Color.GREEN);
-		
+
 		if(this.getDoorDirection() ==  DoorDirection.RIGHT)
 		{
 			g.fillRect(x,y,PIECE_SIZE,PIECE_SIZE);
 			drawPathway(g);
-			g.setColor(Color.blue);
-			g.drawString(String.valueOf('R'), x -1 , y - 1);
+			g.setColor(Color.RED);
+			int size = PIECE_SIZE;
+			g.drawString(String.valueOf('R'), x  + (float)(PIECE_SIZE / 3 ), y + (float)(PIECE_SIZE / 2));
 			
 		}
 		if(this.getDoorDirection() == DoorDirection.LEFT)
 		{
 			g.fillRect(x,y,PIECE_SIZE,PIECE_SIZE);
 			drawPathway(g);
-			g.setColor(Color.blue);
-			g.drawString(String.valueOf('L'), x, y);
+			
+			g.setColor(Color.RED);
+			g.drawString(String.valueOf('L'), x  +  (float)(PIECE_SIZE / 3 ), y + (float)(PIECE_SIZE / 2));
+			
 		}
 		if(this.getDoorDirection() == DoorDirection.DOWN)
 		{
 			g.fillRect(x,y,PIECE_SIZE,PIECE_SIZE);
 			drawPathway(g);
-			g.setColor(Color.blue);
-			g.drawString(String.valueOf('D'), x, y);
+			g.setColor(Color.RED);
+			g.drawString(String.valueOf('D'), x  +   (float)(PIECE_SIZE / 3 ), y + (float)(PIECE_SIZE / 2));
+			
 		}
 		if(this.getDoorDirection() == DoorDirection.UP)
 		{
 			g.fillRect(x,y,PIECE_SIZE,PIECE_SIZE);
 			drawPathway(g);
-			g.setColor(Color.blue);
-			g.drawString(String.valueOf('U'), x, y);
+			g.setColor(Color.RED);
+			g.drawString(String.valueOf('U'), x  +  (float)(PIECE_SIZE / 3 ), y + (float)(PIECE_SIZE / 2));
+			
 		}
-		
+
 	}
-	public void drawRoomName(Graphics2D g)
+	// Room Names built on proportions
+	public void drawRoomTitles(Graphics2D g)
 	{
-		if(showRoomName == true)
-		{
-			g.setColor(Color.BLUE);
-			g.drawString(Board.getInstance().getSpecificRoom(getInitial()).toUpperCase(), x , y);
-		}
+		g.setColor(Color.MAGENTA);
+		
+		g.drawString("OBSERVATORY",(float)(PIECE_SIZE * .33) , ((float)PIECE_SIZE * (float) 10.625));
+		g.drawString("KITCHEN", (float)( PIECE_SIZE * 1.25) , (float)(PIECE_SIZE *3));
+		g.drawString("LIBRARY", (float)(PIECE_SIZE * 8) , (float)(PIECE_SIZE * 3));
+		g.drawString("BATHROOM", (float)(PIECE_SIZE *18),  (float) (PIECE_SIZE *3));
+		g.drawString("SAUNA", (float) (PIECE_SIZE * 18), (float) (PIECE_SIZE *13 ));
+		g.drawString("GARDEN", (float) (PIECE_SIZE * 18), (float) (PIECE_SIZE * 22 ));
+		g.drawString("BEDROOM",(float) (PIECE_SIZE * 11.66), (float)(PIECE_SIZE *20.5));
+		g.drawString("FOYER",(float) (PIECE_SIZE * 6.5), (float)(PIECE_SIZE *20.5));
+		// Entertainment Room is paried due to the narrowness of the room.
+		g.drawString("ENTERTAINMENT", (float) (PIECE_SIZE *.33), (float) (PIECE_SIZE *16.5));
+		g.drawString("ROOM", (float) (PIECE_SIZE *.70), (float) (PIECE_SIZE *17.2));
+		
+		
 	}
 	
 }

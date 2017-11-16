@@ -619,17 +619,17 @@ public class Board extends JPanel {
 	}
 	
 
-	protected void paintComponent(Graphics g)
-
+	public void paintComponent(Graphics g)
 	//Graphics methods for the boar
-
 	{
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D )g;
 		drawGrid(g2);
 		drawPlayers(g2);
+		
 	}
 	
+	// draw the grid, very simple
 	public void drawGrid(Graphics2D g)
 	{
 		for (int row = 0; row < this.numRows; row++) 

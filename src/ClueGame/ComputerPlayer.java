@@ -8,8 +8,8 @@ import java.util.Set;
 public class ComputerPlayer extends Player {
 
 	private String playerName;
-	private int row;
-	private int column;
+	//private int row;
+	//private int column;
 	private Color color;
 	private ArrayList<Card> myCards = new ArrayList<Card>();
 	private char lastVisitedRoom;
@@ -119,7 +119,7 @@ public class ComputerPlayer extends Player {
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
-	public int getRow() {
+	/*public int getRow() {
 		return row;
 	}
 	public void setRow(int row) {
@@ -131,6 +131,7 @@ public class ComputerPlayer extends Player {
 	public void setColumn(int column) {
 		this.column = column;
 	}
+	*/
 	public Color getColor() {
 		return color;
 	}

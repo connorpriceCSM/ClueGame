@@ -108,6 +108,8 @@ public class Player {
 		
 		g.setColor(color);
 		g.fillOval(x, y, playerSize, playerSize);
+		g.setColor(color.BLACK);
+		g.drawOval(x, y, playerSize, playerSize);
 		
 	}
 }

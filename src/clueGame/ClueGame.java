@@ -59,6 +59,7 @@ public class ClueGame extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Our Control Panel will be at the bottom of the frame
 		{
+			// set the panel, board, and menu
 			setControlPanel();
 			add(this.board);
 			createMenuBar();
@@ -109,6 +110,7 @@ public class ClueGame extends JFrame {
 		JMenuItem sheetTab = new JMenuItem("Detective Sheet");
 		sheetTab.addActionListener(new ActionListener()
 		{
+			// if the Detective Sheet tab is clicked, open the sheet!
 			public void actionPerformed(ActionEvent e)
 			{
 				sheet.setVisible(true);
