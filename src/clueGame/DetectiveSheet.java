@@ -11,17 +11,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
-
+//Authors: Connor Price & Amelia Atiles
+// Note the JDialog!
 public class DetectiveSheet extends JDialog {
 
 
 	//use the board to get names, weapons, and rooms!!
 	private Board board;
 
-	//constructor to create a Detective Sheetfor a human to keep track of what cards they've seen.
+	//constructor to create a Detective Sheet for the humanPlayer to keep track of what cards they've seen.
 	public DetectiveSheet()
 	{
 		board = Board.getInstance();
+		//create the sheet
 		createDetectiveSheet();
 		setTitle("Detective Sheet");
 		setSize(700, 700);
@@ -30,6 +32,7 @@ public class DetectiveSheet extends JDialog {
 
 
 	// create our sheet. There should be 6 panels in total
+	// 3 checkbox groups and 3 combo boxes.
 	private void createDetectiveSheet()
 	{
 		this.add(createBoxes("Players", board.getPlayerNames()));
@@ -72,6 +75,7 @@ public class DetectiveSheet extends JDialog {
 		combo.addItem("N/A");
 		for (String card : cards) 
 		{
+			// add the card to the drop-down menu (combo)
 			combo.addItem(card);
 		}
 		// add our combo panel

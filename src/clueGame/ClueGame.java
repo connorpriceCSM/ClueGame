@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+// Authors: Connor Price & Amelia Atiles
 public class ClueGame extends JFrame {
 
 
@@ -21,6 +21,7 @@ public class ClueGame extends JFrame {
 	private ControlPanel controlPanel;
 
 
+	// constructor to (theoretically) set up other file games
 	public ClueGame(String boardFile, String roomFile )
 	{
 		boardConfigFile = boardFile;
@@ -28,12 +29,15 @@ public class ClueGame extends JFrame {
 		setUpGame();
 
 	}
+	// constructor to set up our own game
 	public ClueGame()
 	{ 
 		setUpGame();
 
 	}
 
+	// set up the game like we would for tests
+	// get the files, intiaalize the board, and in this case, get the GUI set up
 	public void setUpGame()
 	{
 		setTitle("Clue Game");
@@ -49,13 +53,15 @@ public class ClueGame extends JFrame {
 		{
 			System.out.println("Error: Board Failed to Initialize!");
 		}
+		// method to set the graphic user interface
 		setGUI();
 	}
 
-	//set up the consoles
+	//set up the panels, board, and the menubar
 	public void setGUI()
 	{
 
+		// exit behavior
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		// Our Control Panel will be at the bottom of the frame
 		{
@@ -77,7 +83,7 @@ public class ClueGame extends JFrame {
 	}
 
 	// set the grid up
-	
+
 	// create the menu bar on the top of the Frame!
 	public JMenuBar createMenuBar()
 	{
@@ -103,9 +109,9 @@ public class ClueGame extends JFrame {
 		JMenuItem exitTab = new JMenuItem("Exit Program");
 		exitTab.addActionListener(new ActionListener()
 		{
-			// if the Detective Sheet tab is clicked, open the sheet!
+			// if the exit program tab is clicked, exit the entire thing
 			public void actionPerformed(ActionEvent e)
-			{
+			{ //exit the program
 				System.exit(0);			}
 		});
 		// needs a returnable value so it can be put in our menu bar!
@@ -118,13 +124,14 @@ public class ClueGame extends JFrame {
 		{
 			// if the Detective Sheet tab is clicked, open the sheet!
 			public void actionPerformed(ActionEvent e)
-			{
+			{ 
+				// make sure the sheet can be viewed
 				sheet.setVisible(true);
 			}
 		});
 		return sheetTab;
 	}
-	
+
 	// Main method to create our frame
 	public static void main(String[] args)
 	{

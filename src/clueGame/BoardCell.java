@@ -221,7 +221,7 @@ public class BoardCell {
 		}
 
 	}
-	// Room Names built on proportions
+	// Room Names built on proportions according to the constant PIECE_SIZE
 	public void drawRoomTitles(Graphics2D g)
 	{
 		g.setColor(Color.MAGENTA);
