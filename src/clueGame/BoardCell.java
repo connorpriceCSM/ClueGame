@@ -236,7 +236,7 @@ public class BoardCell {
 		g.drawString("BATHROOM", (float)(PIECE_SIZE *18),  (float) (PIECE_SIZE *3));
 		g.drawString("SAUNA", (float) (PIECE_SIZE * 18), (float) (PIECE_SIZE *13 ));
 		g.drawString("GARDEN", (float) (PIECE_SIZE * 18), (float) (PIECE_SIZE * 22 ));
-		g.drawString("BEDROOM",(float) (PIECE_SIZE * 11.66), (float)(PIECE_SIZE *20.5));
+		g.drawString("BEDROOM",(float) (PIECE_SIZE * 11.33), (float)(PIECE_SIZE *20.5));
 		g.drawString("FOYER",(float) (PIECE_SIZE * 6.5), (float)(PIECE_SIZE *20.5));
 		// Entertainment Room is paried due to the narrowness of the room.
 		g.drawString("ENTERTAINMENT", (float) (PIECE_SIZE *.33), (float) (PIECE_SIZE *16.5));

@@ -4,11 +4,13 @@ package clueGame;
 import java.util.Map;
 
 
+
 import java.util.Scanner;
 import java.util.Set;
 
 import javax.swing.JPanel;
 
+import java.awt.Graphics;
 
 import clueGame.BoardCell;
 
@@ -16,7 +18,6 @@ import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -622,7 +623,7 @@ public class Board extends JPanel {
 	public void paintComponent(Graphics g)
 	//Graphics methods for the boar
 	{
-		super.paintComponent(g);
+		super.paintComponent( g);
 		Graphics2D g2 = (Graphics2D )g;
 		drawGrid(g2);
 		drawPlayers(g2);
