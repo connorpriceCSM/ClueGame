@@ -20,6 +20,7 @@ public class ClueGame extends JFrame {
 	private String boardConfigFile = "ClueMap.csv";
 	private String roomConfigFile = "ClueLegend.txt";
 	private ControlPanel controlPanel;
+	private PlayerCardPanel playerPanel;
 
 
 	// constructor to (theoretically) set up other file games
@@ -70,6 +71,7 @@ public class ClueGame extends JFrame {
 			setControlPanel();
 			add(this.board);
 			createMenuBar();
+			setPlayerCardsPanel();
 			sheet = new DetectiveSheet();
 
 		}
@@ -81,6 +83,13 @@ public class ClueGame extends JFrame {
 		controlPanel =  new ControlPanel();
 		board.setControlPanel(controlPanel);
 		add(controlPanel, "South");
+	}
+	public void setPlayerCardsPanel()
+	{
+		playerPanel = new PlayerCardPanel(board.getHumanPlayer().getCards());
+		board.setPlayerCardPanel(playerPanel);
+		add(playerPanel, "East");
+		
 	}
 
 	// set the grid up

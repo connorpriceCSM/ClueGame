@@ -20,7 +20,7 @@ public class PlayerCardPanel extends JPanel {
 	public PlayerCardPanel(ArrayList<Card> playerCards)
 	{
 		// set a title layout for this panel
-		setLayout(new GridLayout(7, 1));
+		setLayout(new GridLayout(3, 1));
 		// create the beautiful title and add it
 		TitledBorder title = BorderFactory.createTitledBorder(
 				BorderFactory.createEtchedBorder(0), "Player Cards");

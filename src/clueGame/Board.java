@@ -43,6 +43,7 @@ public class Board extends JPanel {
 	private static Board theInstance = new Board();
 	private Suggestion winningSolution;
 	private ControlPanel controlPanel;
+	private PlayerCardPanel playerPanel;
 
 
 	private int numRows,numCols;
@@ -103,6 +104,7 @@ public class Board extends JPanel {
 			calcAdjacencies();
 			loadWeaponConfig();
 			loadPlayersConfig();
+			dealCards();
 			System.out.print("Files loaded.");
 		}
 		//our FileNotFound and BadConfig Exceptions!
@@ -535,6 +537,10 @@ public class Board extends JPanel {
 	public void setControlPanel(ControlPanel panel)
 	{
 		this.controlPanel = panel;
+	}
+	public void setPlayerCardPanel(PlayerCardPanel playerPanel)
+	{
+		this.playerPanel = playerPanel;
 	}
 
 	// Deal all the cards in the deck to each player.
