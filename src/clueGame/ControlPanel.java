@@ -73,7 +73,7 @@ public class ControlPanel extends JPanel {
 		rollPanel.add(rollLabel);
 		rollPanel.add(dieRoll);
 		rollPanel.setBorder(new TitledBorder(new EtchedBorder(), "Die Roll"));
-		rollPanel.setPreferredSize(new Dimension(200,100));
+		rollPanel.setPreferredSize(new Dimension(200,50));
 		add(rollPanel);
 
 
@@ -83,7 +83,7 @@ public class ControlPanel extends JPanel {
 		JPanel turnPanel = new JPanel();
 		JLabel turnLabel = new JLabel("Player Moving :");
 		turnPanel.add(turnLabel);
-		turnPanel.setPreferredSize(new Dimension(200,50));
+		//turnPanel.setPreferredSize(new Dimension(200,100));
 		this.whoseTurn = new JTextField(10);
 		this.whoseTurn.setEditable(false);
 
@@ -103,7 +103,7 @@ public class ControlPanel extends JPanel {
 		guessPanel.add(guessLabel);
 		guessPanel.add(this.guessMade);
 		guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Status"));
-		guessPanel.setPreferredSize(new Dimension(400,50));
+		guessPanel.setPreferredSize(new Dimension(400,100));
 		add(guessPanel);
 	}
 

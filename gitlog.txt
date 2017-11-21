@@ -1,0 +1,34 @@
+commit 34e3e7786909f793053505849e4e5954a7235263
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Nov 20 21:23:10 2017 -0700
+
+     Integrated control panel with grid and player display! Works well!
+
+
+commit ad198d6adae2ba122c282ddfd0fd2de0020848c6
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Nov 20 12:08:14 2017 -0700
+
+    Panel works! Sizing to be done later!
+
+
+commit dc7c0a8af90a8b9cca19d730060fa333717cfccd
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Mon Nov 20 11:47:44 2017 -0700
+
+    Player panel skeleton made.
+
+
+commit 28f73c75fb9a37c97f41cab9689ebc8345d5f0e1
+Author: connorpriceCSM <31745502+connorpriceCSM@users.noreply.github.com>
+Date:   Thu Nov 16 12:30:54 2017 -0700
+
+    Welcome message implemented.
+
+
+
+
+
+
+
+
