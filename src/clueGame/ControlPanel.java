@@ -1,8 +1,7 @@
 package clueGame;
 
 import java.awt.BorderLayout;
-
-
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -61,6 +60,7 @@ public class ControlPanel extends JPanel {
 		accusePlayer.addActionListener(listerner);
 		buttonPanel.add(nextPlayer);
 		buttonPanel.add(accusePlayer);
+		buttonPanel.setPreferredSize(new Dimension(500,50));
 		add(buttonPanel);
 	}
 	public void createRollDisplay()
@@ -73,6 +73,7 @@ public class ControlPanel extends JPanel {
 		rollPanel.add(rollLabel);
 		rollPanel.add(dieRoll);
 		rollPanel.setBorder(new TitledBorder(new EtchedBorder(), "Die Roll"));
+		rollPanel.setPreferredSize(new Dimension(200,100));
 		add(rollPanel);
 
 
@@ -82,6 +83,7 @@ public class ControlPanel extends JPanel {
 		JPanel turnPanel = new JPanel();
 		JLabel turnLabel = new JLabel("Player Moving :");
 		turnPanel.add(turnLabel);
+		turnPanel.setPreferredSize(new Dimension(200,50));
 		this.whoseTurn = new JTextField(10);
 		this.whoseTurn.setEditable(false);
 
@@ -101,6 +103,7 @@ public class ControlPanel extends JPanel {
 		guessPanel.add(guessLabel);
 		guessPanel.add(this.guessMade);
 		guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Status"));
+		guessPanel.setPreferredSize(new Dimension(400,50));
 		add(guessPanel);
 	}
 
@@ -114,6 +117,7 @@ public class ControlPanel extends JPanel {
 		guessPanel.add(guessLabel);
 		guessPanel.add(this.guessResult);
 		guessPanel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
+		guessPanel.setPreferredSize(new Dimension(400,50));
 		add(guessPanel);
 	}
 

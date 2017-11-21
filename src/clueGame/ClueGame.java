@@ -147,7 +147,7 @@ public class ClueGame extends JFrame {
 	{
 		ClueGame game = new ClueGame();
 		game.setVisible(true);
-		game.setSize(800,800);
+		game.setSize(2000,2000);
 		// welcome message!
 		JOptionPane.showMessageDialog(game, "You are the fantastic James Bond. Press Next Player to start. Good luck!");
 		

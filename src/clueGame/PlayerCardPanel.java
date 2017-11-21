@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,6 +46,7 @@ public class PlayerCardPanel extends JPanel {
 		playerCardsPanel.add(playerCardsLabel);
 		// set the border
 		playerCardsPanel.setBorder(new EtchedBorder());
+		playerCardsPanel.setPreferredSize(new Dimension(300, 300));
 		// go through the players cards
 		// if a card matches the weapon type of the panel, then add a text field showing it
 		for(Card card : cards)
