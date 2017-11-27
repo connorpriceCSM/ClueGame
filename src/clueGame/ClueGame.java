@@ -89,7 +89,7 @@ public class ClueGame extends JFrame {
 		playerPanel = new PlayerCardPanel(board.getHumanPlayer().getCards());
 		board.setPlayerCardPanel(playerPanel);
 		add(playerPanel, "East");
-		
+
 	}
 
 	// set the grid up
@@ -150,7 +150,7 @@ public class ClueGame extends JFrame {
 		game.setSize(2000,2000);
 		// welcome message!
 		JOptionPane.showMessageDialog(game, "You are the fantastic James Bond. Press Next Player to start. Good luck!");
-		
+
 	}
 }
 

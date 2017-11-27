@@ -116,17 +116,35 @@ public class ComputerPlayer extends Player {
 	public void setPlayerName(String playerName) {
 		this.playerName = playerName;
 	}
-	
+
 	//important getters and setters for the computer player regarding targets and movements
 	public char getLastVisitedRoom()
 	{
 		return lastVisitedRoom;
 	}
-	
+
 	public void setLastVisitedRoom(char roomCharacter)
 	{
 		lastVisitedRoom = roomCharacter;
 	}
 
+	@Override
+	// get the targets for the computer player and have the computer player move to that spot on the grid.
+	public void makeMove(Board board) {
 
+		Set<BoardCell> targets = board.getTargets();
+		BoardCell location = pickLocation(targets);
+		setRow(location.getRow());
+		setColumn(location.getColumn());
+		
+		/*if (location.isRoom())
+		{
+			this.lastVisitedRoom = location.getInitial();
+			createSuggestion(board.getSpecificRoom(location.getInitial()));
+
+		}
+		*/
+
+
+	}
 }

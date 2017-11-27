@@ -5,7 +5,7 @@ import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Player {
+public abstract class Player {
 
 	private String playerName;
 	private int row;
@@ -73,6 +73,7 @@ public class Player {
 	{
 		return seenCards;
 	}
+	public abstract void makeMove(Board board);
 
 	//Disprove Suggestion
 

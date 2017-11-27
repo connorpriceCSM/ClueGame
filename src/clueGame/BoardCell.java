@@ -15,6 +15,7 @@ public class BoardCell {
 	private int index;
 	private int x;
 	private int y;
+	protected boolean highlight;
 	public static int PIECE_SIZE = 40;
 	/*
 	 * Easier to just use a string type as the 3rd parameter
@@ -120,6 +121,11 @@ public class BoardCell {
 		}
 		return false;
 	}
+	public void setHighlight(boolean status)
+	{
+		highlight = status;
+	}
+
 	// depending on the secondary character, set the door direction for this cell
 	public void setDoor()
 	{
@@ -144,6 +150,11 @@ public class BoardCell {
 	}
 	public void draw(Graphics2D g)
 	{
+		//highlight appropriate squares
+		if(this.highlight == true)
+		{
+			g.setColor(Color.yellow);
+		}
 		// Brown tiles for pathways
 		if(this.isPathway())
 		{
@@ -157,7 +168,7 @@ public class BoardCell {
 		g.fillRect(x, y, PIECE_SIZE, PIECE_SIZE);
 
 		// Draw black outline of the square
-		if(this.isPathway())
+		if(this.isPathway() || highlight == true)
 		{
 			drawPathway(g);
 		}

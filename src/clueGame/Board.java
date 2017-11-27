@@ -2,12 +2,11 @@ package clueGame;
 
 
 import java.util.Map;
-
-
-
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import java.awt.Graphics;
@@ -16,16 +15,19 @@ import clueGame.BoardCell;
 
 import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Field;
 
 
 //Authors: Amelia Atiles and Connor Price
-public class Board extends JPanel {
+public class Board extends JPanel implements MouseListener {
 	// variable used for singleton pattern
 
 	private HashMap<BoardCell, Set<BoardCell>> adjMtx;
@@ -39,14 +41,17 @@ public class Board extends JPanel {
 	private ArrayList<String> roomNames;
 	private ArrayList<String> playerNames;
 	private HumanPlayer humanPlayer;
+	private Player currentPlayer;
 	private BoardCell[][] grid = new BoardCell[75][75];
 	private static Board theInstance = new Board();
 	private Suggestion winningSolution;
 	private ControlPanel controlPanel;
 	private PlayerCardPanel playerPanel;
+	private Random rand =  new Random();
 
 
 	private int numRows,numCols;
+	private int turnNumber; 
 	final static int MAX_BOARD_SIZE = 50;
 	public static final int NUMBER_OF_ROWS = 23;
 	public static final int NUMBER_OF_COLUMNS = 22;
@@ -98,13 +103,18 @@ public class Board extends JPanel {
 		clearHolders();
 		try
 		{
-			//load the board, room,weapons, players, and calculate all possible adjacencies.
+			//load the board, room,weapons, players, calculate adjancies, create solution, deal cards, and add listeners.
+			// also set turn number so the player goes first upon next turn button being pushed!
 			loadRoomConfig();
 			loadBoardConfig();
 			calcAdjacencies();
 			loadWeaponConfig();
 			loadPlayersConfig();
+			selectSolution();
 			dealCards();
+			addMouseListener(this);
+
+			int turnNumber = players.size() - 1;
 			System.out.print("Files loaded.");
 		}
 		//our FileNotFound and BadConfig Exceptions!
@@ -509,7 +519,7 @@ public class Board extends JPanel {
 	{
 		return legend.get(initial);
 	}
-	
+
 	// return the names of all the players
 	public ArrayList<String> getPlayerNames()
 	{
@@ -543,6 +553,34 @@ public class Board extends JPanel {
 		this.playerPanel = playerPanel;
 	}
 
+
+	// end the turn and go to the next player. The Human player should have the first turn at the start of every game.
+	public void nextPlayerTurn()
+	{
+		// check if the human player is finished, otherwise, tell them to hurry it up and finish!
+		if(!humanPlayer.finishedStatus())
+		{
+			JOptionPane.showMessageDialog(null, "You still need to finish your turn!");
+			// very important to put a return statement here otherwise the next computer player will move even if 
+			// the human player hasn't finished their turn.
+			return;
+		}
+
+		// same modulus method used in handleSuggestion to determine who is next in the turn list
+		turnNumber = ((turnNumber + 1) % players.size());
+		//get the player size.
+		currentPlayer = players.get(turnNumber);
+		// dice roll of 1 to 6!
+		int roll = rand.nextInt(5) + 1;
+		// calc all the targets for the player
+		calcTargets(currentPlayer.getRow(),currentPlayer.getColumn(), roll);
+        // The player executes their move (computer) or prompts the human for a response (human) and the board is repainted.
+		currentPlayer.makeMove(this);
+		repaint();
+	}
+
+
+
 	// Deal all the cards in the deck to each player.
 	// playerCount will increment every time a card is dealt.
 	// Each player should get one card at a time until the end
@@ -559,21 +597,48 @@ public class Board extends JPanel {
 			if(playerCount == players.size()) {
 				playerCount  = 0;
 			}
-			// give player the next card in the array!
-			Player player = players.get(playerCount);
-			player.addCard(card);
-			playerCount++;
+			if ((!card.getCardName().equals(winningSolution.person)) && 
+					(!card.getCardName().equals(winningSolution.room)) && 
+					(!card.getCardName().equals(winningSolution.weapon)))
+			{
+				// give player the next card in the array!
+				Player player = players.get(playerCount);
+				player.addCard(card);
+				playerCount++;
+			}
 		}
 	}
 
 
-	// set the overall solution of the game
+	// set the overall solution of the game (unnecessary method)
 	public void setWinningSolution(String room, String weapon, String  person)
 	{
 		winningSolution  = new Suggestion();
 		winningSolution.setPerson(person);
 		winningSolution.setRoom(room);
 		winningSolution.setWeapon(weapon);
+	}
+	// method to select winning solution
+	public void selectSolution()
+	{
+		// create our winning solution
+		this.winningSolution = new Suggestion();
+		// shuffle our cards to ranomize it
+		Collections.shuffle(this.cards);
+		// go through the deck, picking a person, weapon, and player for our solution.
+		for (Card card : this.cards)
+		{
+			if ((this.winningSolution.person != null) && (this.winningSolution.weapon != null) && (this.winningSolution.room != null)) {
+				break;
+			}
+			if ((card.getCardType() == CardType.PERSON) && (this.winningSolution.person == null)) {
+				winningSolution.setPerson(card.getCardName());
+			} else if ((card.getCardType() == CardType.ROOM) && (this.winningSolution.room == null)) {
+				winningSolution.setRoom(card.getCardName());
+			} else if ((card.getCardType() == CardType.WEAPON) && (this.winningSolution.weapon == null)) {
+				winningSolution.setWeapon(card.getCardName());
+			}
+		}
 	}
 
 	//check if the accusation matches the board's answers. 
@@ -624,7 +689,7 @@ public class Board extends JPanel {
 		// if no Cards can be shown, return null
 		return null;
 	}
-	
+
 
 	public void paintComponent(Graphics g)
 	//Graphics methods for the boar
@@ -633,9 +698,9 @@ public class Board extends JPanel {
 		Graphics2D g2 = (Graphics2D )g;
 		drawGrid(g2);
 		drawPlayers(g2);
-		
+
 	}
-	
+
 	// draw the grid, very simple
 	public void drawGrid(Graphics2D g)
 	{
@@ -656,7 +721,79 @@ public class Board extends JPanel {
 			p.draw(g);
 		}
 	}
+	// go through and highlight the targeted cells!
+	public void highlightTargetCells(boolean highlighted)
+	{
+		if(targets != null)
+		{
+			for(BoardCell cell : targets)
+			{
+				cell.setHighlight(highlighted);
+			}
+		}
+	}
 
+	public void mouseClicked(MouseEvent e)
+	{
+		// if the human player has already finished their turn, do nothing
+		if (humanPlayer.finishedStatus()) {
+			return;
+		}
+		// locate the clicked cell, if the target isn't valid, return an error messag
+		BoardCell clickedCell = getClickedCell(e.getX(), e.getY());
+		if (clickedCell == null)
+		{
+			JOptionPane.showMessageDialog(null, "That is not a valid target. Pick another one");
+		}
+		else
+		{
+			// move the player, turn the highlighted cells back to normal, and repaint the grid to show the changes	
+			humanPlayer.finishTurn(clickedCell);
+			highlightTargetCells(false);
+			// repaint methods calls the draw again so the grid is updated
+			repaint();
+
+		}
+	}
+	// the mouse only needs to click in this game so these other methods can be left blank.
+	public void mouseReleased(MouseEvent e) {}
+
+	public void mouseEntered(MouseEvent e) {}
+
+	public void mousePressed(MouseEvent e) {}
+
+	public void mouseExited(MouseEvent e) {}
+
+	//method to find  a cell that has been clicked.
+	public BoardCell getClickedCell(int X, int Y)
+	{
+		//check if there are valid targets
+		if (this.targets != null)
+		{
+			// get the precise location of the click and therefore, the BoardCell
+			int col = X / BoardCell.PIECE_SIZE;
+			int row = Y / BoardCell.PIECE_SIZE;
+			BoardCell clickedCell = grid[row][col];
+			if (this.targets.contains(clickedCell)) {
+				return clickedCell;
+			}
+		}
+		return null;
+	}
+
+
+
+	public void movePlayer(String playerName, BoardCell location)
+	{
+		for (Player p : this.players) {
+			if (p.getPlayerName().equals(playerName))
+			{
+				p.setLocation(location);
+				break;
+			}
+		}
+		repaint();
+	}
 
 }
 
