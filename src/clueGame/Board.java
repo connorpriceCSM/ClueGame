@@ -310,6 +310,7 @@ public class Board extends JPanel implements MouseListener {
 			playerNames.add(currentPlayer.getPlayerName());
 			players.add(currentPlayer);
 		}
+		// turnNumber = this.players.size();
 	}
 	// Get the boardcell;
 	public BoardCell getCellAt(int row, int col)
@@ -553,19 +554,19 @@ public class Board extends JPanel implements MouseListener {
 		this.playerPanel = playerPanel;
 	}
 
-
+    
+	// this method should be called upon the next turn button click
 	// end the turn and go to the next player. The Human player should have the first turn at the start of every game.
 	public void nextPlayerTurn()
 	{
 		// check if the human player is finished, otherwise, tell them to hurry it up and finish!
-		if(!humanPlayer.finishedStatus())
+		if(humanPlayer.finishedStatus())
 		{
 			JOptionPane.showMessageDialog(null, "You still need to finish your turn!");
 			// very important to put a return statement here otherwise the next computer player will move even if 
 			// the human player hasn't finished their turn.
 			return;
 		}
-
 		// same modulus method used in handleSuggestion to determine who is next in the turn list
 		turnNumber = ((turnNumber + 1) % players.size());
 		//get the player size.
@@ -574,6 +575,7 @@ public class Board extends JPanel implements MouseListener {
 		int roll = rand.nextInt(5) + 1;
 		// calc all the targets for the player
 		calcTargets(currentPlayer.getRow(),currentPlayer.getColumn(), roll);
+		controlPanel.showTurn(currentPlayer.getPlayerName(), roll);
         // The player executes their move (computer) or prompts the human for a response (human) and the board is repainted.
 		currentPlayer.makeMove(this);
 		repaint();
@@ -736,7 +738,7 @@ public class Board extends JPanel implements MouseListener {
 	public void mouseClicked(MouseEvent e)
 	{
 		// if the human player has already finished their turn, do nothing
-		if (humanPlayer.finishedStatus()) {
+		if (!humanPlayer.finishedStatus()) {
 			return;
 		}
 		// locate the clicked cell, if the target isn't valid, return an error messag

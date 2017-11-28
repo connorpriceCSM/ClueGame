@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class HumanPlayer extends Player 
 {
 	private String playerName;
-	private boolean needfinishedTurn;
+	private boolean needtoFinishTurn;
 	
 	private ArrayList<Card> myCards = new ArrayList<Card>();
 
@@ -31,27 +31,28 @@ public class HumanPlayer extends Player
 	// highlight the cells and begin the process
 	@Override
 	public void makeMove(Board board) {
-		needfinishedTurn = true;
+		// set our boolean to true to indicate we need to finish our turn.
+		needtoFinishTurn = true;
 		board.highlightTargetCells(true);
 		
 	}
 	
-	// set the status of our boolean to true
+	// set the status of our boolean to false
 	public void finished()
 	{
-		needfinishedTurn = true;
+		needtoFinishTurn = false;
 	}
 	// return the human player status 
 	public boolean finishedStatus()
 	{
-		return needfinishedTurn;
+		return needtoFinishTurn;
 	}
 	
 	// the clicked cell comes from mouseclicked method
 	// the player will move!
 	public void finishTurn(BoardCell clickedCell)
 	{
-		needfinishedTurn = false;
+		needtoFinishTurn = false;
 		setRow(clickedCell.getRow());
 		setColumn(clickedCell.getColumn());
 		

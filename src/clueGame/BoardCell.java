@@ -156,7 +156,7 @@ public class BoardCell {
 			g.setColor(Color.yellow);
 		}
 		// Brown tiles for pathways
-		if(this.isPathway())
+		else if(this.isPathway())
 		{
 			g.setColor(Color.white);
 		}

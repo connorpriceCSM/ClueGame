@@ -149,7 +149,7 @@ public class ClueGame extends JFrame {
 		game.setVisible(true);
 		game.setSize(2000,2000);
 		// welcome message!
-		JOptionPane.showMessageDialog(game, "You are the fantastic James Bond. Press Next Player to start. Good luck!");
+		JOptionPane.showMessageDialog(game, "You are the fantastic James Bond (black). Press Next Player to start. Good luck!");
 
 	}
 }
