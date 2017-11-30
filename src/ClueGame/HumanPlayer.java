@@ -48,13 +48,6 @@ public class HumanPlayer extends Player
 		return needtoFinishTurn;
 	}
 	
-	// the clicked cell comes from mouseclicked method
-	// the player will move!
-	public void finishTurn(BoardCell clickedCell)
-	{
-		needtoFinishTurn = false;
-		setRow(clickedCell.getRow());
-		setColumn(clickedCell.getColumn());
-		
-	}
+
+	
 }

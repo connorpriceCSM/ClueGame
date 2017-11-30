@@ -34,7 +34,6 @@ public class gameSetupTests {
 		board = Board.getInstance();
 		board.setConfigFiles("ClueMap.csv", "ClueLegend.txt");		
 		board.initialize();
-		board.dealCards();
 	}
 	
 	@Test
@@ -126,7 +125,7 @@ public class gameSetupTests {
 		assertTrue(rooms.contains("Library"));
 		
 		//Check player has seen cards
-		assertEquals(4,(human.getCards()).size());
+		assertEquals(3,(human.getSeenCards()).size());
 	}
 	
 	@Test
@@ -134,8 +133,7 @@ public class gameSetupTests {
 	{
 		/*
 		 * This method will need to test to make sure that
-		 * 21 total cards are given out, 3 players will get 4 cards 
-		 * and the remaining 3 players will get 3 cards.
+		 * 21 total cards are given out, 3 going to each player for a total of 18
 		 */
 		ArrayList<Player> players = board.getPlayers();
 		ArrayList<Card> cards = board.getCards();
@@ -144,7 +142,7 @@ public class gameSetupTests {
 		for (int i = 0; i < players.size(); i++) {
 			
 			// check to make sure the players have the same if not, roughly equal number of cards.
-				assertTrue((players.get(i).getCards().size() == 4) || (players.get(i).getCards().size() == 3));
+				assertTrue((players.get(i).getCards().size() == 3));
 			 
 			
 		}

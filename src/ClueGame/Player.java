@@ -62,7 +62,7 @@ public abstract class Player {
 	}
 	public void addCard(Card card) {
 		playerCards.add(card);
-		seenCards.add(card.getCardName());
+		
 	}
 	public void addSeenCard(Card card)
 	{

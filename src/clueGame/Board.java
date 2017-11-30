@@ -114,7 +114,7 @@ public class Board extends JPanel implements MouseListener {
 			dealCards();
 			addMouseListener(this);
 
-			int turnNumber = players.size() - 1;
+			turnNumber = players.size() -1;
 			System.out.print("Files loaded.");
 		}
 		//our FileNotFound and BadConfig Exceptions!
@@ -606,6 +606,7 @@ public class Board extends JPanel implements MouseListener {
 				// give player the next card in the array!
 				Player player = players.get(playerCount);
 				player.addCard(card);
+				player.addSeenCard(card);
 				playerCount++;
 			}
 		}
@@ -723,9 +724,10 @@ public class Board extends JPanel implements MouseListener {
 			p.draw(g);
 		}
 	}
-	// go through and highlight the targeted cells!
+	// go through all of the targand highlight the targeted cells!
 	public void highlightTargetCells(boolean highlighted)
 	{
+		// a lot like the other board cell methods used. Condensed for loop
 		if(targets != null)
 		{
 			for(BoardCell cell : targets)
@@ -735,6 +737,7 @@ public class Board extends JPanel implements MouseListener {
 		}
 	}
 
+	// The big method! The one that actually moves the player!!
 	public void mouseClicked(MouseEvent e)
 	{
 		// if the human player has already finished their turn, do nothing
@@ -749,8 +752,10 @@ public class Board extends JPanel implements MouseListener {
 		}
 		else
 		{
-			// move the player, turn the highlighted cells back to normal, and repaint the grid to show the changes	
-			humanPlayer.finishTurn(clickedCell);
+			// move the player, turn the highlighted cells back to normal, indicate a finished turn. and repaint the grid to show the changes	
+			humanPlayer.setRow(clickedCell.getRow());
+			humanPlayer.setColumn(clickedCell.getColumn());
+			humanPlayer.finished();
 			highlightTargetCells(false);
 			// repaint methods calls the draw again so the grid is updated
 			repaint();
